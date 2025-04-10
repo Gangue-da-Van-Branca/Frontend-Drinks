@@ -1,0 +1,35 @@
+.home {
+    font-family: 'NunitoSans', sans-serif;
+    color: #2d2d2d;
+  }
+  
+  .hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    padding: 4rem;
+    color: white;
+  }
+  
+  .hero h1 {
+    font-family: 'SedraBold-Italic', serif;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero button {
+    background-color: #a15b2f;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .hero button:hover {
+    background-color: #8a4c24;
+  }
+  

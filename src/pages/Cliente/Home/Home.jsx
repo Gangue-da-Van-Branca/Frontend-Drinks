@@ -1,10 +1,10 @@
 import React from "react";
+import Header from "../../../components/Header/Header";
 
 function Home(){
     return (
         <div>
-            <h1>Elo Drinks lalala</h1>
-            <p>Bar venda pacote personaliza</p>
+            <Header />
         </div>
     )
 }
