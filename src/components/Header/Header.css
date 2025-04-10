@@ -1,17 +1,14 @@
-.header {
-    width: 100%;
-    padding: 1rem 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: rgba(28, 25, 78, 0.36);
-    position: absolute;
-    top: 0;
-    z-index: 1000;
-    color: #fafafa;
-    font-family: 'SedraBold-Italic','NunitoSans', sans-serif;
-  }
-  
+  .header {
+      width: 100%;
+      display:flex;
+      align-items: center;
+      padding: 1rem 5rem;
+      justify-content: space-between;
+      background-color: rgba(75, 56, 27, 0.559);
+      color: #fafafa;
+      font-family: 'SedraMedium-Italic','NunitoSans', sans-serif;
+    }
+    
   .logo {
     display: flex;
     align-items: center;
@@ -36,11 +33,7 @@
   }
   
   .nav a:hover {
-    color: #ae653c;
+    color: #fafafa;
   }
   
-  .login-icon i {
-    font-size: 1.3rem;
-    cursor: pointer;
-  }
   

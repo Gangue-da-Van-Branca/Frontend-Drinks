@@ -17,10 +17,6 @@ const Header = () => {
           <li><a href="#como-funciona">COMO FUNCIONA</a></li>
         </ul>
       </nav>
-
-      <div className="login-icon">
-        <i className="fa-regular fa-user"></i>
-      </div>
     </header>
   );
 };
