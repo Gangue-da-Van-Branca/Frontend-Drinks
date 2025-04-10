@@ -1,0 +1,59 @@
+@font-face {
+    font-family: 'NunitoSans';
+    src: url('../assets/fonts/Nunito/NunitoSans.ttf') format('truetype');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'NunitoSans-Italic';
+    src: url('../assets/fonts/Nunito/NunitoSans-Italic.ttf') format('truetype');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SedraRegular';
+    src: url('../assets/fonts/Sedra/SedraRegular.ttf') format('truetype');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SedraRegular-Italic';
+    src: url('../assets/fonts/Sedra/SedraRegular-Italic.ttf') format('truetype');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SedraMedium';
+    src: url('../assets/fonts/Sedra/SedraMedium.ttf') format('truetype');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SedraMedium-Italic';
+    src: url('../assets/fonts/Sedra/SedraMedium-Italic.ttf') format('truetype');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SedraLight';
+    src: url('../assets/fonts/Sedra/SedraLight.ttf') format('truetype');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SedraLight-Italic';
+    src: url('../assets/fonts/Sedra/SedraLight-Italic.ttf') format('truetype');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SedraBold';
+    src: url('../assets/fonts/Sedra/SedraBold.ttf') format('truetype');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SedraBold-Italic';
+    src: url('../assets/fonts/Sedra/SedraBold-Italic.ttf') format('truetype');
+    font-style: normal;
+}
