@@ -1,25 +1,112 @@
 .quem-somos {
-    padding: 50rem 2rem 4rem;
-    background-color: #fdf9f2;
-    color: #1c194e;
-    font-family: 'NunitoSans', sans-serif;
-  }
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  background-color: #fafafa;
+  color: #1c194e;
+  font-family: "NunitoSans", sans-serif;
+}
+
+.title{
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  position: relative;
+}
+
+.title h1 {
+  font-size: 5rem;
+  font-family: "SedraRegular", sans-serif;
+  padding-left: 4rem;
+  line-height: 0.5;
+}
+
+.title p {
+  font-size: 0.7rem;
+  font-family: "SedraRegular", sans-serif;
+  text-align: left;
+  max-width: 200px;
+  line-height: 1.2;
+  padding-right: 4rem;
+  margin-bottom: 0.5rem;
+}
+
+.box-esq {
+  background: #9d4915;
+  width: 5rem;
+  height:3rem;
+  left: 0;
+  position: flex;
+}
+
+.line-top {
+  background: #9d4915;
+  width: 15rem;
+  height:0.2rem;
+  position: absolute;
+  right: 5rem;
+  bottom: 0;
+}
+
+.line-img-center {
+  background: #9d4915;
+  width: 15rem;
+  height:0.2rem;
   
-  .quem-somos .container {
-    max-width: 1000px;
-    margin: 0 auto;
-    text-align: center;
-  }
-  
-  .quem-somos h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-    font-family: 'SedraBold', serif;
-  }
-  
-  .quem-somos p {
-    font-size: 1.125rem;
-    line-height: 1.8;
-    margin-bottom: 1rem;
-  }
-  
+}
+
+.teste{
+  display: flex;
+  align-items: center;
+  position: relative;
+  font-size: 3rem;
+}
+
+.teste p {
+  font-family: "NunitoSans", sans-serif;
+  padding-left: 1rem;
+}
+
+.quem-somos .container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  padding-top: 2rem;
+  padding-left: 4rem;
+  padding-right: 4rem;
+  align-items: start;
+}
+
+.quem-somos-info p {
+  font-size: 1rem;
+  text-align: left;
+  margin-bottom: 1rem;
+  font-family: "NunitoSans", serif;
+}
+
+#meio {
+  margin-top: 2.5rem;
+  margin-bottom: 4.5rem;
+}
+
+#img-left {
+  width: 25rem;
+  height: 28rem;
+  object-fit: cover;
+  box-shadow: 0 4px 8px rgba(30, 27, 27, 0.464);
+}
+
+#img-center {
+  width: 25rem;
+  height: 20rem;
+  object-fit: cover;
+  box-shadow: 0 4px 8px rgba(30, 27, 27, 0.464);
+  object-position: 100% 0;
+}
+
+#img-right {
+  position: absolute;
+  width: 26rem;
+  height: 40rem;
+  object-fit: cover;
+  box-shadow: 0 4px 8px rgba(30, 27, 27, 0.464);
+}
