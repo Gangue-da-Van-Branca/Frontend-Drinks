@@ -4,19 +4,28 @@ import "./Header.css";
 const Header = () => {
   return (
     <header className="header">
-      <div className="logo">
-        <span>ELO</span>
-        <span>DRINKS</span>
+      <div className="header-container">
+        <div className="logo">EloDrinks</div>
+        <nav className="nav">
+          <ul>
+            <li>
+              <a href="#quem-somos">Quem Somos</a>
+            </li>
+            <li>
+              <a href="#como-funciona">Como Funciona</a>
+            </li>
+            <li>
+              <a href="#pacotes">Pacotes</a>
+            </li>
+            <li>
+              <a href="#personalizar">Personalizar</a>
+            </li>
+          </ul>
+        </nav>
+        <div className="login-icon">
+          <i className="fas fa-user"></i>
+        </div>
       </div>
-
-      <nav className="nav">
-        <ul>
-          <li><a href="#quem-somos">QUEM SOMOS</a></li>
-          <li><a href="#pacotes">PACOTES</a></li>
-          <li><a href="#personalizar">PERSONALIZAR</a></li>
-          <li><a href="#como-funciona">COMO FUNCIONA</a></li>
-        </ul>
-      </nav>
     </header>
   );
 };

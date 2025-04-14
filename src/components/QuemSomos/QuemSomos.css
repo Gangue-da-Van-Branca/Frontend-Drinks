@@ -1,0 +1,25 @@
+.quem-somos {
+    padding: 6rem 2rem 4rem;
+    background-color: #fdf9f2;
+    color: #1c194e;
+    font-family: 'NunitoSans', sans-serif;
+  }
+  
+  .quem-somos .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .quem-somos h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    font-family: 'SedraBold', serif;
+  }
+  
+  .quem-somos p {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+  
