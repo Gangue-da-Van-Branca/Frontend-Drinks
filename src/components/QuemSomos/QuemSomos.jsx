@@ -10,9 +10,7 @@ const QuemSomos = () => {
       </div>
       <div className="teste">
         <div className="box-esq"></div>
-        <p>
-        ELO DRINKS
-        </p>
+        <p>ELO DRINKS</p>
         <div className="line-top"></div>
       </div>
 
@@ -40,7 +38,6 @@ const QuemSomos = () => {
             surpreender seus convidados.
           </p>
           <div className="line-img-center"></div>
-
         </div>
 
         <div className="quem-somos-info">
@@ -54,6 +51,11 @@ const QuemSomos = () => {
           <img id="img-right" src="src/assets/images/ex_festa4.jpg" />
         </div>
       </div>
+
+      <div className="brinde-bg">
+        <p>O BRINDE É SEU, O DRINK É NOSSO!</p>
+      </div>
+
     </section>
   );
 };
