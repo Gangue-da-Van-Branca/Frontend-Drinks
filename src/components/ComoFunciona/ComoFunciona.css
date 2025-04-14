@@ -1,0 +1,38 @@
+.como-funciona {
+    padding-top: 4rem;
+    padding-bottom: 6rem;
+    background-color: #fafafa;
+    color: #1c194e;
+    font-family: "NunitoSans", sans-serif;
+    position: relative;
+  }
+  
+  .titleFunciona{
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    position: relative;
+  }
+
+  .box-esq {
+    background: #9d4915;
+    width: 5rem;
+    height:3rem;
+    left: 0;
+    position: flex;
+  }
+
+  .titleFunciona p {
+    font-size: 2rem;
+    font-family: "SedraRegular", sans-serif;
+    text-align: left;
+    padding-right: 4rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .titleFunciona h1 {
+    font-size: 5rem;
+    font-family: "SedraRegular", sans-serif;
+    padding-left: 4rem;
+    line-height: 0.5;
+  }
