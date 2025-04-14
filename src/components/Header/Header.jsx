@@ -1,7 +1,24 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "./Header.css";
 
 const Header = () => {
+
+  useEffect(() => {
+    const handleScroll = () => {
+      console.log('ScrollY:', window.scrollY);
+      const header = document.querySelector('.header');
+      if (window.scrollY > 150) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <header className="header">
       <div className="header-container">

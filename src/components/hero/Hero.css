@@ -23,6 +23,12 @@
     color: #fafafa;
     margin-top: 14rem;
   }
+
+  @media (max-width: 768px) {
+    .hero-content {
+      margin-top: 4rem;
+    }
+  }  
   
   .hero-content h1 {
     font-family: 'SedraBold', sans-serif;

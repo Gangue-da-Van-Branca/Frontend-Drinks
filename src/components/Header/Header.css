@@ -19,6 +19,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  transition: background-color 0.5s ease-in;
+  background-color: transparent;
+}
+
+.header.scrolled {
+  background-color: #9d4915;
 }
 
 .header-container {
