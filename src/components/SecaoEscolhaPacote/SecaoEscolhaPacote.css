@@ -1,0 +1,57 @@
+.escolha-pacote {
+    background-color: #2a1d15;
+    height: 100vh;
+    color: #ffffff;
+    position: relative;
+    background-image: url('src/assets/images/ex_festa.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .escolha-pacote-overlay{
+    position: absolute;
+    inset: 0;
+    background-color: #5a504092; 
+    z-index: 1;
+  }
+
+  .escolha-pacote-content {
+    padding-top: 5rem;
+    position: relative;
+    z-index: 2;
+    color: #fafafa;
+    margin-top: 14rem;
+  }
+
+  .titlePacote{
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    position: relative;
+  }
+
+  .box-esq {
+    background: #9d4915;
+    width: 5rem;
+    height:3rem;
+    left: 0;
+    position: flex;
+  }
+
+  .titlePacote p {
+    font-size: 2rem;
+    font-family: "SedraRegular-Italic";
+    text-align: left;
+    padding-right: 4rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .titlePacote h1 {
+    font-size: 5rem;
+    font-family: "SedraRegular";
+    padding-left: 4rem;
+    line-height: 0.5;
+  }
+
+
+  

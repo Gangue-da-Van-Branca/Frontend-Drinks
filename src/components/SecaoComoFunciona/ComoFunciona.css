@@ -1,9 +1,7 @@
 .como-funciona {
-    padding-top: 4rem;
-    padding-bottom: 6rem;
+    padding-top: 5rem;
     background-color: #fafafa;
     color: #1c194e;
-    font-family: "NunitoSans", sans-serif;
     position: relative;
   }
   
@@ -24,7 +22,7 @@
 
   .titleFunciona p {
     font-size: 2rem;
-    font-family: "SedraRegular", sans-serif;
+    font-family: "SedraRegular-Italic";
     text-align: left;
     padding-right: 4rem;
     margin-bottom: 0.5rem;
@@ -32,7 +30,7 @@
 
   .titleFunciona h1 {
     font-size: 5rem;
-    font-family: "SedraRegular", sans-serif;
+    font-family: "SedraRegular";
     padding-left: 4rem;
     line-height: 0.5;
   }

@@ -1,8 +1,9 @@
 import React from "react";
 import Header from "../../../components/Header/Header";
-import QuemSomos from "../../../components/QuemSomos/QuemSomos";
+import QuemSomos from "../../../components/SecaoQuemSomos/QuemSomos";
 import Hero from "../../../components/hero/Hero";
-import ComoFunciona  from "../../../components/ComoFunciona/ComoFunciona";
+import ComoFunciona  from "../../../components/SecaoComoFunciona/ComoFunciona";
+import SecaoEscolhaPacote from "../../../components/SecaoEscolhaPacote/SecaoEscolhaPacote";
 
 function Home(){
     return (
@@ -11,7 +12,8 @@ function Home(){
             <Hero />
             <QuemSomos />
             <ComoFunciona />
-            </>
+            <SecaoEscolhaPacote />
+            
         </div>
     )
 }

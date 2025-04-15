@@ -31,7 +31,7 @@ const Header = () => {
               <a href="#como-funciona">Como Funciona</a>
             </li>
             <li>
-              <a href="#pacotes">Pacotes</a>
+              <a href="#escolha-pacote">Pacotes</a>
             </li>
             <li>
               <a href="#personalizar">Personalizar</a>
