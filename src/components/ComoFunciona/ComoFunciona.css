@@ -36,3 +36,63 @@
     padding-left: 4rem;
     line-height: 0.5;
   }
+
+
+  #steps {
+    display: flex;
+    flex-direction: row;  
+    justify-content: space-around; 
+    align-items: flex-start;
+    padding: 2rem 2rem 0;
+    gap: 1rem;
+  }
+  
+  #step {
+    flex: 1;
+    max-width: 20rem;
+    text-align: left;
+  }
+  
+  #step h2 span {
+    font-size: 8rem;
+    font-weight: bold;
+    color: #0e0e0e;
+    display: block;
+    font-family: "NunitoSans";
+  }
+  
+  #step h2 {
+    font-size: 2rem;
+    color: #9d4915;
+    font-family: "SedraRegular-Italic";
+    text-align: left;
+  }
+  
+  #step h2 em {
+    display: inline-block;
+    font-size: 2rem;
+    color: #222;
+    font-family: "SedraRegular-Italic";
+
+  }
+  
+  
+  #step p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #333;
+    font-family: "NunitoSans";
+    padding-bottom: 2rem;
+
+  }
+  
+  #step button {
+    margin-top: 1rem;
+    background-color: #9d4915;
+    color: white;
+    border: none;
+    padding: 1rem 1.2rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+  

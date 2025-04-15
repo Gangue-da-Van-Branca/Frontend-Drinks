@@ -11,7 +11,7 @@ function Home(){
             <Hero />
             <QuemSomos />
             <ComoFunciona />
-            
+            </>
         </div>
     )
 }
