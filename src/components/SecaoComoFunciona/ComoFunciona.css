@@ -62,7 +62,7 @@
   
   #step h2 {
     font-size: 2rem;
-    color: #9d4915;
+    color: #101820;
     font-family: "SedraRegular-Italic";
     text-align: left;
   }
@@ -70,7 +70,7 @@
   #step h2 em {
     display: inline-block;
     font-size: 2rem;
-    color: #222;
+    color: #101820;
     font-family: "SedraRegular-Italic";
 
   }
@@ -79,7 +79,7 @@
   #step p {
     font-size: 0.95rem;
     line-height: 1.5;
-    color: #333;
+    color: #101820;
     font-family: "NunitoSans";
     padding-bottom: 2rem;
 
