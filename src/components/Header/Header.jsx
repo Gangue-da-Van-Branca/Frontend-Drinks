@@ -1,27 +1,28 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import "./Header.css";
 
 const Header = () => {
-
   useEffect(() => {
     const handleScroll = () => {
-      const header = document.querySelector('.header');
+      const header = document.querySelector(".header");
       if (window.scrollY > 150) {
-        header.classList.add('scrolled');
+        header.classList.add("scrolled");
       } else {
-        header.classList.remove('scrolled');
+        header.classList.remove("scrolled");
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <header className="header">
       <div className="header-container">
-        <div className="logo">EloDrinks</div>
+        <div className="logo">
+          <img src="src/assets/images/logo2.png" id="logo-img" />
+        </div>
         <nav className="nav">
           <ul>
             <li>
@@ -39,7 +40,7 @@ const Header = () => {
           </ul>
         </nav>
         <div className="login-icon">
-          <i className="fas fa-user"></i>
+          <i className="fas fa-user"> login</i>
         </div>
       </div>
     </header>
