@@ -34,7 +34,7 @@ const Header = () => {
               <a href="#escolha-pacote">Pacotes</a>
             </li>
             <li>
-              <a href="#personalizar">Personalizar</a>
+              <a href="#personalizacao">Personalizar</a>
             </li>
           </ul>
         </nav>
