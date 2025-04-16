@@ -4,6 +4,7 @@ import QuemSomos from "../../../components/SecaoQuemSomos/QuemSomos";
 import Hero from "../../../components/hero/Hero";
 import ComoFunciona  from "../../../components/SecaoComoFunciona/ComoFunciona";
 import SecaoEscolhaPacote from "../../../components/SecaoEscolhaPacote/SecaoEscolhaPacote";
+import Footer from "../../../components/Footer/Footer";
 
 function Home(){
     return (
@@ -13,7 +14,7 @@ function Home(){
             <QuemSomos />
             <ComoFunciona />
             <SecaoEscolhaPacote />
-            
+            <Footer />
         </div>
     )
 }

@@ -1,0 +1,76 @@
+.footer {
+    background-image: url('src/assets/images/bartender6.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    color: #fff;
+    padding: 2rem 1rem;
+}
+
+.footer-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: #5a5040bd;
+    z-index: 0;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;  
+    align-items: flex-start;          
+    flex-wrap: wrap;
+    margin: 0 auto;
+    max-width: 1200px;             
+    position: relative;
+    z-index: 1;
+}
+
+.footer-col {
+    flex: 1;
+    min-width: 250px;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-img {
+    width: 20rem;
+    height: auto;
+    display: block;
+}
+
+.social {
+    text-align: left    ;  
+}
+
+.social h3 {
+    margin-bottom: 0.1rem;
+}
+
+.social ul {
+    list-style: none;
+    padding: 0 0 2rem 0;
+    margin: 0;
+}
+
+.social li {
+    margin-top: 0.1rem;
+    display: flex;
+    justify-content: left; 
+    align-items: left;
+    font-family: "SedraLight";
+
+}
+
+
+
+.dev-credit {
+    margin-top: 20px;
+    font-size: 0.85rem;
+    color: #ddd;
+}
+
+.address {
+    text-align: left;  
+}
+
