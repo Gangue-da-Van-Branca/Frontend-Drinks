@@ -1,7 +1,7 @@
 import React from "react";
 import "./ComoFunciona.css";
 
-const QuemSomos = () => {
+const ComoFunciona = () => {
   return (
     <section className="como-funciona" id="como-funciona">
       <div className="titleFunciona">
@@ -51,4 +51,4 @@ const QuemSomos = () => {
   );
 };
 
-export default QuemSomos;
+export default ComoFunciona;
