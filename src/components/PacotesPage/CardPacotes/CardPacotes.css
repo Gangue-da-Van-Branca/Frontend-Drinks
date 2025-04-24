@@ -1,15 +1,16 @@
 .container-card {
   width: 18rem;
   height: 22rem;
-  background-color: #e0ceaa;
+  background-color: #101820;
   padding: 1rem;
-  border: 2px solid #d1c19f;
+  border: 2px solid #192632;
 }
 
 h1 {
   font-size: 2rem;
   font-family: "SedraRegular";
   text-align: center;
+  color: #fafafa;
 }
 
 .container-price {
@@ -17,12 +18,13 @@ h1 {
   align-items:baseline;
   font-family: "SedraRegular";
   margin: 0 auto;
+  color: #fafafa;
 }
 
 .botao-detalhes {
     width: 10rem;
     padding: 7px 10px;
-    background-color: #5A5040;
+    background-color: #9D4815;
     text-align: center;
     font-family: "SedraRegular";
     font-size: 1.2rem;
@@ -32,11 +34,11 @@ h1 {
 
 .botao-detalhes:hover{
     background-color: #fafafa;
-    color:#5A5040;
+    color:#9D4815;
     cursor: pointer;
-    border: 2px solid #5A5040;
+    border: 2px solid #9D4815;
 }
 
 hr{
-    color: #5A5040;
+    color: #9D4815;
 }
