@@ -3,7 +3,7 @@ import Home from "../pages/Cliente/Home/Home";
 import Cadastro from "../pages/Cadastro/Cadastro";
 import Dashboard from "../pages/Cliente/Dashboard";
 import OrcamentoResumo from "../pages/Cliente/OrcamentoResumo";
-import Pacotes from "../pages/Cliente/Pacotes";
+import Pacotes from "../pages/Cliente/PacotesPage/Pacotes";
 
 export default function AppRoutes() {
   return (
