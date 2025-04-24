@@ -3,4 +3,11 @@
     gap: 3rem;
     padding: 4rem 6rem;
     flex-wrap: wrap;
+    justify-content: center;    
+}
+
+.container-cards > * {
+        flex: 1 1 calc(33.333% - 2rem);
+        max-width: calc(33.333% - 8rem);
+        min-width: 250px;
 }

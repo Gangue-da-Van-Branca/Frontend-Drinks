@@ -17,8 +17,6 @@ function Pacotes() {
         <Card evento="Aniversário" preco="1000,00" />
         <Card evento="Casamento" preco="1234,00" />
         <Card evento="Aniversário" preco="1000,00" />
-        <Card evento="Casamento" preco="1234,00" />
-        <Card evento="Aniversário" preco="1000,00" />
       </div>
       <BotaoPersonalizar />
       <Footer />
