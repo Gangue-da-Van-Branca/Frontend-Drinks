@@ -1,6 +1,9 @@
 import React from "react";
 import TopoPacotes from "../../../components/PacotesPage/TopoPacotes/TopoPacotes";
 import Card from "../../../components/PacotesPage/CardPacotes/CardPacotes";
+import BotaoPersonalizar from "../../../components/PacotesPage/BotaoPacotesPersonalizar/BotaoPacotesPersonalizar";
+import Footer from "../../../components/Footer/Footer";
+
 import "./Pacotes.css";
 
 function Pacotes() {
@@ -17,6 +20,8 @@ function Pacotes() {
         <Card evento="Casamento" preco="1234,00" />
         <Card evento="Aniversário" preco="1000,00" />
       </div>
+      <BotaoPersonalizar />
+      <Footer />
     </div>
   );
 }
