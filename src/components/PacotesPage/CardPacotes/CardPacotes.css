@@ -1,0 +1,52 @@
+.container-card {
+  width: 18rem;
+  height: 22rem;
+  background-color: #101820;
+  padding: 1rem;
+  border: 2px solid #192632;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+h1 {
+  font-size: 2rem;
+  font-family: "SedraRegular";
+  text-align: center;
+  color: #fafafa;
+  line-height: 30px;
+  padding-bottom: 3px;
+}
+
+.container-price {
+  display: flex;
+  align-items:baseline;
+  font-family: "SedraRegular";
+  justify-content: center;
+  margin: 0 auto;
+  color: #fafafa;
+  padding-top: 0.5rem;
+}
+
+.botao-detalhes {
+    width: 10rem;
+    padding: 7px 10px;
+    background-color: #9D4815;
+    text-align: center;
+    font-family: "SedraRegular";
+    font-size: 1.2rem;
+    margin: 5px auto 15px;
+    color: #fafafa;
+}
+
+.botao-detalhes:hover{
+    background-color: #fafafa;
+    color:#9D4815;
+    cursor: pointer;
+    border: 2px solid #9D4815;
+}
+
+hr{
+    color: #9D4815;
+}
