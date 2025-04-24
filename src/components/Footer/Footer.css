@@ -51,24 +51,23 @@
     list-style: none;
     padding: 0 0 2rem 0;
     margin: 0;
+    justify-content: left;
 }
 
 .social li {
     margin-top: 0.1rem;
     display: flex;
-    justify-content: left; 
-    align-items: left;
+    align-items:center;
     font-family: "SedraLight";
-
 }
 
 .dev-credit {
-    margin-top: 20px;
+    margin-top: 70px;
     font-size: 0.85rem;
     color: #ddd;
+
 }
 
 .address {
     text-align: left;  
 }
-
