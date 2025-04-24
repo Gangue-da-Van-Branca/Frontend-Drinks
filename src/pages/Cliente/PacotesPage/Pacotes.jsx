@@ -12,10 +12,10 @@ function Pacotes() {
       <TopoPacotes />
       <div className="container-cards">
         <Card evento="Casamento" preco="1234,00" />
-        <Card evento="Aniversário" preco="1000,00" />
-        <Card evento="Casamento" preco="1234,00" />
-        <Card evento="Aniversário" preco="1000,00" />
-        <Card evento="Casamento" preco="1234,00" />
+        <Card evento="Lançamento" preco="1000,00" />
+        <Card evento="Evento Corporativo" preco="1234,00" />
+        <Card evento="Debutante" preco="1000,00" />
+        <Card evento="Festa Teen" preco="1234,00" />
         <Card evento="Aniversário" preco="1000,00" />
       </div>
       <BotaoPersonalizar />
