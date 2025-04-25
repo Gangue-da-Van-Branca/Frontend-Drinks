@@ -1,24 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./Header.css";
 
 const Header = () => {
+
+  const [isScrolled, setIsScrolled] = useState(false);
   useEffect(() => {
     const handleScroll = () => {
-      const header = document.querySelector(".header");
-      if (window.scrollY > 150) {
-        header.classList.add("scrolled");
-      } else {
-        header.classList.remove("scrolled");
-      }
+      setIsScrolled(window.scrollY > 50);
     };
 
     window.addEventListener("scroll", handleScroll);
-
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <header className="header">
+    <header className={`header ${isScrolled ? "scrolled" : ""}`}>
       <div className="header-container">
         <div className="logo">
           <img src="src/assets/images/logo2.png" id="logo-img" />
@@ -32,7 +28,7 @@ const Header = () => {
               <a href="#como-funciona">Como Funciona</a>
             </li>
             <li>
-              <a href="#escolha-pacote">Pacotes</a>
+              <a href="#escolha-pacote" >Pacotes</a>
             </li>
             <li>
               <a href="#personalizacao">Personalizar</a>
@@ -40,7 +36,7 @@ const Header = () => {
           </ul>
         </nav>
         <div className="login-icon">
-          <i className="fas fa-user"> login</i>
+          <a className="Login"> Login</a>
         </div>
       </div>
     </header>

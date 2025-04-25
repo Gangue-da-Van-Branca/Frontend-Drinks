@@ -1,5 +1,16 @@
-html {
-    scroll-behavior: smooth;
-    background-color: #fafafa;
-  }
-  
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+:root{
+  --white:  #fafafa;
+  --black:  black;
+  --red:    #E71C5C;
+  --orange: #9d4915;
+  --brown:  #5a504092;
+  --eggshell: #e6d3a3;
+  font-family: 'Rokkitt', serif;
+}

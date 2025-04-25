@@ -3,14 +3,14 @@
     background-size: cover;
     background-position: center;
     position: relative;
-    color: #fff;
+    color: var(--white);
     padding: 2rem 1rem;
 }
 
 .footer-overlay {
     position: absolute;
     inset: 0;
-    background-color: #5a5040bd;
+    background-color: var(--brown); 
     z-index: 0;
 }
 
@@ -40,7 +40,7 @@
 }
 
 .social {
-    text-align: left    ;  
+    text-align: left;  
 }
 
 .social h3 {

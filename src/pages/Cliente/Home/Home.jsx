@@ -6,6 +6,7 @@ import ComoFunciona  from "../../../components/SecaoComoFunciona/ComoFunciona";
 import SecaoEscolhaPacote from "../../../components/SecaoEscolhaPacote/SecaoEscolhaPacote";
 import Footer from "../../../components/Footer/Footer";
 import SecaoPersonalizar from "../../../components/SecaoPersonalizar/SecaoPersonalizar";
+import "../../../style/global.css"
 
 function Home(){
     return (

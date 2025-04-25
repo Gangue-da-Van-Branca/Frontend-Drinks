@@ -13,7 +13,7 @@
   .hero-overlay {
     position: absolute;
     inset: 0;
-    background-color: #5a504092; 
+    background-color: var(--brown); 
     z-index: 1;
   }
   
