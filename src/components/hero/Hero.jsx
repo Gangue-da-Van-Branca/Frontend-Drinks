@@ -1,23 +1,29 @@
 import React from "react";
 import "./Hero.css";
+import Carrossel from "../Carrossel/Carrossel";
+import seta from '../../assets/icons/arrow-up-right.svg'
 
 const Hero = () => {
   return (
     <section className="hero" id="inicio">
-      <div className="hero-overlay"></div>
-
+    <div className="hero-overlay">
       <div className="hero-content">
         <h1>
           O SEU DRINK
           <br />
           EM NOSSAS MÃOS
         </h1>
-        <a href="#quem-somos" className="btn-saiba-mais">
-          SAIBA MAIS →
-        </a>
+        <button>
+          <a href="#quem-somos" className="nunito">SAIBA MAIS</a>
+          <img src={seta} alt="seta" />
+        </button>
       </div>
-     
-    </section>
+  
+      <div className="hero-carrossel">
+        <Carrossel/>
+      </div>
+    </div>
+  </section>
   );
 };
 

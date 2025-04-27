@@ -1,0 +1,59 @@
+.card-slide {
+  background-color: var(--eggshell);
+  overflow: hidden;
+  width: fit-content;
+  text-align: center;
+}
+
+.item{
+  width: fit-content;
+}
+
+.rodape{
+  background-color: var(--brown2);
+  color: var(--white);
+  padding: 0.75rem 1.25rem;
+}
+
+.crsl-icon {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  padding: 4rem;
+}
+
+.card-slide h1 {
+  font-family: 'SedraBold', sans-serif;
+  font-size: 2rem;
+  line-height: 1.2;
+  text-align: left;
+}
+
+.card-slide p {
+  padding: 1rem 0;
+  display: flex;
+  font-size: 1rem;
+  text-align: left;
+}
+
+p img{
+  stroke: var(--white);
+}
+
+.divisor{
+  max-height: 80%;
+  justify-self: center;
+  align-self: center;
+  padding: 0 4rem;
+}
+
+.divs{
+  display: contents;
+  justify-items: center;
+  padding-left: 4rem;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--brown2);
+}

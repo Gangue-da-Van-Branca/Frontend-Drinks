@@ -11,6 +11,52 @@
   --red:    #E71C5C;
   --orange: #9d4915;
   --brown:  #5a504092;
+  --brown2: #5A5040;
   --eggshell: #e6d3a3;
   font-family: 'Rokkitt', serif;
+}
+
+.nunito{
+  font-family: 'Nunito', sans-serif;
+  margin-bottom: -1px;
+}
+
+button{
+  display: flex;
+  text-decoration: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 1.5rem 2.25rem;
+  font-family: "NunitoSans", sans-serif;
+  align-items: center;
+  font-weight: 900;
+  transition: 0.3s ease;
+  gap: 4px;
+}
+
+button img{
+  width: 1.5rem;
+  height: 1.5rem;
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+button:hover{
+  background-color: #cbb67f;
+  padding: 1.25rem 2rem;
+}
+
+button:hover img{
+  width: 2rem;
+  height: 2rem;
+}
+
+a{
+  all: unset;
+  cursor: pointer;
+}
+
+p{
+  font-family: "NunitoSans", sans-serif;
+  align-items: center;
 }
