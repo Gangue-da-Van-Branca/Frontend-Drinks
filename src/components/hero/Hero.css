@@ -15,17 +15,47 @@
     inset: 0;
     background-color: var(--brown); 
     z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
   }
   
   .hero-content {
     position: relative;
     z-index: 2;
-    color: #fafafa;
     margin-top: 14rem;
+    padding-left: 4rem;
+    
+  }
+
+  .hero-carrossel {
+    position: absolute; 
+    right: 0;            
+    top: 50%;            
+    transform: translateY(-50%);
+    width: 45vw;        
+    height: auto;        
+    z-index: 2;
+    overflow: hidden;    
+    border: none;    
+  }
+
+  .item-footer{
+    border: 1px solid red;
+    background-color: var(--brown2);
+  }
+
+  .item-footer div{
+    height: max-content;
+    display: flex;
+    background-color: (var(--brown2));
   }
 
   @media (max-width: 768px) {
     .hero-content {
+      margin-top: 4rem;
+    }
+    .hero-carrossel{
       margin-top: 4rem;
     }
   }  
@@ -34,23 +64,12 @@
     font-family: 'SedraBold', sans-serif;
     font-size: 4rem;
     line-height: 1.2;
-    padding: 0 6rem;
+    text-align: left;
+    padding-bottom: 4rem;
   }
-  
-  .btn-saiba-mais {
-    display: inline-block;
-    margin: 2rem 30rem 0;
-    padding: 0.8rem 2rem;
-    background-color: #e6d3a3;
-    color: #000;
-    font-weight: bold;
-    border-radius: 4px;
-    text-decoration: none;
-    transition: 0.3s ease;
-    
+
+  .hero-content button{
+    color: var(--brown2);
+    background-color: var(--eggshell);
+    font-size: 1rem;
   }
-  
-  .btn-saiba-mais:hover {
-    background-color: #cbb67f;
-  }
-  
