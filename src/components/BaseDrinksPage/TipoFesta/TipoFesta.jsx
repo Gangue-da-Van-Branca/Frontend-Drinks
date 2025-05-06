@@ -1,5 +1,5 @@
 import React from "react";
-import './TipoFesta.module.css';
+import './TipoFesta.css';
 
 const tiposFesta = [
   "Casamento",
@@ -12,13 +12,13 @@ const tiposFesta = [
   "Outro",
 ];
 
-function TipoFesta({tipoSelecionado,setTipoSelecionado,outroTipo,setOutroTipo}) {
+function TipoFesta({ tipoSelecionado, setTipoSelecionado, outroTipo, setOutroTipo }) {
   return (
-    <div id="campo-tipo-festa">
-      <h2 id="subtitulo-tipo">Tipo de Festa</h2>
-      <div id="tipo-opcoes">
+    <div className="campo-tipo-festa">
+      <div className="subtitulo-tipo">Tipo de Festa</div>
+      <div className="tipo-opcoes">
         {tiposFesta.map((tipo) => (
-          <label key={tipo} id="tipo-opcao">
+          <label key={tipo} className="tipo-opcao">
             <input
               type="radio"
               name="tipoFesta"
@@ -27,12 +27,18 @@ function TipoFesta({tipoSelecionado,setTipoSelecionado,outroTipo,setOutroTipo}) 
               onChange={(e) => setTipoSelecionado(e.target.value)}
             />
             {tipo}
+            {tipo === "Outro" && tipoSelecionado === "Outro" && (
+              <input
+                type="text"
+                className="campo-outro"
+                placeholder="Digite o tipo de festa"
+                value={outroTipo}
+                onChange={(e) => setOutroTipo(e.target.value)}
+              />
+            )}
           </label>
         ))}
       </div>
-      {tipoSelecionado === 'Outro' && (
-        <input type="text" id="campo-outro" placeholder="Digite o tipo de festa" value={outroTipo} onChange={(e) => setOutroTipo(e.target.value)} />
-      )}
     </div>
   );
 }

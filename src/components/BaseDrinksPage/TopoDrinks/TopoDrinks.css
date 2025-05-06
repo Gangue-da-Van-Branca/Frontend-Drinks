@@ -21,14 +21,14 @@
   font-size: 3.5rem;
   color: var(--darkblue);
   position: relative;
-  padding-left: 4rem;
-  padding-right: 4rem;
+  padding-left: 10rem;
+  padding-right: 10rem;
   margin-bottom: -1px;
 }
 
 #linha-horizontal-basedrinks {
   width: 100%;
-  height: 2px;
+  height: 1px;
   background-color: #9d4915;
   margin-top: -15px;
   margin-bottom: 30px;

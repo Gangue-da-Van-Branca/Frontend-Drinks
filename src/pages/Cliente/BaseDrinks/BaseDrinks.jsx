@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import TipoFesta from "../../../components/BaseDrinksPage/TipoFesta/TipoFesta";
 import SelecioneDrinks from "../../../components/BaseDrinksPage/SelecioneDrinks/SelecioneDrinks";
 import TopoDrinks from "../../../components/BaseDrinksPage/TopoDrinks/TopoDrinks";
-import "./BaseDrinks.module.css";
+import "./BaseDrinks.css";
 
 const drinksDisponiveis = [
   { nome: "Mojito", descricao: "Rum, hortelã e limão" },

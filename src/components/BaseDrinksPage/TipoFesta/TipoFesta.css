@@ -1,0 +1,48 @@
+.campo-tipo-festa {
+  text-align: center;
+  margin: 4rem auto;
+  max-width: 700px;
+  font-family: 'SedraRegular', sans-serif;
+}
+
+.subtitulo-tipo {
+  font-size: 1.8rem;
+  color: var(--darkblue); 
+  margin-bottom: 0.2rem;
+  text-transform: uppercase;
+}
+
+.tipo-opcoes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem 2rem;
+  padding: 2rem 3rem;
+  border: 2px solid var(--orange);
+  justify-items: start;
+}
+
+.tipo-opcao {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  color: var(--darkblue);
+}
+
+.tipo-opcao input[type="radio"] {
+  accent-color: var(--orange); 
+  width: 1rem;
+  height: 1rem;
+}
+
+.campo-outro {
+  margin-left: 0.5rem;
+  border: none;
+  border-bottom: 1px solid #333;
+  outline: none;
+  font-size: 0.9rem;
+  width: 160px;
+  padding: 0.25rem;
+  background: transparent;
+}
+
