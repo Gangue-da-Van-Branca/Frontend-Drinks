@@ -1,0 +1,39 @@
+#campo-tipo-festa {
+    margin-bottom: 32px;
+  }
+  
+  #subtitulo-tipo {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+  
+  #tipos-opcoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  
+  #tipo-opcao {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #f2f2f2;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  #tipo-opcao:hover {
+    background-color: #e0e0e0;
+  }
+  
+  #campo-outro {
+    margin-top: 12px;
+    padding: 8px;
+    width: 100%;
+    max-width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  

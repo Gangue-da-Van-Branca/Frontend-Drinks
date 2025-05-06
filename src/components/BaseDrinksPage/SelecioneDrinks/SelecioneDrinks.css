@@ -1,0 +1,15 @@
+#campo-drinks {
+    margin-bottom: 32px;
+  }
+  
+  #subtitulo-drinks {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+  
+  #lista-drinks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  
