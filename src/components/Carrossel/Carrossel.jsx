@@ -9,10 +9,10 @@ import "./Carrossel.css";
 function Carrossel() {
   return (
     <Swiper className="crsl"
-      slidesPerView={2}   // Um slide inteiro + pedaço do próximo
-      spaceBetween={-100}     // Espaço entre os slides
-      centeredSlides={false} // Não centraliza, começa na esquerda
-      navigation={true}      // Ativa botões Next/Prev automáticos
+      slidesPerView={2}   
+      spaceBetween={-100}     
+      centeredSlides={false} 
+      navigation={true}    
     >
       <SwiperSlide className='item'>
         <div className="card-slide">
@@ -51,8 +51,6 @@ function Carrossel() {
           </div>
         </div>
       </SwiperSlide>
-
-      {/* Adicione mais slides conforme necessário */}
     </Swiper>
   );
 }
