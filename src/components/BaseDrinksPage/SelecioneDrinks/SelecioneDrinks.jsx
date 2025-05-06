@@ -1,6 +1,6 @@
 import React from "react";
 import DrinkOption from '../drinkOption';
-import './SelecioneDrinks.css';
+import './SelecioneDrinks.module.css';
 
 function SelecioneDrinks({ drinksDisponiveis, drinksSelecionados, toggleDrink}){
     return (

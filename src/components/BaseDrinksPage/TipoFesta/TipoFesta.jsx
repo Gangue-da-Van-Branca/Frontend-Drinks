@@ -1,5 +1,5 @@
 import React from "react";
-import './TipoFesta.css';
+import './TipoFesta.module.css';
 
 const tiposFesta = [
   "Casamento",
