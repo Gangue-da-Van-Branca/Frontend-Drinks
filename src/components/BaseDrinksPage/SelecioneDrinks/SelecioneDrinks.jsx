@@ -1,24 +1,39 @@
 import React from "react";
-import DrinkOption from '../drinkOption';
-import './SelecioneDrinks.css';
+import "./SelecioneDrinks.css";
 
-function SelecioneDrinks({ drinksDisponiveis, drinksSelecionados, toggleDrink}){
-    return (
-        <div id="campo-drinks">
-            <h2 id="subtitulo-drinks">Selecione os drinks da sua festa (mínimo 5 e máximo 8)_</h2>
-            <div id="lista-drinks">
-                {drinksDisponiveis.map((drink) => (
-                    <DrinkOption 
-                        key={drink.nome}
-                        nome={drink.nome}
-                        descricao={drink.descricao}
-                        selecionado={drinksSelecionados.includes(drink.nome)}
-                        aoSelecionar={() => toggleDrink(drink.nome)}
+function SelecioneDrinks({ drinksDisponiveis, drinksSelecionados, toggleDrink }) {
+  return (
+    <div className="container-principal">
+      <h1 className="titulo">Selecione seus drinks</h1>
+      <div className="quadro">
+        {drinksDisponiveis.map((categoria) => (
+          <div key={categoria.categoria} className="categoria">
+            <h2 className="titulo-categoria">{categoria.categoria}</h2>
+            <ul className="lista-drinks">
+              {categoria.drinks.map((drink) => (
+                <li
+                  key={drink.id}
+                  className={`item-drink ${
+                    drinksSelecionados.includes(drink) ? "selecionado" : ""
+                  }`}
+                  onClick={() => toggleDrink(drink)}
+                >
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={drinksSelecionados.includes(drink)}
+                      onChange={() => toggleDrink(drink)}
                     />
-                ))}
-            </div>
-        </div>
-    );
+                    <strong>{drink.nome}</strong> — {drink.descricao}
+                  </label>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 export default SelecioneDrinks;
