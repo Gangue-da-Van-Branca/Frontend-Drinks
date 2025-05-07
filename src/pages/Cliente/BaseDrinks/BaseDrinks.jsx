@@ -55,6 +55,14 @@ function BaseDrinks() {
       alert("Selecione ao menos 5 drinks.");
       return;
     }
+    if (!tipoSelecionado || tipoSelecionado.trim() === "") {
+      alert("Selecione o tipo de festa.");
+      return;
+    }
+    if (tipoSelecionado === "Outro" && (!outroTipo || outroTipo.trim() === "")) {
+      alert("Por favor, preencha o campo com o tipo de festa.");
+      return;
+    }
     const tipoFinal = tipoSelecionado === "Outro" ? outroTipo : tipoSelecionado;
     navigate("/opcionais", {
       state: {
