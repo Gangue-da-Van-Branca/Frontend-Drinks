@@ -5,7 +5,7 @@ function BotaoPersonalizar() {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/monte-sua-festa");
+    navigate("/basedrinks");
   };
 
   return <div className="botao-personalizar" onClick={handleClick}>PERSONALIZAR MEU PACOTE</div>;

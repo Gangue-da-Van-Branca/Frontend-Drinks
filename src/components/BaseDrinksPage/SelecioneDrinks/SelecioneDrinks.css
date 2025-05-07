@@ -1,0 +1,57 @@
+.container-principal {
+  margin: 20px auto 0px;
+  max-width: 800px;
+  padding: 20px;
+  font-family: 'SedraRegular';
+}
+
+.titulo {
+  text-align: center;
+  font-family: 'SedraRegular';
+
+  font-size: 1.8rem;
+  color: var(--darkblue);
+  margin-bottom: 0.2rem;
+  text-transform: uppercase;
+}
+
+.quadro {
+  background-color: #fff;
+  padding: 20px;
+  border: 2px solid var(--orange);
+}
+
+.titulo-categoria {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 1.4em;
+  border-bottom: 1px solid var(--orange);
+  padding-bottom: 6px;
+  color: var(--darkblue);
+}
+
+.lista-drinks {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item-drink {
+  padding: 10px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.item-drink:hover {
+  background-color: var(--eggshell);
+}
+
+.item-drink input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.item-drink.selecionado {
+  background-color: #9d491544;
+  border-left: 4px solid var(--orange);
+}

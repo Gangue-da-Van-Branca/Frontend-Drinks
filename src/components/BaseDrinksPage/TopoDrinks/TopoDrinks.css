@@ -1,0 +1,47 @@
+#topo-basedrinks {
+  padding-top: 3rem;
+}
+
+#logo-container-basedrinks {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+#barra-lateral-basedrinks {
+  width: 5rem;
+  height: 3rem;
+  background-color: #9d4915;
+  margin-right: 0.5rem;
+}
+
+#linha-titulo-basedrinks {
+  text-align: center;
+  font-family: "SedraRegular";
+  font-size: 3.5rem;
+  color: var(--darkblue);
+  position: relative;
+  padding-left: 10rem;
+  padding-right: 10rem;
+  margin-bottom: -1px;
+}
+
+#linha-horizontal-basedrinks {
+  width: 100%;
+  height: 1px;
+  background-color: #9d4915;
+  margin-top: -15px;
+  margin-bottom: 30px;
+}
+
+#linha-titulo-basedrinks p {
+  font-size: 15px;
+  font-family: "SedraMedium";
+  text-align: left;
+  color: var(--darkblue);
+}
+
+#texto-basedrinks {
+  margin: 0 auto;
+  max-width: 800px;
+}
