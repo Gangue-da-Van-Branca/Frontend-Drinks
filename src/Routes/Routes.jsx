@@ -6,6 +6,7 @@ import OrcamentoResumo from "../pages/Cliente/OrcamentoResumo";
 import Pacotes from "../pages/Cliente/PacotesPage/Pacotes";
 import BaseDrinks from "../pages/Cliente/BaseDrinks/BaseDrinks";
 import Opcionais from "../pages/Cliente/Opcionais/Opcionais";
+import InfosCompra from "../pages/Cliente/InfosCompra/InfosCompra";
 
 export default function AppRoutes() {
   return (
@@ -16,6 +17,7 @@ export default function AppRoutes() {
         <Route path="/cadastro" element={<Cadastro />} />
         <Route path="/basedrinks" element={<BaseDrinks />} />
         <Route path="/opcionais" element={<Opcionais />} />
+        <Route path="/infosContratante" element={<InfosCompra />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/orcamento-resumo" element={<OrcamentoResumo />} />
       </Routes>
