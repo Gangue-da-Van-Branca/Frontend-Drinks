@@ -3,7 +3,7 @@
     margin-bottom: 30px;
   }
   
-  .shots-titulo {
+  .shots-titulo {   
     font-size: 2rem;
     margin: -8px;
     font-family: 'SedraRegular', serif;
@@ -11,7 +11,7 @@
   
   .shots-subtitulo {
     font-size: 12px;
-    color: #666;
+    color: var(--orange);
     margin-bottom: 10px;
   }
   
@@ -32,7 +32,7 @@
     margin-left: 30px;
     margin-right: 30px;
     font-size: 18px;
-    color: var(--brown2);
+    color: var(--orange);
   }
   
   .shot-titulo {
