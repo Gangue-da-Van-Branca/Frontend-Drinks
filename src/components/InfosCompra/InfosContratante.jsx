@@ -31,7 +31,7 @@ export default function InfosForm() {
       return;
     }
 
-    navigate("/resumo"); 
+    navigate("/orcamento-resumo"); 
   };
 
   return (
