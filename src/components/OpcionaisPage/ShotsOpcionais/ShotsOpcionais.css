@@ -1,0 +1,72 @@
+.shots-wrapper {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .shots-titulo {   
+    font-size: 2rem;
+    margin: -8px;
+    font-family: 'SedraRegular', serif;
+  }
+  
+  .shots-subtitulo {
+    font-size: 12px;
+    color: #444;
+    margin-bottom: 10px;
+  }
+  
+  .shots-container {
+    border: 3px solid var(--orange);
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px 0px;
+    background-color: #fafafa;
+    text-align: left;
+  }
+  
+  .shot-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    margin-left: 30px;
+    margin-right: 30px;
+    font-size: 18px;
+    color: var(--orange);
+  }
+  
+  .shot-titulo {
+    flex: 2;
+    margin-left: 10px;
+    font-family: 'SedraRegular';
+    font-weight: bold;
+
+  }
+  
+  .shot-preco {
+    flex: 1;
+    color: var(--orange);
+  }
+  
+  .shot-input {
+    width: 80px;
+    padding: 5px;
+    font-size: 16px;
+    text-align: center;
+    border: 1px solid var(--orange);
+  }
+  
+  .total-shot {
+    max-width: 900px;         
+    margin: 30px auto 0 auto; 
+    font-size: 18px;
+    font-weight: bold;
+    text-align: right;
+    color: var(--orange);
+    font-family: 'SedraRegular';
+  }
+  
+  .total-valor {
+    color: var(--orange);
+  }
+  
