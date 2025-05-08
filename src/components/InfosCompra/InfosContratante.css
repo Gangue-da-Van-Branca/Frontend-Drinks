@@ -1,0 +1,72 @@
+.infos-container {
+  padding: 50px 80px;
+  font-family: 'SedraRegular', sans-serif;
+}
+
+.logo {
+  font-size: 40px;
+  color: var(--darkblue);
+  font-weight: 300;
+}
+
+.logo span {
+  display: block;
+  margin-left: 40px;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  margin: 30px 0 10px;
+  width: fit-content;
+}
+
+.infos-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 40px;
+  margin-bottom: 30px;
+}
+
+input {
+  border: none;
+  border-bottom: 2px solid var(--orange);
+  padding: 8px;
+  font-size: 14px;
+  color: var(--darkblue);
+  background: transparent;
+  outline: none;
+  font-family: inherit;
+}
+
+input::placeholder {
+  color: var(--orange);
+  font-weight: 300;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+button[type="submit"] {
+  background-color: var(--orange);
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: 'SedraBold';
+}
+
+#linha-horizontal-infos {
+  width: 100%;
+  height: 2px;
+  background-color: #9d4915;
+  margin-top: -15px;
+  margin-bottom: 30px;
+}
