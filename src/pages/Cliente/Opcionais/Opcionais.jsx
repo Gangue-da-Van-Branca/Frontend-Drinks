@@ -4,7 +4,7 @@ import TopoOpcionais from "../../../components/OpcionaisPage/TopoOpcionais/TopoO
 import BaresOpcionais from "../../../components/OpcionaisPage/BaresOpcionais/BaresOpcionais";
 import ShotsOpcionais from "../../../components/OpcionaisPage/ShotsOpcionais/ShotsOpcionais";
 import ExtrasOpcionais from "../../../components/OpcionaisPage/ExtrasOpcionais/ExtrasOpcionais";
-import "./Opcionais.css";
+import Footer from "../../../components/Footer/Footer";
 
 function Opcionais() {
   const navigate = useNavigate();
@@ -12,18 +12,19 @@ function Opcionais() {
   const handleAvancar = () => {
     navigate("/infosContratante");
   };
-  
+
   return (
     <div>
       <TopoOpcionais />
       <BaresOpcionais />
       <ShotsOpcionais />
       <ExtrasOpcionais />
-      <div className="container-botao">
+      <div className="container-botao" style={{marginBottom:60}}>
         <button id="botao-avancar" onClick={handleAvancar}>
           Avançar
         </button>
       </div>
+      <Footer />
     </div>
   );
 }
