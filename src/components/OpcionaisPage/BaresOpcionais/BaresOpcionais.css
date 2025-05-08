@@ -1,0 +1,73 @@
+.bares-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    font-family: 'Georgia', serif;
+    color: var(--orange);
+  }
+  
+  .bares-container h2 {
+    text-align: center;
+    font-size: 2rem;
+    font-family: 'SedraRegular';
+    color: var(--darkblue);
+  }
+  
+  .bares-lista {
+    border: 3px solid var(--orange);
+    padding: 30px;
+  }
+  
+  .bar-card {
+    margin-bottom: 30px;
+  }
+  
+  .bar-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .bar-titulo {
+    max-width: 100%;
+  }
+  
+  .bar-preco {
+    color: var(--orange);
+    white-space: nowrap;
+  }
+  
+  .bar-itens {
+    list-style: disc inside;
+    padding-left: 10px;
+    font-family: 'NunitoSans';
+    margin: 0;
+    font-size: 13px;
+    color: var(--darkblue);
+  }
+  
+  .bar-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .bar-checkbox input[type='checkbox'] {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .total-bar {
+    margin-top: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: right;
+    color: var(--orange);
+  }
+  
+  .total-valor {
+    color: var(--orange);
+  }
+  
