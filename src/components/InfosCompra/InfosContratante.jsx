@@ -1,22 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import "./InfosContratante.css";
 import { useNavigate } from "react-router-dom";
+import { OrcamentoContext } from "../../../contexts/OrcamentoContext";
 
 export default function InfosForm() {
   const navigate = useNavigate();
-
-  const [formData, setFormData] = useState({
-    nome: "",
-    sobrenome: "",
-    telefone: "",
-    email: "",
-    data: "",
-    endereco: "",
-    horarioInicio: "",
-    horarioFinal: "",
-    cep: "",
-    convidados: "",
-  });
+  const { formData, setFormData } = useContext(OrcamentoContext);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
