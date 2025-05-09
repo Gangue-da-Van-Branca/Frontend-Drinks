@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./ShotsOpcionais.css";
 
 const shots = [
@@ -9,7 +9,7 @@ const shots = [
   { titulo: "Mini milk-shakes de Oreo", precoPor50: 750 },
 ];
 
-export default function ShotsNaPista() {
+export default function ShotsNaPista({ onChangeTotal }) {
   const [quantidades, setQuantidades] = useState({});
 
   const handleChange = (titulo, valor) => {
@@ -21,6 +21,10 @@ export default function ShotsNaPista() {
     const quantidade = quantidades[shot.titulo] || 0;
     return acc + (quantidade / 50) * shot.precoPor50;
   }, 0);
+
+useEffect(() => {
+    onChangeTotal?.(total); 
+  }, [total, onChangeTotal]);
 
   return (
     <div className="shots-wrapper">

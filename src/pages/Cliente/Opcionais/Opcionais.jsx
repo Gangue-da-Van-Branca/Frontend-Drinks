@@ -28,6 +28,17 @@ function Opcionais() {
   });
 
   const handleAvancar = () => {
+    const hasShotSelecionado = Object.values(shots).some((qtd) => qtd > 0);
+    const hasExtraSelecionado = Object.values(extras).some((qtd) => qtd > 0);
+
+    if (
+      barSelecionado.length === 0 &&
+      !hasShotSelecionado &&
+      !hasExtraSelecionado
+    ) {
+      alert("Selecione pelo menos uma opção de bar, shot ou extra.");
+      return;
+    }
     console.log("Bar selecionado:", barSelecionado);
     console.log("Shots:", shots);
     console.log("Extras:", extras);
@@ -38,7 +49,10 @@ function Opcionais() {
   return (
     <div>
       <TopoOpcionais />
-      <BaresOpcionais barSelecionado={barSelecionado} setBarSelecionado={setBarSelecionado} />
+      <BaresOpcionais
+        barSelecionado={barSelecionado}
+        setBarSelecionado={setBarSelecionado}
+      />
       <ShotsOpcionais shots={shots} setShots={setShots} />
       <ExtrasOpcionais extras={extras} setExtras={setExtras} />
       <div className="container-botao" style={{ marginBottom: 60 }}>

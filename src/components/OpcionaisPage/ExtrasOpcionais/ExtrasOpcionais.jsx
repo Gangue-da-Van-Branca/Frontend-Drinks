@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ExtrasOpcionais.css';
 
 const outros = [
@@ -10,7 +10,7 @@ const outros = [
   { titulo: 'Drink na Lâmpada', precoPorUnidade: 8.00 },
 ];
 
-export default function OutrosOpcionais() {
+export default function OutrosOpcionais({ onChangeTotal } ) {
   const [quantidades, setQuantidades] = useState({});
 
   const handleChange = (titulo, valor) => {
@@ -22,6 +22,10 @@ export default function OutrosOpcionais() {
     const quantidade = quantidades[item.titulo] || 0;
     return acc + quantidade * item.precoPorUnidade;
   }, 0);
+
+  useEffect(() => {
+    onChangeTotal?.(total);
+  }, [total, onChangeTotal]);
 
   return (
     <div className="outros-wrapper">
