@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import "./InfosContratante.css";
 import { useNavigate } from "react-router-dom";
-import { OrcamentoContext } from "../../../contexts/OrcamentoContext";
+import { OrcamentoContext } from "../../../context/OrcamentoContext";
 
 export default function InfosForm() {
   const navigate = useNavigate();
