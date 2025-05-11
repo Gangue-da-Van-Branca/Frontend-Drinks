@@ -6,11 +6,11 @@ export const OrcamentoProvider = ({ children }) => {
   const [orcamento, setOrcamento] = useState({
     baseFesta: {},
     opcionais: {
-      shots: [],
-      extras: [],
+      shots: {},
+      extras: {},
       baresAdicionais: [],
     },
-    contratante: {}
+    infosContratante: {}
   });
 
   const atualizarBase = (dados) => {
@@ -22,14 +22,14 @@ export const OrcamentoProvider = ({ children }) => {
   };
 
   const atualizarContratante = (dados) => {
-    setOrcamento((prev) => ({ ...prev, contratante: dados }));
+    setOrcamento((prev) => ({ ...prev, infosContratante: dados }));
   };
 
   const resetarOrcamento = () => {
     setOrcamento({
       baseFesta: {},
-      opcionais: { shots: [], extras: [], baresAdicionais: [] },
-      contratante: {}
+      opcionais: { shots: {}, extras: {}, baresAdicionais: [] },
+      infosContratante: {}
     });
   };
 

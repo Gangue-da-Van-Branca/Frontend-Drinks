@@ -123,7 +123,8 @@ function BaseDrinks() {
   const [tipoSelecionado, setTipoSelecionado] = useState("");
   const [outroTipo, setOutroTipo] = useState("");
   const [drinksSelecionados, setDrinksSelecionados] = useState([]);
-  const { setDadosBaseFesta } = useOrcamento();
+  const { atualizarBase } = useOrcamento();
+
 
 
   const toggleDrink = (drink) => {
@@ -152,11 +153,13 @@ function BaseDrinks() {
     }
     const tipoFinal = tipoSelecionado === "Outro" ? outroTipo : tipoSelecionado;
 
-    setDadosBaseFesta({
+    atualizarBase({
       tipoFesta: tipoFinal,
       drinksSelecionados,
     });
     
+    console.log("tipo selecionado:", tipoFinal);
+    console.log("drinks:", drinksSelecionados);
     navigate("/opcionais", {
       state: {
         TipoFesta: tipoFinal,

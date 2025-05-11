@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TopoOpcionais from "../../../components/OpcionaisPage/TopoOpcionais/TopoOpcionais";
 import BaresOpcionais from "../../../components/OpcionaisPage/BaresOpcionais/BaresOpcionais";
-import ShotsOpcionais from "../../../components/OpcionaisPage/ShotsOpcionais/ShotsOpcionais";
+import ShotsOpcionais from "../../../components/OpcionaisPage/ShotsOpcionais/ShotsNaPista";
 import ExtrasOpcionais from "../../../components/OpcionaisPage/ExtrasOpcionais/ExtrasOpcionais";
 import Footer from "../../../components/Footer/Footer";
+import { useOrcamento } from "../../../context/OrcamentoContext";
 
 function Opcionais() {
   const navigate = useNavigate();
+  const { atualizarOpcionais } = useOrcamento();
 
   const [barSelecionado, setBarSelecionado] = useState([]);
 
@@ -30,6 +32,12 @@ function Opcionais() {
   const handleAvancar = () => {
     const hasShotSelecionado = Object.values(shots).some((qtd) => qtd > 0);
     const hasExtraSelecionado = Object.values(extras).some((qtd) => qtd > 0);
+
+    atualizarOpcionais({
+      shots,
+      extras,
+      baresAdicionais: barSelecionado,
+    });
 
     if (
       barSelecionado.length === 0 &&
