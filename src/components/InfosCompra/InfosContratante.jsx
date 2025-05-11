@@ -7,7 +7,7 @@ export default function InfosForm() {
   const navigate = useNavigate();
   const { orcamento, atualizarContratante } = useOrcamento();
 
-  const formData = orcamento.contratante || {
+const formData = orcamento.infosContratante || {
     nome: "",
     sobrenome: "",
     telefone: "",
