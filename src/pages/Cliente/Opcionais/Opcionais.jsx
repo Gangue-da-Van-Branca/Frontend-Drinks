@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import { useOrcamento } from "../../../context/OrcamentoContext";
+
 import TopoOpcionais from "../../../components/OpcionaisPage/TopoOpcionais/TopoOpcionais";
 import BaresOpcionais from "../../../components/OpcionaisPage/BaresOpcionais/BaresOpcionais";
 import ShotsOpcionais from "../../../components/OpcionaisPage/ShotsOpcionais/ShotsNaPista";
 import ExtrasOpcionais from "../../../components/OpcionaisPage/ExtrasOpcionais/ExtrasOpcionais";
 import Footer from "../../../components/Footer/Footer";
-import { useOrcamento } from "../../../context/OrcamentoContext";
 
 function Opcionais() {
   const navigate = useNavigate();

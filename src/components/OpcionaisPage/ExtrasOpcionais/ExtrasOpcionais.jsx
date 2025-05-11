@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import './ExtrasOpcionais.css';
 
 const outros = [
@@ -10,22 +10,20 @@ const outros = [
   { titulo: 'Drink na Lâmpada', precoPorUnidade: 8.00 },
 ];
 
-export default function OutrosOpcionais({ onChangeTotal } ) {
-  const [quantidades, setQuantidades] = useState({});
-
+export default function ExtrasOpcionais({ extras, setExtras }) {
   const handleChange = (titulo, valor) => {
     const quantidade = parseInt(valor) || 0;
-    setQuantidades((prev) => ({ ...prev, [titulo]: quantidade }));
+    setExtras((prev) => ({ ...prev, [titulo]: quantidade }));
   };
 
   const total = outros.reduce((acc, item) => {
-    const quantidade = quantidades[item.titulo] || 0;
+    const quantidade = extras[item.titulo] || 0;
     return acc + quantidade * item.precoPorUnidade;
   }, 0);
 
   useEffect(() => {
-    onChangeTotal?.(total);
-  }, [total, onChangeTotal]);
+    console.log('Total extras atualizado:', total);
+  }, [total]);
 
   return (
     <div className="outros-wrapper">
@@ -39,8 +37,8 @@ export default function OutrosOpcionais({ onChangeTotal } ) {
             <input
               type="number"
               min="0"
-              step="10"
-              value={quantidades[item.titulo] || 0}
+              step="1"
+              value={extras[item.titulo] || 0}
               onChange={(e) => handleChange(item.titulo, e.target.value)}
               className="outro-input"
             />
@@ -51,8 +49,6 @@ export default function OutrosOpcionais({ onChangeTotal } ) {
       <div className="total-outro">
         Total: <span className="total-valor">R$ {total.toFixed(2)}</span>
       </div>
-
-      
     </div>
   );
 }
