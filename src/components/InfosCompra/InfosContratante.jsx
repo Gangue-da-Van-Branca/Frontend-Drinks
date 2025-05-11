@@ -7,18 +7,7 @@ export default function InfosForm() {
   const navigate = useNavigate();
   const { orcamento, atualizarContratante } = useOrcamento();
 
-const formData = orcamento.infosContratante || {
-    nome: "",
-    sobrenome: "",
-    telefone: "",
-    email: "",
-    data: "",
-    endereco: "",
-    horarioInicio: "",
-    horarioFinal: "",
-    cep: "",
-    convidados: "",
-  };
+  const formData = orcamento.infosContratante;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,6 +16,11 @@ const formData = orcamento.infosContratante || {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    console.log(
+      "SUBMIT - dados finais do contratante:",
+      orcamento.infosContratante
+    );
 
     const emptyField = Object.values(formData).some(
       (field) => field.trim() === ""

@@ -10,7 +10,18 @@ export const OrcamentoProvider = ({ children }) => {
       extras: {},
       baresAdicionais: [],
     },
-    infosContratante: {}
+    infosContratante: {
+      nome: "",
+      sobrenome: "",
+      telefone: "",
+      email: "",
+      data: "",
+      endereco: "",
+      horarioInicio: "",
+      horarioFinal: "",
+      cep: "",
+      convidados: "",
+    },
   });
 
   const atualizarBase = (dados) => {
@@ -29,7 +40,7 @@ export const OrcamentoProvider = ({ children }) => {
     setOrcamento({
       baseFesta: {},
       opcionais: { shots: {}, extras: {}, baresAdicionais: [] },
-      infosContratante: {}
+      infosContratante: {},
     });
   };
 
