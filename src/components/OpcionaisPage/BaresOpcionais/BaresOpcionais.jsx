@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './BaresOpcionais.css';
 
 const bares = [
@@ -45,11 +45,10 @@ const bares = [
   }
 ];
 
-export default function BaresOpcionais() {
-  const [selecionados, setSelecionados] = useState([]);
+export default function BaresOpcionais({ barSelecionado, setBarSelecionado }) {
 
   const toggleSelecionado = (titulo) => {
-    setSelecionados((prev) =>
+    setBarSelecionado((prev) =>
       prev.includes(titulo)
         ? prev.filter((t) => t !== titulo)
         : [...prev, titulo]
@@ -57,7 +56,7 @@ export default function BaresOpcionais() {
   };
 
   const total = bares
-    .filter((bar) => selecionados.includes(bar.titulo))
+    .filter((bar) => barSelecionado.includes(bar.titulo))
     .reduce((acc, bar) => acc + bar.preco, 0);
 
   return (
@@ -70,7 +69,7 @@ export default function BaresOpcionais() {
               <label className="bar-checkbox">
                 <input
                   type="checkbox"
-                  checked={selecionados.includes(bar.titulo)}
+                  checked={barSelecionado.includes(bar.titulo)}
                   onChange={() => toggleSelecionado(bar.titulo)}
                 />
                 <span className="bar-titulo">{bar.titulo}</span>

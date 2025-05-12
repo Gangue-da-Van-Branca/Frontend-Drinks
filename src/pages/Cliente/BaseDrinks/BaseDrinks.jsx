@@ -5,6 +5,7 @@ import SelecioneDrinks from "../../../components/BaseDrinksPage/SelecioneDrinks/
 import TopoDrinks from "../../../components/BaseDrinksPage/TopoDrinks/TopoDrinks";
 import Footer from "../../../components/Footer/Footer";
 import "./BaseDrinks.css";
+import { useOrcamento } from "../../../context/OrcamentoContext";
 
 const drinksDisponiveis = [
   {
@@ -116,10 +117,15 @@ const drinksDisponiveis = [
 ];
 
 function BaseDrinks() {
+
+  
   const navigate = useNavigate();
   const [tipoSelecionado, setTipoSelecionado] = useState("");
   const [outroTipo, setOutroTipo] = useState("");
   const [drinksSelecionados, setDrinksSelecionados] = useState([]);
+  const { atualizarBase } = useOrcamento();
+
+
 
   const toggleDrink = (drink) => {
     if (drinksSelecionados.includes(drink)) {
@@ -146,6 +152,12 @@ function BaseDrinks() {
       return;
     }
     const tipoFinal = tipoSelecionado === "Outro" ? outroTipo : tipoSelecionado;
+
+    atualizarBase({
+      tipoFesta: tipoFinal,
+      drinksSelecionados,
+    });
+    
     navigate("/opcionais", {
       state: {
         TipoFesta: tipoFinal,
