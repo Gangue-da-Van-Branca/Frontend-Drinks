@@ -49,9 +49,6 @@ function Opcionais() {
       alert("Selecione pelo menos uma opção de bar, shot ou extra.");
       return;
     }
-    console.log("Bar selecionado:", barSelecionado);
-    console.log("Shots:", shots);
-    console.log("Extras:", extras);
 
     navigate("/infosContratante");
   };

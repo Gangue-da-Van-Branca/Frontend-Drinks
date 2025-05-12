@@ -158,8 +158,6 @@ function BaseDrinks() {
       drinksSelecionados,
     });
     
-    console.log("tipo selecionado:", tipoFinal);
-    console.log("drinks:", drinksSelecionados);
     navigate("/opcionais", {
       state: {
         TipoFesta: tipoFinal,

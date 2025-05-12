@@ -17,11 +17,6 @@ export default function InfosForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(
-      "SUBMIT - dados finais do contratante:",
-      orcamento.infosContratante
-    );
-
     const emptyField = Object.values(formData).some(
       (field) => field.trim() === ""
     );

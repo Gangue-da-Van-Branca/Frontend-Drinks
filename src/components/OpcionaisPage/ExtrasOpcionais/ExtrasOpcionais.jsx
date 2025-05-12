@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './ExtrasOpcionais.css';
 
 const outros = [
@@ -21,9 +21,7 @@ export default function ExtrasOpcionais({ extras, setExtras }) {
     return acc + quantidade * item.precoPorUnidade;
   }, 0);
 
-  useEffect(() => {
-    console.log('Total extras atualizado:', total);
-  }, [total]);
+
 
   return (
     <div className="outros-wrapper">

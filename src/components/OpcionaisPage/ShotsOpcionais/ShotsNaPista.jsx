@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./ShotsOpcionais.css";
 
 const shotsData = [
@@ -22,9 +22,6 @@ export default function ShotsNaPista({ shots, setShots }) {
     return acc + (quantidade / 50) * shot.precoPor50;
   }, 0);
 
-  useEffect(() => {
-    console.log("Total shots atualizado:", total);
-  }, [total]);
 
   return (
     <div className="shots-wrapper">
