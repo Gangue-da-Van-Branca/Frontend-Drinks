@@ -4,13 +4,14 @@
   top: 0;
   z-index: 1000;
   color: #fafafa;
-  font-family: 'SedraMedium', 'NunitoSans', sans-serif;
-  padding: 1rem 2rem;
+  font-family: 'SedraMedium', sans-serif;
+  padding: 1rem 4rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   transition: background-color 0.5s ease-in;
   background-color: transparent;
+  font-style: italic;
 }
 
 .header.scrolled {
@@ -19,8 +20,8 @@
 
 .header-container {
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+  
+  margin: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -29,7 +30,7 @@
 #logo-img {
   display: flex;
   align-items: left;
-  width: 10rem;
+  width: 12rem;
   height: auto;
 }
 

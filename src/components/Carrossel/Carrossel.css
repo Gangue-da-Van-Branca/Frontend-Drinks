@@ -15,6 +15,11 @@
   padding: 0.75rem 1.25rem;
 }
 
+.rodape h1{
+  font-style: italic;
+}
+
+
 .crsl-icon {
   width: 100%;
   height: auto;
