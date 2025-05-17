@@ -1,12 +1,16 @@
 import React from "react";
 import "./QuemSomos.css";
+import logo from "../../assets/icons/logo.svg"
 
 const QuemSomos = () => {
   return (
     <section className="quem-somos" id="quem-somos">
       <div className="title">
         <h1>Sobre</h1>
-        <p>Perfeccionismo aos detalhes, qualidade e amor pela arte de servir</p>
+        <div className="right-div">
+          <img src={logo} alt="logo" />
+          <p>Perfeccionismo aos detalhes, qualidade e amor pela arte de servir</p>
+        </div>
       </div>
       <div className="teste">
         <div className="box-esq"></div>
