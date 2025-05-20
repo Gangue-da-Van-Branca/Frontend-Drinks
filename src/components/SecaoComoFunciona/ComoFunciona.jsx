@@ -1,7 +1,14 @@
 import React from "react";
 import "./ComoFunciona.css";
+import { useNavigate } from "react-router-dom";
 
 const ComoFunciona = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/pacotes");
+  };
+
   return (
     <section className="como-funciona" id="como-funciona">
       <div className="titleFunciona">
@@ -23,7 +30,7 @@ const ComoFunciona = () => {
             Escolha o combo que mais combina com o seu evento e prepare-se para
             brindar.
           </p>
-          <button>Escolher Pacote ➔</button>
+          <button onClick={handleClick}>Escolher Pacote ➔</button>
         </div>
 
         <div id="step">

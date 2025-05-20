@@ -8,7 +8,7 @@ const TopoPacotes = () => {
         <div id="barra-lateral" />
         
       </div>
-      <div id="linha-titulo">
+      <div id="linha-titulo-pacote">
         <p>ESCOLHA SEU PACOTE OU PERSONALIZE</p>
         <div id="linha-horizontal" />
       </div>
