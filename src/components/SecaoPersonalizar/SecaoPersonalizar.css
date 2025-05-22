@@ -1,10 +1,7 @@
 .personalizacao {
-    padding-top: 5rem;
-    background-color: #fafafa;
-    color: #1c194e;
+    padding: 5rem 0;
+    background-color: var(--white);
     position: relative;
-    height: 100vh;
-
   }
   
   .titlePersonalizacao{
@@ -57,7 +54,7 @@
     font-weight: bold;
     color: #101820;
     display: block;
-    font-family: "NunitoSans";
+    font-family: "SedraRegular";
   }
 
 
@@ -94,6 +91,21 @@
     object-fit: cover;
     box-shadow: 0 4px 8px rgba(30, 27, 27, 0.464);
   }
+
+#personalizar-botao{
+   width: fit-content;
+  background-color: var(--orange);
+  color: var(--white);
+  justify-self: center;
+  font-size: 2rem;
+  font-weight: 500;
+  padding: 2.5rem 8rem;
+}
+
+#personalizar-botao img{
+  height: 2rem;
+  width: 2rem;
+}
 
  
 

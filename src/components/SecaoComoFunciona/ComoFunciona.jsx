@@ -61,7 +61,7 @@ const ComoFunciona = () => {
        <button id="passo-botao">
             <a href="#quem-somos" className="nunito">Escolher Pacote</a>
             <img src={seta} alt="seta" />
-          </button>
+        </button>
 
     </section>
   );
