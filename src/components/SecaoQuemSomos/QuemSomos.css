@@ -1,7 +1,6 @@
 .quem-somos {
   padding-top: 4rem;
-  height: 155vh;
-  background-color: #fafafa;
+  background-color: var(--white);
   color: var(--darkblue);
   font-weight: 300;
   font-family: "SedraRegular", sans-serif;
@@ -68,20 +67,6 @@
   width: 15rem;
   height:0.2rem;
   
-}
-
-.teste{
-  display: flex;
-  align-items: center;
-  position: relative;
-  margin-top: -0.75rem;
-  font-size: 2.5rem;
-}
-
-.teste p {
-  font-family: "SedraRegular", sans-serif;
-  padding-left: 1rem;
-  margin-bottom: -1rem;
 }
 
 .quem-somos .container {
