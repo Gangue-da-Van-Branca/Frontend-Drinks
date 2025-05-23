@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import OrcamentoCard from "./OrcamentoCard.jsx";
 import "./DashboardOrcamento.css";
 
 export default function DashboardOrcamentos() {
+  // eslint-disable-next-line no-unused-vars
   const [orcamentos, setOrcamentos] = useState(mockOrcamentos);
 
   const handleAprovar = (orcamento) => {
@@ -16,23 +18,13 @@ export default function DashboardOrcamentos() {
     <div className="dashboard-orcamentos">
       <h2>Orçamentos Recebidos</h2>
       {orcamentos.map((orcamento, index) => (
-        <div key={index} className="orcamento-card">
-          <h3>Orçamento #{index + 1}</h3>
-          <p><strong>Data:</strong> {orcamento.infosContratante.data}</p>
-          <p><strong>Horário:</strong> {orcamento.infosContratante.horarioInicio} - {orcamento.infosContratante.horarioFinal}</p>
-          <p><strong>Convidados:</strong> {orcamento.infosContratante.convidados}</p>
-
-          <p><strong>Drinks:</strong> {Object.keys(orcamento.baseFesta.drinks).join(", ")}</p>
-          <p><strong>Bares:</strong> {orcamento.opcionais.baresAdicionais.join(", ") || "Nenhum"}</p>
-          <p><strong>Opcionais:</strong> {Object.keys(orcamento.opcionais.extras).join(", ")}</p>
-
-          <p><strong>Valor Final:</strong> R$ {orcamento.valorFinal}</p>
-
-          <div className="botoes-acoes">
-            <button onClick={() => handleAprovar(orcamento)}>✅ Aprovar</button>
-            <button onClick={() => handleRejeitar(orcamento)}>❌ Rejeitar</button>
-          </div>
-        </div>
+        <OrcamentoCard 
+          key={index}
+          orcamento={orcamento}
+          index={index}
+          onAprovar={handleAprovar}
+          onRejeitar={handleRejeitar}
+        />
       ))}
     </div>
   );
