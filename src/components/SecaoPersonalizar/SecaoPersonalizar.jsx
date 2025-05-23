@@ -1,15 +1,18 @@
-import React from "react";
+import Elodrinks from "../Elodrinks";
 import "./SecaoPersonalizar.css";
+import seta from '../../assets/icons/arrow-white.svg'
 
 const SecaoPersonalizar = () => {
   return (
     <section className="personalizacao" id="personalizacao">
-      <div className="titlePersonalizacao">
-        <h1>Personalização</h1>
-        <p>ELO DRINKS</p>
+      <div className="title">
+        <h1>Personalize</h1>
+        <Elodrinks tam="2.5rem"></Elodrinks>
       </div>
-      <div className="teste">
+
+      <div className="Subtitulo">
         <div className="box-esq"></div>
+        <p>Seu Evento</p>
       </div>
 
       <div id="steps">
@@ -47,6 +50,12 @@ const SecaoPersonalizar = () => {
         </div>
       </div>
 
+      <button id="personalizar-botao">
+        <a href="#quem-somos" className="nunito">
+          PERSONALIZAR
+        </a>
+        <img src={seta} alt="seta" />
+      </button>
     </section>
   );
 };

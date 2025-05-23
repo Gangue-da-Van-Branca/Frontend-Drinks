@@ -1,7 +1,8 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import casamentoIcon from '../../assets/icons/casamentoIcon.png';
-import niverIcon from '../../assets/icons/niverIcon.svg';
+import casamentoIcon from "../../assets/icons/weddingIcon280.svg";
+import maletaIcon from "../../assets/icons/maletaIcon280.svg";
+import niverIcon from "../../assets/icons/giftIcon280.svg";
 import seta from '../../assets/icons/arrow-white.svg'
 import divisor from '../../assets/icons/divisor.svg'
 import "./Carrossel.css";
@@ -44,7 +45,7 @@ function Carrossel() {
 
       <SwiperSlide>
         <div className="card-slide">
-          <img className="crsl-icon" src={casamentoIcon} alt="Casamento" />
+          <img className="crsl-icon" src={maletaIcon} alt="Casamento" />
           <div className="rodape">
             <h1>MAIS OPÇÕES</h1>
             <p class="Nunito">DETALHES DO PACOTE <img src={seta} alt="" /></p>

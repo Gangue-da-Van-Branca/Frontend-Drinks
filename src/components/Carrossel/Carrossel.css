@@ -1,10 +1,3 @@
-.card-slide {
-  background-color: var(--eggshell);
-  overflow: hidden;
-  width: fit-content;
-  text-align: center;
-}
-
 .item{
   width: fit-content;
 }
@@ -13,9 +6,12 @@
   background-color: var(--brown2);
   color: var(--white);
   padding: 0.75rem 1.25rem;
+  width: 100%;
+  height: 33%;
 }
 
 .rodape h1{
+  width: 100%;
   font-style: italic;
 }
 
@@ -26,6 +22,22 @@
   object-fit: contain;
   padding: 4rem;
 }
+.card-slide{
+  display: flex;
+  flex-direction: column;
+  background-color: var(--eggshell);
+  overflow: hidden;
+  width: fit-content;
+  text-align: center;
+  height: 100%;
+  justify-content:space-between;
+  width: 23rem;
+  transition: 0.2s ease-in-out;
+}
+
+.card-slide:hover{
+  background-color: #b4a376;
+}
 
 .card-slide h1 {
   font-family: 'SedraBold', sans-serif;
@@ -34,8 +46,13 @@
   text-align: left;
 }
 
+.card-slide img{
+  align-self: center;
+  transition: 0.2s ease-in-out;
+}
+
 .card-slide p {
-  padding: 1rem 0;
+  padding: 0.5rem 0;
   display: flex;
   font-size: 1rem;
   text-align: left;

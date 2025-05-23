@@ -60,3 +60,31 @@ p{
   font-family: "NunitoSans", sans-serif;
   align-items: center;
 }
+
+h2{
+  font-family: "NunitoSans", sans-serif;
+}
+
+.Subtitulo{
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-top: -0.75rem;
+  font-size: 2.5rem;
+}
+
+.Subtitulo p {
+  font-family: "SedraRegular", sans-serif;
+  padding-left: 1rem;
+  margin-bottom: -1rem;
+}
+
+.Elodrinks{
+  font-family: "SedraRegular", sans-serif;
+  align-self: center;
+  text-align: left;
+  max-width: 280px;
+  line-height: 1.2;
+  padding-right: 4rem;
+  margin-bottom: 0.5rem;
+}

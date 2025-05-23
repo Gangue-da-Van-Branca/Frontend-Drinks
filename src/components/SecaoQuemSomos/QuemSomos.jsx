@@ -12,7 +12,7 @@ const QuemSomos = () => {
           <p>Perfeccionismo aos detalhes, qualidade e amor pela arte de servir</p>
         </div>
       </div>
-      <div className="teste">
+      <div className="Subtitulo">
         <div className="box-esq"></div>
         <p>ELO DRINKS</p>
         <div className="line-top"></div>
