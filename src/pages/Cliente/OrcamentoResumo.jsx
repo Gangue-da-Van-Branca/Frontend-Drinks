@@ -10,7 +10,7 @@ export default function OrcamentoResumo() {
   const { baseFesta, opcionais, infosContratante } = orcamento;
 
   const handleConfirmar = () => {
-    console.log("ORÇAMENTO FINAL ENVIADO:", orcamento);
+    console.log(JSON.parse(JSON.stringify(orcamento)));
     alert("Orçamento enviado com sucesso!");
     resetarOrcamento();
     navigate("/");
@@ -90,9 +90,7 @@ export default function OrcamentoResumo() {
             <strong>Bares Adicionais:</strong>
             <ul>
               {opcionais.baresAdicionais.length > 0 ? (
-                opcionais.baresAdicionais.map((bar) => (
-                  <li key={bar}>{bar}</li>
-                ))
+                opcionais.baresAdicionais.map((bar) => <li key={bar}>{bar}</li>)
               ) : (
                 <li>Nenhum</li>
               )}

@@ -1,9 +1,15 @@
 import "./ComoFunciona.css";
 import Elodrinks from "../Elodrinks";
 import seta from '../../assets/icons/arrow-white.svg'
-
+import { useNavigate } from "react-router-dom";
 
 const ComoFunciona = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/pacotes");
+  };
+
   return (
     <section className="como-funciona" id="como-funciona">
       <div className="title">
@@ -29,6 +35,7 @@ const ComoFunciona = () => {
           </p>
           <div id="espaco"></div>
           <div id="espaco"></div>
+          <button onClick={handleClick}>Escolher Pacote ➔</button>
         </div>
 
         <div id="passo">
