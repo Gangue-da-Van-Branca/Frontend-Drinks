@@ -35,7 +35,6 @@ const ComoFunciona = () => {
           </p>
           <div id="espaco"></div>
           <div id="espaco"></div>
-          <button onClick={handleClick}>Escolher Pacote ➔</button>
         </div>
 
         <div id="passo">
@@ -65,7 +64,7 @@ const ComoFunciona = () => {
         </div>
       </div>
 
-       <button id="passo-botao">
+       <button onClick={handleClick} id="passo-botao">
             <a href="#quem-somos" className="nunito">Escolher Pacote</a>
             <img src={seta} alt="seta" />
         </button>

@@ -19,7 +19,7 @@ const SecaoPersonalizar = () => {
         <div id="step">
           <h2>
             <img src="src/assets/images/ex_bar.jpg" />
-            ESCOLHA SEUS<em>SABORES</em>
+            ESCOLHA SEUS SABORES
           </h2>
           <p>
             Prefere algo doce, cítrico ou mais forte? Selecione os drinks que
@@ -30,7 +30,7 @@ const SecaoPersonalizar = () => {
         <div id="step">
           <h2>
             <img src="src/assets/images/casamento.jpg" />
-            DEFINA A<em>APRESENTAÇÃO</em>
+            DEFINA A APRESENTAÇÃO
           </h2>
           <p>
             Quer os drinks em garrafinhas individuais, jarras para compartilhar
@@ -41,7 +41,7 @@ const SecaoPersonalizar = () => {
         <div id="step">
           <h2>
             <img src="src/assets/images/bartender3.jpg" />
-            ADICIONE UM<em>TOQUE ESPECIAL</em>
+            ADICIONE UM TOQUE ESPECIAL
           </h2>
           <p>
             Que tal um detalhe extra? Adicione frutas, especiarias ou até mesmo
