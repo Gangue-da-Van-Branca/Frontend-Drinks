@@ -1,4 +1,5 @@
 .quem-somos {
+  scroll-margin-top: 4rem;
   padding-top: 4rem;
   background-color: var(--white);
   color: var(--darkblue);
