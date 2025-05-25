@@ -1,0 +1,75 @@
+.popUp {
+   position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 10px;
+  z-index: 1000;
+  left: 100%;
+    transform: translateX(-90%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  color: black;
+  font-family: "NunitoSans", sans-serif;
+  font-style: normal;
+  font-size: 1rem;
+}
+
+.popUp-inner {
+  background: var(--white);
+  padding: 30px;
+  border-radius: 8px;
+  width: 300px;
+  position: relative;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.popUp-inner h2 {
+  font-family: "SedraRegular", sans-serif;
+  padding: 6px 0;
+  justify-self: center;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.login-form label {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+}
+
+.login-form input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: var(--white);
+}
+
+.login-form button {
+  padding: 10px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  justify-content: center;
+}
+
+.login-form button:hover {
+  background-color: var(--eggshell);
+}
