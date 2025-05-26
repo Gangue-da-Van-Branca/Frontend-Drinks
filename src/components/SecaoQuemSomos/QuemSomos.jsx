@@ -1,6 +1,9 @@
 import React from "react";
 import "./QuemSomos.css";
 import logo from "../../assets/icons/logo.svg"
+import img1 from "../../assets/images/ex_festa7.jpg";
+import img2 from "../../assets/images/bartender2.jpg";
+import img3 from "../../assets/images/ex_festa4.jpg";
 
 const QuemSomos = () => {
   return (
@@ -28,11 +31,11 @@ const QuemSomos = () => {
             da Grande São Paulo por terem ótimos profissionais e um excelente
             atendimento.
           </p>
-          <img id="img-left" src="src/assets/images/ex_festa7.jpg" />
+          <img id="img-left" src={img1} />
         </div>
 
         <div className="quem-somos-info">
-          <img id="img-center" src="src/assets/images/bartender2.jpg" />
+          <img id="img-center" src={img2} />
           <p id="meio">
             As personalizações dos drinks são um diferencial a parte, pois traz
             um toque especial no olhar e para o paladar dos convidados, como bar
@@ -52,7 +55,7 @@ const QuemSomos = () => {
             atendimento, com drinks inovadores, com ingredientes artesanais e
             diversão à seus convidados.{" "}
           </p>
-          <img id="img-right" src="src/assets/images/ex_festa4.jpg" />
+          <img id="img-right" src={img3} />
         </div>
       </div>
 
