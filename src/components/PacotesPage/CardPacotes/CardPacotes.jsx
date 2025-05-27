@@ -1,14 +1,19 @@
+import { useNavigate } from "react-router-dom";
 import "./CardPacotes.css";
 
-function Card({ evento, preco, index, modalAbertoIndex, setModalAbertoIndex }) {
+function Card({ evento, preco, index, modalAbertoIndex, setModalAbertoIndex, drinks}) {
+  const navigate = useNavigate();
   const estaAberto = modalAbertoIndex === index;
 
   const abrirModal = () => setModalAbertoIndex(index);
   const fecharModal = () => setModalAbertoIndex(null);
+
   const selecionarPacote = () => {
-    alert(`Pacote "${evento}" selecionado!`);
     fecharModal();
+
+    navigate("/basedrinks", { state: { tipoFesta: evento, drinksSelecionados: drinks, } });
   };
+
 
   return (
     <>
@@ -26,18 +31,23 @@ function Card({ evento, preco, index, modalAbertoIndex, setModalAbertoIndex }) {
 
       {estaAberto && (
         <div className="modal-overlay" onClick={fecharModal}>
-          <div
-            className="modal"
-            onClick={(e) => e.stopPropagation()}
-          >
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
             <h2>{evento}</h2>
-            <p><strong>Preço:</strong> R$ {preco}</p>
+            <p>
+              <strong>Preço:</strong> R$ {preco}
+            </p>
 
             <h3>Drinks inclusos</h3>
             <ul>
-              <li>Mojito</li>
-              <li>Sex on the Beach</li>
-              <li>Caipirinha</li>
+              {drinks.length > 0 ? (
+                drinks.map((drink) => (
+                  <li key={drink.id}>
+                    <strong>{drink.nome}</strong> — {drink.descricao}
+                  </li>
+                ))
+              ) : (
+                <li>Nenhum drink disponível para esta categoria.</li>
+              )}
             </ul>
 
             <h3>Bares</h3>

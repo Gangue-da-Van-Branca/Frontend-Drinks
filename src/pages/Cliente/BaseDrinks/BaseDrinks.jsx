@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import TipoFesta from "../../../components/BaseDrinksPage/TipoFesta/TipoFesta";
 import SelecioneDrinks from "../../../components/BaseDrinksPage/SelecioneDrinks/SelecioneDrinks";
 import TopoDrinks from "../../../components/BaseDrinksPage/TopoDrinks/TopoDrinks";
@@ -120,16 +120,19 @@ function BaseDrinks() {
 
   
   const navigate = useNavigate();
-  const [tipoSelecionado, setTipoSelecionado] = useState("");
+  const location = useLocation();
+  const [tipoSelecionado, setTipoSelecionado] = useState(location.state?.tipoFesta || "");
   const [outroTipo, setOutroTipo] = useState("");
-  const [drinksSelecionados, setDrinksSelecionados] = useState([]);
+  const [drinksSelecionados, setDrinksSelecionados] = useState(location.state?.drinksSelecionados || []);
   const { atualizarBase } = useOrcamento();
 
 
 
   const toggleDrink = (drink) => {
-    if (drinksSelecionados.includes(drink)) {
-      setDrinksSelecionados(drinksSelecionados.filter((d) => d !== drink));
+    const isSelected = drinksSelecionados.some((d) => d.id === drink.id);
+
+    if (isSelected) {
+      setDrinksSelecionados(drinksSelecionados.filter((d) => d.id !== drink.id));
     } else if (drinksSelecionados.length < 8) {
       setDrinksSelecionados([...drinksSelecionados, drink]);
     }

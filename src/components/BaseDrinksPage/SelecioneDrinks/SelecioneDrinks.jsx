@@ -1,7 +1,11 @@
 import React from "react";
 import "./SelecioneDrinks.css";
 
-function SelecioneDrinks({ drinksDisponiveis, drinksSelecionados, toggleDrink }) {
+function SelecioneDrinks({
+  drinksDisponiveis,
+  drinksSelecionados,
+  toggleDrink,
+}) {
   return (
     <div className="container-principal">
       <h1 className="titulo">Selecione seus drinks</h1>
@@ -14,14 +18,18 @@ function SelecioneDrinks({ drinksDisponiveis, drinksSelecionados, toggleDrink })
                 <li
                   key={drink.id}
                   className={`item-drink ${
-                    drinksSelecionados.includes(drink) ? "selecionado" : ""
+                    drinksSelecionados.some((d) => d.id === drink.id)
+                      ? "selecionado"
+                      : ""
                   }`}
                   onClick={() => toggleDrink(drink)}
                 >
                   <label>
                     <input
                       type="checkbox"
-                      checked={drinksSelecionados.includes(drink)}
+                      checked={drinksSelecionados.some(
+                        (d) => d.id === drink.id
+                      )}
                       onChange={() => toggleDrink(drink)}
                     />
                     <strong>{drink.nome}</strong> — {drink.descricao}
