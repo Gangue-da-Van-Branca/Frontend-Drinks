@@ -54,7 +54,7 @@ const SecaoPersonalizar = () => {
       </div>
 
       <button id="personalizar-botao">
-        <a href="#quem-somos" className="nunito">
+        <a href="/basedrinks" className="nunito">
           PERSONALIZAR
         </a>
         <img src={seta} alt="seta" />
