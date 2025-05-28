@@ -102,6 +102,16 @@ const Cadastro = () => {
             required
           />
         </label>
+        <label>
+          Confirme sua senha:
+          <input
+            type="password"
+            name="Confirmação da senha"
+            value={formData.senha}
+            onChange={handleChange}
+            required
+          />
+        </label>
         <button type="submit">Cadastrar</button>
       </form>
     </div>
