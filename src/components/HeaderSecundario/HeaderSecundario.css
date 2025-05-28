@@ -1,0 +1,64 @@
+.header-secundario {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  color: #fafafa;
+  font-family: 'SedraMedium', sans-serif;
+  padding: 1rem 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--orange);
+  font-style: italic;
+  font-size: 1.25rem;
+  transition: background-color 0.5s ease-in;
+}
+
+.header-secundario-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#logo-img-sec {
+  width: 12rem;
+  height: auto;
+}
+
+.nav-secundaria ul {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-secundaria a {
+  position: relative;
+  text-decoration: none;
+  color: var(--white);
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-secundaria a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+}
+
+.nav-secundaria a:hover::after {
+  width: 100%;
+}
+
+.login-icon a {
+  font-size: 1.2rem;
+  cursor: pointer;
+}
