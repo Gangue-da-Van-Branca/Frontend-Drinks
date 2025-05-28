@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
 const Login = ({ trigger, setTrigger }) => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+
+  const navigate = useNavigate();
 
   if (!trigger) return null;
 
@@ -12,6 +15,10 @@ const Login = ({ trigger, setTrigger }) => {
     // Aqui você pode colocar a lógica de autenticação
     console.log("Email:", email);
     console.log("Senha:", senha);
+  };
+
+  const handleCadastro = () => {
+    navigate("/cadastro"); 
   };
 
   return (
@@ -41,6 +48,7 @@ const Login = ({ trigger, setTrigger }) => {
             />
           </label>
           <button type="submit">Entrar</button>
+          <button type="button" onClick={handleCadastro}>Cadastrar</button>
         </form>
       </div>
     </div>
