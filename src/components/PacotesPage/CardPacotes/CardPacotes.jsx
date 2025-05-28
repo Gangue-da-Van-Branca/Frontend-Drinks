@@ -50,11 +50,6 @@ function Card({ evento, preco, index, modalAbertoIndex, setModalAbertoIndex, dri
               )}
             </ul>
 
-            <h3>Bares</h3>
-            <ul>
-              <li>Bar Temático Tropical</li>
-            </ul>
-
             <div className="botoes-modal">
               <button onClick={selecionarPacote}>Selecionar Pacote</button>
               <button onClick={fecharModal}>Fechar</button>
