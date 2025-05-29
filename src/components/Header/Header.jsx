@@ -6,6 +6,7 @@ import "./Header.css";
 const Header = ({ nome, setNome }) => {
   const [buttonPopup, setButtonPopUp] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,13 +45,24 @@ const Header = ({ nome, setNome }) => {
   const handleLogout = () => {
     localStorage.clear();
     setNome(null);
+    setUserMenuOpen(false);
+  };
+
+  const handleUserMenuToggle = () => {
+    setUserMenuOpen(!userMenuOpen);
+  };
+
+  const handleMyOrders = () => {
+    // Navegar para a página de pedidos
+    console.log("Ver meus pedidos");
+    setUserMenuOpen(false);
   };
 
   return (
     <header className={`header ${isScrolled ? "scrolled" : ""}`}>
       <div className="header-container">
         <div className="logo">
-          <img src={logo} id="logo-img" />
+          <img src={logo} id="logo-img" alt="Logo" />
         </div>
         <nav className="nav">
           <ul>
@@ -62,10 +74,17 @@ const Header = ({ nome, setNome }) => {
         </nav>
         <div className="login-icon">
           {nome ? (
-            <>
-              <span>Olá, {nome}!</span>
-              <a onClick={handleLogout} className="Logout">Logout</a>
-            </>
+            <div className="user-menu-container">
+              <a onClick={handleUserMenuToggle} className="user-greeting">
+                Olá, {nome}!
+              </a>
+              {userMenuOpen && (
+                <div className="user-menu">
+                  <a onClick={handleMyOrders}>Ver meus pedidos</a>
+                  <a onClick={handleLogout}>Logout</a>
+                </div>
+              )}
+            </div>
           ) : (
             <>
               <a onClick={() => setButtonPopUp(true)} className="Login">Login</a>
