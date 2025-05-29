@@ -20,7 +20,11 @@ const Login = ({ trigger, setTrigger }) => {
 
   const handleEsqueceuSenhaClick = (e) => {
     e.preventDefault();
-    setShowEsqueceuSenha(true); 
+    setShowEsqueceuSenha(true);
+  };
+
+  const handleCadastro = () => {
+    navigate("/cadastro");
   };
 
   return (
@@ -51,50 +55,21 @@ const Login = ({ trigger, setTrigger }) => {
               />
             </label>
             <button type="submit">Entrar</button>
+            <button type="button" onClick={handleCadastro}>
+              Cadastrar
+            </button>
             <a id="senha" href="#" onClick={handleEsqueceuSenhaClick}>
               Esqueceu sua senha?
             </a>
           </form>
+
+          {/* Mostra o pop-up de recuperação de senha */}
+          <EsqueceuSenha
+            trigger={showEsqueceuSenha}
+            setTrigger={setShowEsqueceuSenha}
+          />
         </div>
-
-  const handleCadastro = () => {
-    navigate("/cadastro"); 
-  };
-
-  return (
-    <div className="popUp">
-      <div className="popUp-inner">
-        <a className="close-button" onClick={() => setTrigger(false)}>
-          X
-        </a>
-        <h2>Login</h2>
-        <form onSubmit={handleSubmit} className="login-form">
-          <label>
-            Email:
-            <input
-              type="text"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </label>
-          <label>
-            Senha:
-            <input
-              type="password"
-              value={senha}
-              onChange={(e) => setSenha(e.target.value)}
-              required
-            />
-          </label>
-          <button type="submit">Entrar</button>
-          <button type="button" onClick={handleCadastro}>Cadastrar</button>
-        </form>
-
       </div>
-
-      {/* Mostra o pop-up de recuperação de senha */}
-      <EsqueceuSenha trigger={showEsqueceuSenha} setTrigger={setShowEsqueceuSenha} />
     </>
   );
 };
