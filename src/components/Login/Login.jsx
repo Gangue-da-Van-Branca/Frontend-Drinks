@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
+import EsqueceuSenha from "./EsqueceuSenha";
 
 const Login = ({ trigger, setTrigger, setNome }) => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [erro, setErro] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showEsqueceuSenha, setShowEsqueceuSenha] = useState(false);
 
   const navigate = useNavigate();
 
@@ -30,12 +32,10 @@ const Login = ({ trigger, setTrigger, setNome }) => {
         const data = await response.json();
         console.log("Login bem-sucedido:", data);
 
-        // Armazena os dados no localStorage
         localStorage.setItem("token", data.token);
         localStorage.setItem("role", data.role);
         localStorage.setItem("idUsuario", data.idUsuario);
 
-        // Busca o nome do usuário
         const userResponse = await fetch(`http://localhost:8080/Usuario/${data.idUsuario}`, {
           headers: {
             Authorization: `Bearer ${data.token}`,
@@ -44,12 +44,12 @@ const Login = ({ trigger, setTrigger, setNome }) => {
 
         if (userResponse.ok) {
           const userData = await userResponse.json();
-          setNome(userData.nome);  // Atualiza o estado global
+          setNome(userData.nome);
         } else {
           console.warn("Não foi possível buscar o nome do usuário.");
         }
 
-        setTrigger(false);  // Fecha o modal
+        setTrigger(false);
       } else {
         const errorData = await response.json();
         setErro(errorData.erro || "Erro ao fazer login");
@@ -63,43 +63,58 @@ const Login = ({ trigger, setTrigger, setNome }) => {
   };
 
   const handleCadastro = () => {
-    setTrigger(false);  // Fecha o modal antes de navegar
+    setTrigger(false);
     navigate("/cadastro");
   };
 
+  const handleEsqueceuSenhaClick = (e) => {
+    e.preventDefault();
+    setShowEsqueceuSenha(true);
+  };
+
   return (
-    <div className="popUp">
-      <div className="popUp-inner">
-        <h2>Login</h2>
-        {erro && <p className="erro">{erro}</p>}
-        <form onSubmit={handleSubmit} className="login-form">
-          <label>
-            Email:
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </label>
-          <label>
-            Senha:
-            <input
-              type="password"
-              value={senha}
-              onChange={(e) => setSenha(e.target.value)}
-              required
-            />
-          </label>
-          <button type="submit" disabled={loading}>
-            {loading ? "Entrando..." : "Entrar"}
-          </button>
-          <button type="button" onClick={handleCadastro}>
-            Cadastrar
-          </button>
-        </form>
+    <>
+      <div className="popUp">
+        <div className="popUp-inner">
+          <a className="close-button" onClick={() => setTrigger(false)}>
+            X
+          </a>
+          <h2>Login</h2>
+          {erro && <p className="erro">{erro}</p>}
+          <form onSubmit={handleSubmit} className="login-form">
+            <label>
+              Email:
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </label>
+            <label>
+              Senha:
+              <input
+                type="password"
+                value={senha}
+                onChange={(e) => setSenha(e.target.value)}
+                required
+              />
+            </label>
+            <button type="submit" disabled={loading}>
+              {loading ? "Entrando..." : "Entrar"}
+            </button>
+            <button type="button" onClick={handleCadastro}>
+              Cadastrar
+            </button>
+            <a id="senha" href="#" onClick={handleEsqueceuSenhaClick}>
+              Esqueceu sua senha?
+            </a>
+          </form>
+        </div>
       </div>
-    </div>
+
+      <EsqueceuSenha trigger={showEsqueceuSenha} setTrigger={setShowEsqueceuSenha} />
+    </>
   );
 };
 
