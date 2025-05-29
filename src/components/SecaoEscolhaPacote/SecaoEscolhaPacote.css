@@ -5,7 +5,7 @@
 .escolha-pacote {
     position: relative;
     color: var(--white);
-    background-image: url('src/assets/images/ex_festa.jpg');
+    background-image: url('/assets/images/ex_festa.jpg');
     background-size: cover;
     background-position: center;
   }

@@ -6,7 +6,7 @@ import OpcionalForm from "../../components/AdminPageComponents/OpcionalForm";
 
 export default function GerenciarItens() {
   return (
-    <div className="admin-container">
+    <div className="gerenciar-container">
       <PacoteForm />
       <DrinkForm />
       <BarForm />

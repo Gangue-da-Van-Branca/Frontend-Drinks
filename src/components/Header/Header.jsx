@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Login from "../Login/Login";
+import logo from "../../assets/images/logo2.png";
 import "./Header.css";
 
 const Header = () => {
@@ -19,7 +20,7 @@ const Header = () => {
     <header className={`header ${isScrolled ? "scrolled" : ""}`}>
       <div className="header-container">
         <div className="logo">
-          <img src="src/assets/images/logo2.png" id="logo-img" />
+          <img src={logo} id="logo-img" />
         </div>
         <nav className="nav">
           <ul>

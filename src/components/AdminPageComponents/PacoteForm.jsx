@@ -41,7 +41,7 @@ export default function PacoteForm() {
         type="number"
         value={preco}
         onChange={(e) => setPreco(e.target.value)}
-        placeholder="Preço do drink"
+        placeholder="Preço do pacote"
       />
 
       <button type="submit">Salvar Pacote</button>

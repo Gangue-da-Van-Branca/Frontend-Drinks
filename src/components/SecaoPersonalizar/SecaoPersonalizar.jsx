@@ -1,6 +1,9 @@
 import Elodrinks from "../Elodrinks";
 import "./SecaoPersonalizar.css";
-import seta from '../../assets/icons/arrow-white.svg'
+import seta from '../../assets/icons/arrow-white.svg';
+import img1 from "../../assets/images/ex_bar.jpg";
+import img2 from "../../assets/images/casamento.jpg";
+import img3 from "../../assets/images/bartender3.jpg";
 
 const SecaoPersonalizar = () => {
   return (
@@ -18,7 +21,7 @@ const SecaoPersonalizar = () => {
       <div id="steps">
         <div id="step">
           <h2>
-            <img src="src/assets/images/ex_bar.jpg" />
+            <img src={img1} />
             ESCOLHA SEUS SABORES
           </h2>
           <p>
@@ -29,7 +32,7 @@ const SecaoPersonalizar = () => {
 
         <div id="step">
           <h2>
-            <img src="src/assets/images/casamento.jpg" />
+            <img src={img2} />
             DEFINA A APRESENTAÇÃO
           </h2>
           <p>
@@ -40,7 +43,7 @@ const SecaoPersonalizar = () => {
 
         <div id="step">
           <h2>
-            <img src="src/assets/images/bartender3.jpg" />
+            <img src={img3} />
             ADICIONE UM TOQUE ESPECIAL
           </h2>
           <p>
@@ -51,7 +54,7 @@ const SecaoPersonalizar = () => {
       </div>
 
       <button id="personalizar-botao">
-        <a href="#quem-somos" className="nunito">
+        <a href="/basedrinks" className="nunito">
           PERSONALIZAR
         </a>
         <img src={seta} alt="seta" />

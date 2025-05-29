@@ -3,6 +3,7 @@ import { AiFillTikTok } from "react-icons/ai";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import { FaSquareInstagram } from "react-icons/fa6";
 import { FaMapMarkerAlt } from "react-icons/fa";
+import logo from "../../assets/images/logo1.png";
 import "./Footer.css";
 
 const Footer = () => {
@@ -12,7 +13,7 @@ const Footer = () => {
 
       <div className="footer-container">
         <div className="footer-col">
-          <img src="src/assets/images/logo1.png" className="logo-img" />
+          <img src={logo} className="logo-img" />
         </div>
 
         <div className="footer-col social">

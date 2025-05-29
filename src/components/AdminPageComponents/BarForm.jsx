@@ -41,7 +41,7 @@ export default function BarForm() {
         type="number"
         value={preco}
         onChange={(e) => setPreco(e.target.value)}
-        placeholder="Preço do drink"
+        placeholder="Preço do bar"
       />
 
       <button type="submit">Salvar Bar</button>

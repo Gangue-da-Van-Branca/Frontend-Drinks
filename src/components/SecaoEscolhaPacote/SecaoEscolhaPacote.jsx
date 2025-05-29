@@ -48,7 +48,7 @@ const SecaoEscolhaPacote = () => {
       </div>
 
       <button id="pacote-botao">
-        <a href="#quem-somos" className="nunito">
+        <a href="/pacotes" className="nunito">
           Ver todos os pacotes
         </a>
         <img src={seta} alt="seta" />

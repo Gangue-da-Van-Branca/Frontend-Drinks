@@ -21,8 +21,8 @@ export default function AppRoutes() {
         <Route path="/infosContratante" element={<InfosCompra />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/orcamento-resumo" element={<OrcamentoResumo />} />
-
-        <Route path="/admin" element={<AdminPage />} />
+        <Route path="/cadastro" element={<Cadastro />} />
+        <Route path="/administrador" element={<AdminPage />} />
       </Routes>
     </Router>
   );
