@@ -73,3 +73,37 @@
 .login-form button:hover {
   background-color: var(--eggshell);
 }
+
+#senha{
+  color: var(--orange);
+  align-self: center;
+  font-size: 1rem;
+}
+
+#senha:hover{
+  color: var(--brown2);
+  text-decoration:underline;
+}
+
+#check{
+   color: var(--orange);
+  align-self: center;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.mensagem-confirmacao {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease;
+  min-height: 1.5em; /* garante o espaço mesmo invisível */
+  margin-top: 10px;
+  color: green;
+  font-weight: bold;
+}
+
+/* Quando mostraConfirmacao for true, a classe 'visivel' será aplicada */
+.mensagem-confirmacao.visivel {
+  opacity: 1;
+  visibility: visible;
+}
