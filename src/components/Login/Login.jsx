@@ -70,9 +70,6 @@ const Login = ({ trigger, setTrigger, setNome }) => {
   return (
     <div className="popUp">
       <div className="popUp-inner">
-        <button className="close-button" onClick={() => setTrigger(false)}>
-          X
-        </button>
         <h2>Login</h2>
         {erro && <p className="erro">{erro}</p>}
         <form onSubmit={handleSubmit} className="login-form">

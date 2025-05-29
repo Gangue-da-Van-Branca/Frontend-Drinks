@@ -20,7 +20,7 @@ const Header = ({ nome, setNome }) => {
       const token = localStorage.getItem("token");
       const idUsuario = localStorage.getItem("idUsuario");
 
-      if (token && idUsuario && !nome) {  // só busca se não tiver nome
+      if (token && idUsuario && !nome) { 
         try {
           const response = await fetch(`http://localhost:8080/Usuario/${idUsuario}`, {
             headers: {
