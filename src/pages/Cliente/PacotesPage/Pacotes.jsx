@@ -3,7 +3,6 @@ import TopoPacotes from "../../../components/PacotesPage/TopoPacotes/TopoPacotes
 import Card from "../../../components/PacotesPage/CardPacotes/CardPacotes";
 import BotaoPersonalizar from "../../../components/PacotesPage/BotaoPacotesPersonalizar/BotaoPacotesPersonalizar";
 import Footer from "../../../components/Footer/Footer";
-import HeaderSecundario from "../../../components/HeaderSecundario/HeaderSecundario";
 import "./Pacotes.css";
 
 function Pacotes() {
@@ -129,7 +128,6 @@ function Pacotes() {
 
   return (
     <div>
-      <HeaderSecundario />
       <TopoPacotes />
       <div className="container-cards">
         {pacotes.map((pacote, index) => (

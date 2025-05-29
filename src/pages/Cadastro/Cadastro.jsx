@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import HeaderSecundario from "../../components/HeaderSecundario/HeaderSecundario";
 import "./Cadastro.css";
 
 const Cadastro = () => {
@@ -61,7 +60,6 @@ const Cadastro = () => {
 
   return (
     <>
-      <HeaderSecundario />
       <div className="cadastro-page">
         <div className="cadastro-container">
           <h2>Cadastro</h2>

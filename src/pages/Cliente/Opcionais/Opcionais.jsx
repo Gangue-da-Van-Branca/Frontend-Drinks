@@ -8,7 +8,6 @@ import BaresOpcionais from "../../../components/OpcionaisPage/BaresOpcionais/Bar
 import ShotsOpcionais from "../../../components/OpcionaisPage/ShotsOpcionais/ShotsNaPista";
 import ExtrasOpcionais from "../../../components/OpcionaisPage/ExtrasOpcionais/ExtrasOpcionais";
 import Footer from "../../../components/Footer/Footer";
-import HeaderSecundario from "../../../components/HeaderSecundario/HeaderSecundario";
 
 function Opcionais() {
   const navigate = useNavigate();
@@ -56,7 +55,6 @@ function Opcionais() {
 
   return (
     <div>
-      <HeaderSecundario />
       <TopoOpcionais />
       <BaresOpcionais
         barSelecionado={barSelecionado}

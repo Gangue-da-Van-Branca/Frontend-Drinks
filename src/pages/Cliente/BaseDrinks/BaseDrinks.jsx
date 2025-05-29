@@ -4,7 +4,6 @@ import TipoFesta from "../../../components/BaseDrinksPage/TipoFesta/TipoFesta";
 import SelecioneDrinks from "../../../components/BaseDrinksPage/SelecioneDrinks/SelecioneDrinks";
 import TopoDrinks from "../../../components/BaseDrinksPage/TopoDrinks/TopoDrinks";
 import Footer from "../../../components/Footer/Footer";
-import HeaderSecundaario from "../../../components/HeaderSecundario/HeaderSecundario";
 import "./BaseDrinks.css";
 import { useOrcamento } from "../../../context/OrcamentoContext";
 
@@ -172,7 +171,6 @@ function BaseDrinks() {
 
   return (
     <div id="pagina-base-festa">
-      <HeaderSecundaario />
       <TopoDrinks />
       <TipoFesta
         tipoSelecionado={tipoSelecionado}
