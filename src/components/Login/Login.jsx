@@ -16,6 +16,7 @@ const Login = ({ trigger, setTrigger }) => {
     e.preventDefault();
     console.log("Email:", email);
     console.log("Senha:", senha);
+    // Aqui você pode fazer a chamada de login.
   };
 
   const handleEsqueceuSenhaClick = (e) => {
@@ -55,21 +56,16 @@ const Login = ({ trigger, setTrigger }) => {
               />
             </label>
             <button type="submit">Entrar</button>
-            <button type="button" onClick={handleCadastro}>
-              Cadastrar
-            </button>
+            <button type="button" onClick={handleCadastro}>Cadastrar</button>
             <a id="senha" href="#" onClick={handleEsqueceuSenhaClick}>
               Esqueceu sua senha?
             </a>
           </form>
-
-          {/* Mostra o pop-up de recuperação de senha */}
-          <EsqueceuSenha
-            trigger={showEsqueceuSenha}
-            setTrigger={setShowEsqueceuSenha}
-          />
         </div>
       </div>
+
+      {/* Pop-up de recuperação de senha */}
+      <EsqueceuSenha trigger={showEsqueceuSenha} setTrigger={setShowEsqueceuSenha} />
     </>
   );
 };
