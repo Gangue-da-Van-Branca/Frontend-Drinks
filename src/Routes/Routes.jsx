@@ -8,6 +8,7 @@ import Opcionais from "../pages/Cliente/Opcionais/Opcionais";
 import InfosCompra from "../pages/Cliente/InfosCompra/InfosCompra";
 import OrcamentoResumo from "../pages/Cliente/OrcamentoResumo";
 import AdminPage from "../pages/AdminPage/AdminPage";
+import PrivateRoute from "./PrivateRoute";
 
 export default function AppRoutes() {
   return (
@@ -22,7 +23,16 @@ export default function AppRoutes() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/orcamento-resumo" element={<OrcamentoResumo />} />
         <Route path="/cadastro" element={<Cadastro />} />
-        <Route path="/administrador" element={<AdminPage />} />
+
+        {/* Rota protegida */}
+        <Route
+          path="/administrador"
+          element={
+            <PrivateRoute requiredRole="admin">
+              <AdminPage />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </Router>
   );
