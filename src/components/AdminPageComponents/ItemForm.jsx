@@ -1,11 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../pages/AdminPage/AdminPage.css";
 
-export default function ItemForm() {
+export default function ItemForm({ itemEditado, onItemSalvo }) {
   const [nome, setNome] = useState("");
   const [descricao, setDescricao] = useState("");
   const [preco, setPreco] = useState("");
   const [tipo, setTipo] = useState("");
+
+  useEffect(() => {
+    if (itemEditado) {
+      setNome(itemEditado.nome);
+      setDescricao(itemEditado.descricao);
+      setPreco(itemEditado.preco);
+      setTipo(itemEditado.tipo);
+    }
+  }, [itemEditado]);
+
+  const limparFormulario = () => {
+    setNome("");
+    setDescricao("");
+    setPreco("");
+    setTipo("");
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,41 +33,43 @@ export default function ItemForm() {
       tipo,
     };
 
-    const payload = [item];
+    let payload = [item];
+    let url = "http://localhost:8080/Item";
+    let method = "POST";
 
-    console.log("Item cadastrado:", payload);
+    if (itemEditado) {
+      url = `http://localhost:8080/Item/${itemEditado.idItem}`;
+      method = "PUT";
+      payload = [itemEditado];
+    }
 
-    // Aqui você faz o POST para o backend
-    fetch("http://localhost:8080/Item", {
-      method: "POST",
+    fetch(url, {
+      method,
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify(payload),
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Erro na requisição");
+      .then((res) => {
+        if (!res.ok) {
+          return res.json().then((errorData) => {
+            throw new Error(JSON.stringify(errorData));
+          });
         }
-        return response.json();
+        return res.json();
       })
       .then((data) => {
-        console.log("Item cadastrado com sucesso:", data);
+        console.log("Item salvo:", data);
+        onItemSalvo();
+        limparFormulario();
       })
-      .catch((error) => {
-        console.error("Erro ao cadastrar item:", error);
-      });
-
-    setNome("");
-    setDescricao("");
-    setPreco("");
-    setTipo("");
+      .catch((err) => console.error("Erro ao salvar item:", err));
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <h3>Cadastrar Novo Item</h3>
+      <h3>{itemEditado ? "Editar Item" : "Cadastrar Novo Item"}</h3>
 
       <label>
         Nome do Item:
@@ -98,7 +116,9 @@ export default function ItemForm() {
         </select>
       </label>
 
-      <button type="submit">Salvar Item</button>
+      <button type="submit">
+        {itemEditado ? "Salvar Alterações" : "Salvar Item"}
+      </button>
     </form>
   );
 }
