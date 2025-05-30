@@ -1,47 +1,46 @@
 import React, { useState, useEffect } from "react";
-import "../../pages/AdminPage/AdminPage.css";
+import "./ItemForm.css";
 
 export default function ItemForm({ itemEditado, onItemSalvo }) {
-  const [nome, setNome] = useState("");
-  const [descricao, setDescricao] = useState("");
-  const [preco, setPreco] = useState("");
-  const [tipo, setTipo] = useState("");
+  const [formData, setFormData] = useState({
+    nome: "",
+    descricao: "",
+    preco: "",
+    tipo: ""
+  });
 
   useEffect(() => {
     if (itemEditado) {
-      setNome(itemEditado.nome);
-      setDescricao(itemEditado.descricao);
-      setPreco(itemEditado.preco);
-      setTipo(itemEditado.tipo);
+      setFormData({
+        nome: itemEditado.nome,
+        descricao: itemEditado.descricao,
+        preco: itemEditado.preco,
+        tipo: itemEditado.tipo
+      });
     }
   }, [itemEditado]);
 
-  const limparFormulario = () => {
-    setNome("");
-    setDescricao("");
-    setPreco("");
-    setTipo("");
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const item = {
-      nome,
-      descricao,
-      preco: parseFloat(preco),
-      tipo,
+      ...formData,
+      preco: parseFloat(formData.preco)
     };
 
-    let payload = [item];
-    let url = "http://localhost:8080/Item";
-    let method = "POST";
-
-    if (itemEditado) {
-      url = `http://localhost:8080/Item/${itemEditado.idItem}`;
-      method = "PUT";
-      payload = [itemEditado];
-    }
+    const url = itemEditado 
+      ? `http://localhost:8080/Item/${itemEditado.idItem}`
+      : "http://localhost:8080/Item";
+      
+    const method = itemEditado ? "PUT" : "POST";
 
     fetch(url, {
       method,
@@ -49,76 +48,101 @@ export default function ItemForm({ itemEditado, onItemSalvo }) {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-      body: JSON.stringify(payload),
+      body: JSON.stringify([item]),
     })
-      .then((res) => {
-        if (!res.ok) {
-          return res.json().then((errorData) => {
-            throw new Error(JSON.stringify(errorData));
+      .then(handleResponse)
+      .then(() => {
+        onItemSalvo();
+        if (!itemEditado) {
+          setFormData({
+            nome: "",
+            descricao: "",
+            preco: "",
+            tipo: ""
           });
         }
-        return res.json();
       })
-      .then((data) => {
-        console.log("Item salvo:", data);
-        onItemSalvo();
-        limparFormulario();
-      })
-      .catch((err) => console.error("Erro ao salvar item:", err));
+      .catch(console.error);
+  };
+
+  const handleResponse = (res) => {
+    if (!res.ok) {
+      return res.json().then(err => { throw new Error(JSON.stringify(err)) });
+    }
+    return res.json();
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className="form-container">
       <h3>{itemEditado ? "Editar Item" : "Cadastrar Novo Item"}</h3>
+      
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="nome">Nome do Item</label>
+          <input
+            type="text"
+            id="nome"
+            name="nome"
+            className="form-control"
+            value={formData.nome}
+            onChange={handleChange}
+            required
+            placeholder="Ex: Caipirinha de Limão"
+          />
+        </div>
 
-      <label>
-        Nome do Item:
-        <input
-          type="text"
-          value={nome}
-          onChange={(e) => setNome(e.target.value)}
-          required
-        />
-      </label>
+        <div className="form-group">
+          <label htmlFor="descricao">Descrição</label>
+          <textarea
+            id="descricao"
+            name="descricao"
+            className="form-control"
+            value={formData.descricao}
+            onChange={handleChange}
+            required
+            placeholder="Descreva os ingredientes e características do item"
+          />
+        </div>
 
-      <label>
-        Descrição:
-        <textarea
-          value={descricao}
-          onChange={(e) => setDescricao(e.target.value)}
-          required
-        />
-      </label>
+        <div className="form-group">
+          <label htmlFor="preco">Preço (R$)</label>
+          <input
+            type="number"
+            id="preco"
+            name="preco"
+            className="form-control"
+            value={formData.preco}
+            onChange={handleChange}
+            step="0.01"
+            min="0"
+            required
+            placeholder="Ex: 12.50"
+          />
+        </div>
 
-      <label>
-        Preço:
-        <input
-          type="number"
-          step="0.01"
-          min="0"
-          value={preco}
-          onChange={(e) => setPreco(e.target.value)}
-          required
-        />
-      </label>
+        <div className="form-group">
+          <label htmlFor="tipo">Tipo do Item</label>
+          <select
+            id="tipo"
+            name="tipo"
+            className="form-control"
+            value={formData.tipo}
+            onChange={handleChange}
+            required
+          >
+            <option value="" disabled>Selecione um tipo</option>
+            <option value="Drink Alcólico">Drink Alcólico</option>
+            <option value="Soft Drink">Soft Drink</option>
+            <option value="Bar">Bar</option>
+            <option value="Opcional">Opcional</option>
+            <option value="Shot">Shot</option>
+          </select>
+        </div>
 
-      <label>
-        Tipo:
-        <select value={tipo} onChange={(e) => setTipo(e.target.value)} required>
-          <option value="" disabled>
-            Escolher tipo do item
-          </option>
-          <option value="Drink Alcólico">Drink Alcólico</option>
-          <option value="Soft Drink">Soft Drink</option>
-          <option value="Bar">Bar</option>
-          <option value="Opcional">Opcional</option>
-          <option value="Shot">Shot</option>
-        </select>
-      </label>
-
-      <button type="submit">
-        {itemEditado ? "Salvar Alterações" : "Salvar Item"}
-      </button>
-    </form>
+        <button type="submit" className="btn-submit">
+          {itemEditado ? "Salvar Alterações" : "Cadastrar Item"}
+        </button>
+      </form>
+    </div>
   );
 }

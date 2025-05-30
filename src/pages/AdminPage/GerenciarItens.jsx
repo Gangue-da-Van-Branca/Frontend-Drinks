@@ -49,26 +49,25 @@ export default function GerenciarItens() {
       <ul className="item-list">
         {itens.map(item => (
           <li key={item.idItem} className="item-card">
+            <div className="item-info">
+              <strong>{item.nome}</strong> - R$ {item.preco.toFixed(2)} - {item.tipo}
+              <span>{item.descricao}</span>
+            </div>
             <div className="item-actions">
               <button 
-                className="icon-btn edit-btn" 
+                className="icon-btn-edit-btn" 
                 onClick={() => handleEditar(item)}
                 title="Editar"
               >
                 <FaPen />
               </button>
               <button 
-                className="icon-btn delete-btn" 
+                className="icon-btn-delete-btn" 
                 onClick={() => handleExcluir(item.idItem)}
                 title="Excluir"
               >
                 <FaTrash />
               </button>
-            </div>
-            <div className="item-info">
-              <strong>{item.nome}</strong> - R$ {item.preco.toFixed(2)} - {item.tipo}
-              <br />
-              <span>{item.descricao}</span>
             </div>
           </li>
         ))}
