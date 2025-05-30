@@ -104,6 +104,9 @@ const Login = ({ trigger, setTrigger, setNome }) => {
               {loading ? "Entrando..." : "Entrar"}
             </button>
              <a id="senha" href="#" onClick={handleEsqueceuSenhaClick}>
+            <button type="button" onClick={handleCadastro}>
+              Cadastrar
+            </button>
               Esqueceu sua senha?
             </a>
             <p id="bar"></p>

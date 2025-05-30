@@ -135,7 +135,6 @@ function Pacotes() {
 
   return (
     <div>
-      <HeaderSecundario />
       <TopoPacotes />
       <div className="container-cards">
         {pacotes.map((pacote, index) => (
