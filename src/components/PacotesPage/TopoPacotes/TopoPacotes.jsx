@@ -1,17 +1,24 @@
 import React from "react";
 import "./TopoPacotes.css";
+import Elodrinks from "../../Elodrinks";
+import logo from "../../../assets/icons/logo.svg"
 
 const TopoPacotes = () => {
   return (
     <header id="topo-pacotes">
-      <div id="logo-container">
-        <div id="barra-lateral" />
-        
+      <div className="title">
+        <h1>Escolha</h1>
+        <div id="side">
+        <img src={logo} alt="" />
+        <Elodrinks tam="2.5rem"></Elodrinks></div>
       </div>
-      <div id="linha-titulo-pacote">
-        <p>ESCOLHA SEU PACOTE OU PERSONALIZE</p>
+
+      <div className="Subtitulo">
+        <div className="box-esq"></div>
+        <p>Seu Pacote</p>
+      </div>
         <div id="linha-horizontal" />
-      </div>
+  
     </header>
   );
 };

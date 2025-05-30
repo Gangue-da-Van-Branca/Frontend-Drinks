@@ -3,18 +3,25 @@ import TopoPacotes from "../../../components/PacotesPage/TopoPacotes/TopoPacotes
 import Card from "../../../components/PacotesPage/CardPacotes/CardPacotes";
 import BotaoPersonalizar from "../../../components/PacotesPage/BotaoPacotesPersonalizar/BotaoPacotesPersonalizar";
 import Footer from "../../../components/Footer/Footer";
+import HeaderSecundario from "../../../components/HeaderSecundario/HeaderSecundario";
+import casamentoTime from "../../../assets/images/casamento.jpg";
+import festa1 from "../../../assets/images/ex_festa.jpg";
+import festa2 from "../../../assets/images/ex_festa5.jpg";
+import festa3 from "../../../assets/images/ex_festa2.jpg";
+import festa4 from "../../../assets/images/ex_festa3.jpg";
+import festa5 from "../../../assets/images/ex_festa4.jpg";
 import "./Pacotes.css";
 
 function Pacotes() {
   const [modalAbertoIndex, setModalAbertoIndex] = useState(null);
 
   const pacotes = [
-    { evento: "Casamento", preco: "1234,00", drinks: [1, 3, 5, 7, 13] },
-    { evento: "Lançamento", preco: "1000,00", drinks: [2, 4, 6, 14, 15] },
-    { evento: "Evento Corporativo", preco: "1234,00", drinks: [1, 2, 3, 4, 5] },
-    { evento: "Debutante", preco: "1000,00", drinks: [13, 14, 15, 16, 17] },
-    { evento: "Festa Teen", preco: "1234,00", drinks: [13, 14, 15] },
-    { evento: "Aniversário", preco: "1000,00", drinks: [1, 2, 13, 14] },
+    { evento: "Casamento", preco: "1234,00", drinks: [1, 3, 5, 7, 13], foto: casamentoTime },
+    { evento: "Lançamento", preco: "1000,00", drinks: [2, 4, 6, 14, 15], foto: festa1 },
+    { evento: "Evento Corporativo", preco: "1234,00", drinks: [1, 2, 3, 4, 5], foto: festa2 },
+    { evento: "Debutante", preco: "1000,00", drinks: [13, 14, 15, 16, 17], foto: festa3 },
+    { evento: "Festa Teen", preco: "1234,00", drinks: [13, 14, 15], foto: festa4 },
+    { evento: "Aniversário", preco: "1000,00", drinks: [1, 2, 13, 14], foto: festa5 },
   ];
 
   const drinksDisponiveis = [
@@ -136,6 +143,7 @@ function Pacotes() {
             index={index}
             evento={pacote.evento}
             preco={pacote.preco}
+            foto={pacote.foto}
             modalAbertoIndex={modalAbertoIndex}
             setModalAbertoIndex={setModalAbertoIndex}
             drinks={pacote.drinks.map((drinkId) => {

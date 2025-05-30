@@ -103,12 +103,17 @@ const Login = ({ trigger, setTrigger, setNome }) => {
             <button type="submit" disabled={loading}>
               {loading ? "Entrando..." : "Entrar"}
             </button>
+             <a id="senha" href="#" onClick={handleEsqueceuSenhaClick}>
             <button type="button" onClick={handleCadastro}>
               Cadastrar
             </button>
-            <a id="senha" href="#" onClick={handleEsqueceuSenhaClick}>
               Esqueceu sua senha?
             </a>
+            <p id="bar"></p>
+            <button type="submit" onClick={handleCadastro} id="cadastro">
+              Cadastrar
+            </button>
+           
           </form>
         </div>
       </div>
