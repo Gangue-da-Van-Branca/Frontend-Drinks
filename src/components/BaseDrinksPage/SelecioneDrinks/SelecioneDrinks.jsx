@@ -6,19 +6,29 @@ function SelecioneDrinks({
   drinksSelecionados,
   toggleDrink,
 }) {
+  // ✅ Agrupando os drinks por categoria
+  const drinksPorCategoria = drinksDisponiveis.reduce((acc, drink) => {
+    const categoria = drink.tipo;
+    if (!acc[categoria]) {
+      acc[categoria] = [];
+    }
+    acc[categoria].push(drink);
+    return acc;
+  }, {});
+
   return (
     <div className="container-principal">
       <h1 className="titulo">Selecione seus drinks</h1>
       <div className="quadro">
-        {drinksDisponiveis.map((categoria) => (
-          <div key={categoria.categoria} className="categoria">
-            <h2 className="titulo-categoria">{categoria.categoria}</h2>
+        {Object.entries(drinksPorCategoria).map(([categoria, drinks]) => (
+          <div key={categoria} className="categoria">
+            <h2 className="titulo-categoria">{categoria}</h2>
             <ul className="lista-drinks">
-              {categoria.drinks.map((drink) => (
+              {drinks.map((drink) => (
                 <li
-                  key={drink.id}
+                  key={drink.idItem}
                   className={`item-drink ${
-                    drinksSelecionados.some((d) => d.id === drink.id)
+                    drinksSelecionados.some((d) => d.idItem === drink.idItem)
                       ? "selecionado"
                       : ""
                   }`}
@@ -28,7 +38,7 @@ function SelecioneDrinks({
                     <input
                       type="checkbox"
                       checked={drinksSelecionados.some(
-                        (d) => d.id === drink.id
+                        (d) => d.idItem === drink.idItem
                       )}
                       onChange={() => toggleDrink(drink)}
                     />

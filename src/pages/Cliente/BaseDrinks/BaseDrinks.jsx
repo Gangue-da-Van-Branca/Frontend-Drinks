@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import TipoFesta from "../../../components/BaseDrinksPage/TipoFesta/TipoFesta";
 import SelecioneDrinks from "../../../components/BaseDrinksPage/SelecioneDrinks/SelecioneDrinks";
@@ -7,118 +7,7 @@ import Footer from "../../../components/Footer/Footer";
 import "./BaseDrinks.css";
 import { useOrcamento } from "../../../context/OrcamentoContext";
 
-const drinksDisponiveis = [
-  {
-    categoria: "Drinks Alcoólicos",
-    drinks: [
-      {
-        id: 1,
-        nome: "MOSCOW MULE",
-        descricao:
-          "Vodka, xarope de gengibre, limão taiti e espuma de gengibre",
-      },
-      {
-        id: 2,
-        nome: "FITZGERALD",
-        descricao:
-          "Gin, syrup de açúcar, suco de limão siciliano, angostura bitters e zest",
-      },
-      {
-        id: 3,
-        nome: "PENICILIN",
-        descricao:
-          "Whisky, suco de limão siciliano, xarope de gengibre e scotch defumado",
-      },
-      {
-        id: 4,
-        nome: "BASIL SMASH",
-        descricao:
-          "Gin, suco de limão siciliano, syrup de manjericão e folhas de manjericão",
-      },
-      {
-        id: 5,
-        nome: "CLASSIC TONIC",
-        descricao: "Gin, limão siciliano e tônica",
-      },
-      {
-        id: 6,
-        nome: "PARADISE",
-        descricao:
-          "Vodka, água de coco, syrup de baunilha e raspas de coco desidratado",
-      },
-      {
-        id: 7,
-        nome: "APEROL SPRITZ",
-        descricao: "Aperol, espumante, água com gás e laranja",
-      },
-      {
-        id: 8,
-        nome: "NEGRONI TWIST",
-        descricao: "Gin, vermute rosso, Campari e zest de laranja bahia",
-      },
-      {
-        id: 9,
-        nome: "SPICY PASSION",
-        descricao:
-          "Vodka, maracujá, syrup de pimenta dedo-de-moça e limão taiti",
-      },
-      {
-        id: 10,
-        nome: "CUCUMBER FIZZ",
-        descricao:
-          "Gin, pepino, suco de limão siciliano, syrup de hortelã e água tônica",
-      },
-      {
-        id: 11,
-        nome: "MARGARITA",
-        descricao: "Tequila, Cointreau, suco de limão taiti e borda de sal",
-      },
-      {
-        id: 12,
-        nome: "DAIQUIRI CLÁSSICO",
-        descricao: "Rum branco, suco de limão taiti e xarope de açúcar",
-      },
-    ],
-  },
-  {
-    categoria: "Soft Drinks (não alcoólicos) - Incluso guloseimas",
-    drinks: [
-      {
-        id: 13,
-        nome: "CIRQUE BLUE",
-        descricao:
-          "Curacao blue, suco de blueberry, amora, mix de limão, água com gás e algodão doce ou bala de fruta",
-      },
-      {
-        id: 14,
-        nome: "PINK LEMONADE",
-        descricao:
-          "Mix de limão, limão siciliano, goma ou gás e syrup de morango servido em tacinhas ou limonadas brilhantes",
-      },
-      {
-        id: 15,
-        nome: "PIÑA DESCALADA",
-        descricao:
-          "Suco de abacaxi, leite de coco, leite condensado e granulados coloridos",
-      },
-      {
-        id: 16,
-        nome: "LICHAI PARADISSE",
-        descricao:
-          "Água com gás, morangos simples, lichia, suco de limão e hortelã",
-      },
-      {
-        id: 17,
-        nome: "CLASSIC TONIC",
-        descricao: "Limão siciliano, xarope e tônica",
-      },
-    ],
-  },
-];
-
 function BaseDrinks() {
-
-  
   const navigate = useNavigate();
   const location = useLocation();
   const [tipoSelecionado, setTipoSelecionado] = useState(location.state?.tipoFesta || "");
@@ -126,15 +15,36 @@ function BaseDrinks() {
   const [drinksSelecionados, setDrinksSelecionados] = useState(location.state?.drinksSelecionados || []);
   const { atualizarBase } = useOrcamento();
 
+  const [drinksAPI, setDrinksAPI] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
+  useEffect(() => {
+    const fetchDrinks = async () => {
+      try {
+        const response = await fetch("http://localhost:8080/Item");
+        const data = await response.json();
+        setDrinksAPI(data);
+      } catch (error) {
+        console.error("Erro ao buscar drinks:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchDrinks();
+  }, []);
+
+  const categoriasPermitidas = ["Drink Alcólico", "Soft Drink"];
+  const drinksFiltrados = drinksAPI.filter(drink => categoriasPermitidas.includes(drink.tipo));
 
   const toggleDrink = (drink) => {
-    const isSelected = drinksSelecionados.some((d) => d.id === drink.id);
-
+    const isSelected = drinksSelecionados.some((d) => d.id === drink.idItem);
     if (isSelected) {
-      setDrinksSelecionados(drinksSelecionados.filter((d) => d.id !== drink.id));
+      setDrinksSelecionados(drinksSelecionados.filter((d) => d.id !== drink.idItem));
     } else if (drinksSelecionados.length < 8) {
       setDrinksSelecionados([...drinksSelecionados, drink]);
+    } else {
+      alert("Você só pode selecionar até 8 drinks.");
     }
   };
 
@@ -147,20 +57,18 @@ function BaseDrinks() {
       alert("Selecione o tipo de festa.");
       return;
     }
-    if (
-      tipoSelecionado === "Outro" &&
-      (!outroTipo || outroTipo.trim() === "")
-    ) {
+    if (tipoSelecionado === "Outro" && (!outroTipo || outroTipo.trim() === "")) {
       alert("Por favor, preencha o campo com o tipo de festa.");
       return;
     }
+
     const tipoFinal = tipoSelecionado === "Outro" ? outroTipo : tipoSelecionado;
 
     atualizarBase({
       tipoFesta: tipoFinal,
       drinksSelecionados,
     });
-    
+
     navigate("/opcionais", {
       state: {
         TipoFesta: tipoFinal,
@@ -168,6 +76,10 @@ function BaseDrinks() {
       },
     });
   };
+
+  if (isLoading) {
+    return <p>Carregando drinks...</p>;
+  }
 
   return (
     <div id="pagina-base-festa">
@@ -180,7 +92,7 @@ function BaseDrinks() {
       />
 
       <SelecioneDrinks
-        drinksDisponiveis={drinksDisponiveis}
+        drinksDisponiveis={drinksFiltrados}
         drinksSelecionados={drinksSelecionados}
         toggleDrink={toggleDrink}
       />
@@ -190,6 +102,7 @@ function BaseDrinks() {
           Avançar
         </button>
       </div>
+
       <div className="footer-basedrinks">
         <Footer />
       </div>

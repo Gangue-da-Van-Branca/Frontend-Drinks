@@ -9,11 +9,53 @@ export default function OrcamentoResumo() {
 
   const { baseFesta, opcionais, infosContratante } = orcamento;
 
+  const calcularPreco = () => {
+    let precoBase = 500;
+
+    const adicionais = (opcionais.baresAdicionais?.length || 0) * 100;
+    const shots =
+      Object.values(opcionais.shots || {}).reduce(
+        (acc, curr) => acc + Number(curr || 0),
+        0
+      ) * 10;
+    const extras =
+      Object.values(opcionais.extras || {}).reduce(
+        (acc, curr) => acc + Number(curr || 0),
+        0
+      ) * 20;
+
+    return precoBase + adicionais + shots + extras;
+  };
+
   const handleConfirmar = () => {
-    console.log(JSON.parse(JSON.stringify(orcamento)));
-    alert("Orçamento enviado com sucesso!");
-    resetarOrcamento();
-    navigate("/");
+    const precoFinal = calcularPreco(); // calcula o preço na hora!
+
+    const orcamentoFinal = {
+      ...orcamento,
+      preco: precoFinal,
+    };
+
+    console.log("Enviando orçamento:", orcamentoFinal);
+
+    fetch("http://localhost:8080/Orcamento/front-create", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(orcamentoFinal),
+    })
+      .then(async (res) => {
+        const data = await res.json();
+        console.log("Resposta da API:", res.status, data);
+
+        if (!res.ok) throw new Error("Erro ao enviar orçamento");
+
+        alert("Orçamento enviado com sucesso!");
+        resetarOrcamento();
+        navigate("/");
+      })
+      .catch((err) => {
+        console.error("Erro:", err);
+        alert("Falha ao enviar orçamento.");
+      });
   };
 
   const renderCampo = (label, valor) => (
@@ -95,6 +137,9 @@ export default function OrcamentoResumo() {
                 <li>Nenhum</li>
               )}
             </ul>
+          </div>
+          <div>
+            <strong>Preço final:</strong> R$ {calcularPreco() || "0,00"}
           </div>
         </div>
 

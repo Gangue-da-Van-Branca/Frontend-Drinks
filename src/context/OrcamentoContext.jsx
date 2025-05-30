@@ -2,27 +2,30 @@ import { createContext, useContext, useState } from "react";
 
 const OrcamentoContext = createContext();
 
+const orcamentoInicial = {
+  baseFesta: {},
+  opcionais: {
+    shots: {},
+    extras: {},
+    baresAdicionais: [],
+  },
+  infosContratante: {
+    nome: "",
+    sobrenome: "",
+    telefone: "",
+    email: "",
+    data: "",
+    endereco: "",
+    horarioInicio: "",
+    horarioFinal: "",
+    cep: "",
+    convidados: "",
+  },
+  preco: 0,
+};
+
 export const OrcamentoProvider = ({ children }) => {
-  const [orcamento, setOrcamento] = useState({
-    baseFesta: {},
-    opcionais: {
-      shots: {},
-      extras: {},
-      baresAdicionais: [],
-    },
-    infosContratante: {
-      nome: "",
-      sobrenome: "",
-      telefone: "",
-      email: "",
-      data: "",
-      endereco: "",
-      horarioInicio: "",
-      horarioFinal: "",
-      cep: "",
-      convidados: "",
-    },
-  });
+  const [orcamento, setOrcamento] = useState(orcamentoInicial);
 
   const atualizarBase = (dados) => {
     setOrcamento((prev) => ({ ...prev, baseFesta: dados }));
@@ -36,12 +39,12 @@ export const OrcamentoProvider = ({ children }) => {
     setOrcamento((prev) => ({ ...prev, infosContratante: dados }));
   };
 
+  const atualizarPreco = (preco) => {
+    setOrcamento((prev) => ({ ...prev, preco }));
+  };
+
   const resetarOrcamento = () => {
-    setOrcamento({
-      baseFesta: {},
-      opcionais: { shots: {}, extras: {}, baresAdicionais: [] },
-      infosContratante: {},
-    });
+    setOrcamento(orcamentoInicial);
   };
 
   return (
@@ -51,6 +54,7 @@ export const OrcamentoProvider = ({ children }) => {
         atualizarBase,
         atualizarOpcionais,
         atualizarContratante,
+        atualizarPreco,
         resetarOrcamento,
       }}
     >
