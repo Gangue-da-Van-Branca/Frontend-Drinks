@@ -6,7 +6,6 @@ function SelecioneDrinks({
   drinksSelecionados,
   toggleDrink,
 }) {
-  // ✅ Agrupando os drinks por categoria
   const drinksPorCategoria = drinksDisponiveis.reduce((acc, drink) => {
     const categoria = drink.tipo;
     if (!acc[categoria]) {

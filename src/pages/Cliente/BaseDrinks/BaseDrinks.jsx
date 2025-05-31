@@ -49,8 +49,8 @@ function BaseDrinks() {
   };
 
   const handleAvancar = () => {
-    if (drinksSelecionados.length < 5) {
-      alert("Selecione ao menos 5 drinks.");
+    if (drinksSelecionados.length < 8) {
+      alert("Selecione seus 8 drinks.");
       return;
     }
     if (!tipoSelecionado || tipoSelecionado.trim() === "") {
