@@ -10,9 +10,13 @@ import { useOrcamento } from "../../../context/OrcamentoContext";
 function BaseDrinks() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [tipoSelecionado, setTipoSelecionado] = useState(location.state?.tipoFesta || "");
+  const [tipoSelecionado, setTipoSelecionado] = useState(
+    location.state?.tipoFesta || ""
+  );
   const [outroTipo, setOutroTipo] = useState("");
-  const [drinksSelecionados, setDrinksSelecionados] = useState(location.state?.drinksSelecionados || []);
+  const [drinksSelecionados, setDrinksSelecionados] = useState(
+    location.state?.drinksSelecionados || []
+  );
   const { atualizarBase } = useOrcamento();
 
   const [drinksAPI, setDrinksAPI] = useState([]);
@@ -35,12 +39,18 @@ function BaseDrinks() {
   }, []);
 
   const categoriasPermitidas = ["Drink Alcólico", "Soft Drink"];
-  const drinksFiltrados = drinksAPI.filter(drink => categoriasPermitidas.includes(drink.tipo));
+  const drinksFiltrados = drinksAPI.filter((drink) =>
+    categoriasPermitidas.includes(drink.tipo)
+  );
 
   const toggleDrink = (drink) => {
-    const isSelected = drinksSelecionados.some((d) => d.id === drink.idItem);
+    const isSelected = drinksSelecionados.some(
+      (d) => d.idItem === drink.idItem
+    );
     if (isSelected) {
-      setDrinksSelecionados(drinksSelecionados.filter((d) => d.id !== drink.idItem));
+      setDrinksSelecionados(
+        drinksSelecionados.filter((d) => d.idItem !== drink.idItem)
+      );
     } else if (drinksSelecionados.length < 8) {
       setDrinksSelecionados([...drinksSelecionados, drink]);
     } else {
@@ -57,7 +67,10 @@ function BaseDrinks() {
       alert("Selecione o tipo de festa.");
       return;
     }
-    if (tipoSelecionado === "Outro" && (!outroTipo || outroTipo.trim() === "")) {
+    if (
+      tipoSelecionado === "Outro" &&
+      (!outroTipo || outroTipo.trim() === "")
+    ) {
       alert("Por favor, preencha o campo com o tipo de festa.");
       return;
     }
