@@ -76,28 +76,24 @@ export default function InfosForm() {
             placeholder="NOME"
             onChange={handleChange}
             value={formData.nome}
-            disabled
           />
           <input
             name="sobrenome"
             placeholder="SOBRENOME"
             onChange={handleChange}
             value={formData.sobrenome}
-            disabled
           />
           <input
             name="telefone"
             placeholder="TELEFONE"
             onChange={handleChange}
             value={formData.telefone}
-            disabled
           />
           <input
             name="email"
             placeholder="E-MAIL"
             onChange={handleChange}
             value={formData.email}
-            disabled
           />
         </div>
 
