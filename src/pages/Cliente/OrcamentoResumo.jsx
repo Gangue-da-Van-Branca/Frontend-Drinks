@@ -12,20 +12,31 @@ export default function OrcamentoResumo() {
   const calcularPreco = () => {
     let precoBase = 500;
 
-    const totalBares = (opcionais.baresAdicionais || []).reduce((acc, idItem) => {
-      const bar = dadosOpcionais.baresData.find((b) => b.idItem === idItem);
-      return acc + (bar ? bar.preco : 0);
-    }, 0);
+    const totalBares = (opcionais.baresAdicionais || []).reduce(
+      (acc, idItem) => {
+        const bar = dadosOpcionais.baresData.find((b) => b.idItem === idItem);
+        return acc + (bar ? bar.preco : 0);
+      },
+      0
+    );
 
-    const totalShots = Object.entries(opcionais.shots || {}).reduce((acc, [idItem, qtd]) => {
-      const shot = dadosOpcionais.shotsData.find((s) => s.idItem === idItem);
-      return acc + (shot ? shot.preco * qtd : 0);
-    }, 0);
+    const totalShots = Object.entries(opcionais.shots || {}).reduce(
+      (acc, [idItem, qtd]) => {
+        const shot = dadosOpcionais.shotsData.find((s) => s.idItem === idItem);
+        return acc + (shot ? shot.preco * qtd : 0);
+      },
+      0
+    );
 
-    const totalExtras = Object.entries(opcionais.extras || {}).reduce((acc, [idItem, qtd]) => {
-      const extra = dadosOpcionais.extrasData.find((e) => e.idItem === idItem);
-      return acc + (extra ? extra.preco * qtd : 0);
-    }, 0);
+    const totalExtras = Object.entries(opcionais.extras || {}).reduce(
+      (acc, [idItem, qtd]) => {
+        const extra = dadosOpcionais.extrasData.find(
+          (e) => e.idItem === idItem
+        );
+        return acc + (extra ? extra.preco * qtd : 0);
+      },
+      0
+    );
 
     return precoBase + totalBares + totalShots + totalExtras;
   };
@@ -93,17 +104,29 @@ export default function OrcamentoResumo() {
         <div id="linha-horizontal-infos" />
         <div id="base-festa">
           {Object.entries(baseFesta).map(([key, value]) => {
-            let valorFormatado;
-
-            if (Array.isArray(value)) {
-              valorFormatado = value.map((v) => v.nome || v).join(", ");
-            } else if (typeof value === "object" && value !== null) {
-              valorFormatado = value.nome || JSON.stringify(value);
+            if (key === "drinksSelecionados" && Array.isArray(value)) {
+              return (
+                <div key={key} className="campo">
+                  <strong>Drinks Selecionados:</strong>
+                  <ul>
+                    {value.map((drink, index) => (
+                      <li key={index}>{drink.nome || drink}</li>
+                    ))}
+                  </ul>
+                </div>
+              );
             } else {
-              valorFormatado = value;
+              return (
+                <div key={key} className="campo">
+                  <strong>
+                    {key === "tipoFesta" ? "Tipo da Festa" : key}:
+                  </strong>{" "}
+                  {typeof value === "object" && value !== null
+                    ? value.nome || JSON.stringify(value)
+                    : value}
+                </div>
+              );
             }
-
-            return renderCampo(key, valorFormatado);
           })}
         </div>
 
@@ -114,30 +137,50 @@ export default function OrcamentoResumo() {
           <div id="opcionais-shots">
             <strong>Shots:</strong>
             <ul>
-              {Object.entries(opcionais.shots).map(([key, val]) => (
-                <li key={key}>
-                  {key}: {val}
-                </li>
-              ))}
+              {Object.entries(opcionais.shots || {})
+                .filter(([_, val]) => val > 0)
+                .map(([key, val]) => {
+                  const shot = dadosOpcionais.shotsData.find(
+                    (s) => s.idItem === key
+                  );
+                  return (
+                    <li key={key}>
+                      {shot ? shot.nome : key}: {val}
+                    </li>
+                  );
+                })}
             </ul>
           </div>
 
           <div id="opcionais-extras">
             <strong>Extras:</strong>
             <ul>
-              {Object.entries(opcionais.extras).map(([key, val]) => (
-                <li key={key}>
-                  {key}: {val}
-                </li>
-              ))}
+              {Object.entries(opcionais.extras || {})
+                .filter(([_, val]) => val > 0)
+                .map(([key, val]) => {
+                  const extra = dadosOpcionais.extrasData.find(
+                    (e) => e.idItem === key
+                  );
+                  return (
+                    <li key={key}>
+                      {extra ? extra.nome : key}: {val}
+                    </li>
+                  );
+                })}
             </ul>
           </div>
 
           <div id="opcionais-bares">
             <strong>Bares Adicionais:</strong>
             <ul>
-              {opcionais.baresAdicionais.length > 0 ? (
-                opcionais.baresAdicionais.map((bar) => <li key={bar}>{bar}</li>)
+              {opcionais.baresAdicionais &&
+              opcionais.baresAdicionais.length > 0 ? (
+                opcionais.baresAdicionais.map((bar) => {
+                  const barData = dadosOpcionais.baresData.find(
+                    (b) => b.idItem === bar
+                  );
+                  return <li key={bar}>{barData ? barData.nome : bar}</li>;
+                })
               ) : (
                 <li>Nenhum</li>
               )}
@@ -145,7 +188,7 @@ export default function OrcamentoResumo() {
           </div>
 
           <div id="preco-final">
-            <strong>Preço final:</strong> R$ {calcularPreco() || "0,00"}
+            <strong>Preço final:</strong> R$ {calcularPreco().toFixed(2)}
           </div>
         </div>
 
