@@ -3,7 +3,6 @@ import TopoPacotes from "../../../components/PacotesPage/TopoPacotes/TopoPacotes
 import Card from "../../../components/PacotesPage/CardPacotes/CardPacotes";
 import BotaoPersonalizar from "../../../components/PacotesPage/BotaoPacotesPersonalizar/BotaoPacotesPersonalizar";
 import Footer from "../../../components/Footer/Footer";
-import HeaderSecundario from "../../../components/HeaderSecundario/HeaderSecundario";
 import casamentoTime from "../../../assets/images/casamento.jpg";
 import festa1 from "../../../assets/images/ex_festa.jpg";
 import festa2 from "../../../assets/images/ex_festa5.jpg";
