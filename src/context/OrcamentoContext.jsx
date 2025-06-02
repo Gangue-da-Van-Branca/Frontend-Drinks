@@ -9,6 +9,11 @@ const orcamentoInicial = {
     extras: {},
     baresAdicionais: [],
   },
+  dadosOpcionais: {
+    baresData: [],
+    shotsData: [],
+    extrasData: [],
+  },
   infosContratante: {
     nome: "",
     sobrenome: "",
@@ -47,12 +52,17 @@ export const OrcamentoProvider = ({ children }) => {
     setOrcamento(orcamentoInicial);
   };
 
+  const atualizarDadosOpcionais = (dados) => {
+    setOrcamento((prev) => ({ ...prev, dadosOpcionais: dados }));
+  };
+
   return (
     <OrcamentoContext.Provider
       value={{
         orcamento,
         atualizarBase,
         atualizarOpcionais,
+        atualizarDadosOpcionais,
         atualizarContratante,
         atualizarPreco,
         resetarOrcamento,

@@ -1,5 +1,5 @@
 import React from "react";
-import "../../components/InfosCompra/InfosContratante.css";
+import "./OrcamentoResumo.css";
 import { useOrcamento } from "../../context/OrcamentoContext";
 import { useNavigate } from "react-router-dom";
 
@@ -7,28 +7,31 @@ export default function OrcamentoResumo() {
   const { orcamento, resetarOrcamento } = useOrcamento();
   const navigate = useNavigate();
 
-  const { baseFesta, opcionais, infosContratante } = orcamento;
+  const { baseFesta, opcionais, infosContratante, dadosOpcionais } = orcamento;
 
   const calcularPreco = () => {
     let precoBase = 500;
 
-    const adicionais = (opcionais.baresAdicionais?.length || 0) * 100;
-    const shots =
-      Object.values(opcionais.shots || {}).reduce(
-        (acc, curr) => acc + Number(curr || 0),
-        0
-      ) * 10;
-    const extras =
-      Object.values(opcionais.extras || {}).reduce(
-        (acc, curr) => acc + Number(curr || 0),
-        0
-      ) * 20;
+    const totalBares = (opcionais.baresAdicionais || []).reduce((acc, idItem) => {
+      const bar = dadosOpcionais.baresData.find((b) => b.idItem === idItem);
+      return acc + (bar ? bar.preco : 0);
+    }, 0);
 
-    return precoBase + adicionais + shots + extras;
+    const totalShots = Object.entries(opcionais.shots || {}).reduce((acc, [idItem, qtd]) => {
+      const shot = dadosOpcionais.shotsData.find((s) => s.idItem === idItem);
+      return acc + (shot ? shot.preco * qtd : 0);
+    }, 0);
+
+    const totalExtras = Object.entries(opcionais.extras || {}).reduce((acc, [idItem, qtd]) => {
+      const extra = dadosOpcionais.extrasData.find((e) => e.idItem === idItem);
+      return acc + (extra ? extra.preco * qtd : 0);
+    }, 0);
+
+    return precoBase + totalBares + totalShots + totalExtras;
   };
 
   const handleConfirmar = () => {
-    const precoFinal = calcularPreco(); // calcula o preço na hora!
+    const precoFinal = calcularPreco();
 
     const orcamentoFinal = {
       ...orcamento,
@@ -59,21 +62,21 @@ export default function OrcamentoResumo() {
   };
 
   const renderCampo = (label, valor) => (
-    <div key={label}>
+    <div key={label} className="campo">
       <strong>{label}:</strong> {valor || "-"}
     </div>
   );
 
   return (
-    <div className="infos-container">
-      <h1 className="logo">
+    <div id="orcamento-container">
+      <h1 id="orcamento-logo">
         ELO <span>DRINKS</span>
       </h1>
 
-      <div className="infos-form">
+      <div id="orcamento-form">
         <div className="section-title">DADOS DO CONTRATANTE</div>
         <div id="linha-horizontal-infos" />
-        <div className="form-grid">
+        <div id="dados-contratante">
           {renderCampo("Nome", infosContratante.nome)}
           {renderCampo("Sobrenome", infosContratante.sobrenome)}
           {renderCampo("Telefone", infosContratante.telefone)}
@@ -88,7 +91,7 @@ export default function OrcamentoResumo() {
 
         <div className="section-title">BASE DA FESTA</div>
         <div id="linha-horizontal-infos" />
-        <div className="form-grid">
+        <div id="base-festa">
           {Object.entries(baseFesta).map(([key, value]) => {
             let valorFormatado;
 
@@ -107,8 +110,8 @@ export default function OrcamentoResumo() {
         <div className="section-title">OPCIONAIS</div>
         <div id="linha-horizontal-infos" />
 
-        <div className="form-grid">
-          <div>
+        <div id="opcionais">
+          <div id="opcionais-shots">
             <strong>Shots:</strong>
             <ul>
               {Object.entries(opcionais.shots).map(([key, val]) => (
@@ -118,7 +121,8 @@ export default function OrcamentoResumo() {
               ))}
             </ul>
           </div>
-          <div>
+
+          <div id="opcionais-extras">
             <strong>Extras:</strong>
             <ul>
               {Object.entries(opcionais.extras).map(([key, val]) => (
@@ -128,7 +132,8 @@ export default function OrcamentoResumo() {
               ))}
             </ul>
           </div>
-          <div>
+
+          <div id="opcionais-bares">
             <strong>Bares Adicionais:</strong>
             <ul>
               {opcionais.baresAdicionais.length > 0 ? (
@@ -138,12 +143,13 @@ export default function OrcamentoResumo() {
               )}
             </ul>
           </div>
-          <div>
+
+          <div id="preco-final">
             <strong>Preço final:</strong> R$ {calcularPreco() || "0,00"}
           </div>
         </div>
 
-        <div className="form-footer" style={{ marginTop: "40px" }}>
+        <div id="orcamento-footer">
           <button type="button" onClick={handleConfirmar}>
             CONFIRMAR ENVIO
           </button>

@@ -10,7 +10,7 @@ import Footer from "../../../components/Footer/Footer";
 
 function Opcionais() {
   const navigate = useNavigate();
-  const { atualizarOpcionais } = useOrcamento();
+  const { atualizarOpcionais, atualizarDadosOpcionais } = useOrcamento();
 
   const [baresData, setBaresData] = useState([]);
   const [shotsData, setShotsData] = useState([]);
@@ -25,13 +25,19 @@ function Opcionais() {
       .then((res) => res.json())
       .then((data) => {
         // Separar por tipo
-        const bares = data.filter(item => item.tipo === "Bar");
-        const shots = data.filter(item => item.tipo === "Shot");
-        const extras = data.filter(item => item.tipo === "Opcional");
+        const bares = data.filter((item) => item.tipo === "Bar");
+        const shots = data.filter((item) => item.tipo === "Shot");
+        const extras = data.filter((item) => item.tipo === "Opcional");
 
         setBaresData(bares);
         setShotsData(shots);
         setExtrasData(extras);
+
+        atualizarDadosOpcionais({
+          baresData: bares,
+          shotsData: shots,
+          extrasData: extras,
+        });
 
         // Inicializar shots e extras como { [idItem]: quantidade }
         const shotsInicial = {};
@@ -79,11 +85,7 @@ function Opcionais() {
         barSelecionado={barSelecionado}
         setBarSelecionado={setBarSelecionado}
       />
-      <ShotsOpcionais
-        shotsData={shotsData}
-        shots={shots}
-        setShots={setShots}
-      />
+      <ShotsOpcionais shotsData={shotsData} shots={shots} setShots={setShots} />
       <ExtrasOpcionais
         extrasData={extrasData}
         extras={extras}

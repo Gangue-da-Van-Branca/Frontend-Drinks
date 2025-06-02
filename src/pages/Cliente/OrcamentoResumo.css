@@ -1,0 +1,76 @@
+#orcamento-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+#orcamento-logo {
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+#orcamento-logo span {
+  color: #e63946;
+}
+
+#orcamento-form {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+#linha-horizontal-infos {
+  border-bottom: 2px solid #ccc;
+  margin: 10px 0;
+}
+
+#dados-contratante, 
+#base-festa, 
+#opcionais {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.campo {
+  margin-bottom: 10px;
+}
+
+#opcionais-shots ul, 
+#opcionais-extras ul, 
+#opcionais-bares ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+#preco-final {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+#orcamento-footer {
+  margin-top: 40px;
+  text-align: center;
+}
+
+#orcamento-footer button {
+  padding: 10px 20px;
+  background-color: #e63946;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#orcamento-footer button:hover {
+  background-color: #d62839;
+}
