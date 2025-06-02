@@ -15,12 +15,12 @@ function Pacotes() {
   const [modalAbertoIndex, setModalAbertoIndex] = useState(null);
 
   const pacotes = [
-    { evento: "Casamento", preco: "1234,00", drinks: ["adbjsdba", "adbjsdbaa", "adbjsdbappp", "adbjsdbavvvv", "adbjsdballl"] },
-    { evento: "Lançamento", preco: "1000,00", drinks: ["adbjsdba", "adbjsdbaa", "adbjsdbappp", "adbjsdbavvvv", "adbjsdballl"] },
-    { evento: "Evento Corporativo", preco: "1234,00", drinks: ["adbjsdba", "adbjsdbaa", "adbjsdbappp", "adbjsdbavvvv", "adbjsdballl"]},
-    { evento: "Debutante", preco: "1000,00", drinks: ["adbjsdba", "adbjsdbaa", "adbjsdbappp", "adbjsdbavvvv", "adbjsdballl"] },
-    { evento: "Festa Teen", preco: "1234,00", drinks: ["adbjsdba", "adbjsdbaa", "adbjsdbappp", "adbjsdbavvvv", "adbjsdballl"] },
-    { evento: "Aniversário", preco: "1000,00", drinks: ["adbjsdba", "adbjsdbaa", "adbjsdbappp", "adbjsdbavvvv", "adbjsdballl"] },
+    { evento: "Casamento", preco: "1234,00", drinks: ["adbjsdba", "adbjsdbaa", "adbjsdbappp", "adbjsdbavvvv", "adbjsdballl"],foto: casamentoTime },
+    { evento: "Lançamento", preco: "1000,00", drinks: ["adbjsdba", "adbjsdbaa", "adbjsdbappp", "adbjsdbavvvv", "adbjsdballl"], foto: festa1  },
+    { evento: "Evento Corporativo", preco: "1234,00", drinks: ["adbjsdba", "adbjsdbaa", "adbjsdbappp", "adbjsdbavvvv", "adbjsdballl"], foto: festa2},
+    { evento: "Debutante", preco: "1000,00", drinks: ["adbjsdba", "adbjsdbaa", "adbjsdbappp", "adbjsdbavvvv", "adbjsdballl"], foto: festa3 },
+    { evento: "Festa Teen", preco: "1234,00", drinks: ["adbjsdba", "adbjsdbaa", "adbjsdbappp", "adbjsdbavvvv", "adbjsdballl"], foto: festa4 },
+    { evento: "Aniversário", preco: "1000,00", drinks: ["adbjsdba", "adbjsdbaa", "adbjsdbappp", "adbjsdbavvvv", "adbjsdballl"], foto: festa5 },
   ];
 
 const drinksDisponiveis = [
