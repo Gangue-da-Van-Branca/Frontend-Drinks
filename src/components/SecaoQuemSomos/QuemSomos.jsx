@@ -1,4 +1,3 @@
-import React from "react";
 import "./QuemSomos.css";
 import logo from "../../assets/icons/logo.svg"
 import img1 from "../../assets/images/ex_festa7.jpg";

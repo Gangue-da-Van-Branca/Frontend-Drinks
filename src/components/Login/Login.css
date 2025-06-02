@@ -60,16 +60,6 @@
   background-color: var(--white);
 }
 
-.login-form button {
-  padding: 10px;
-  background-color: #3498db;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  justify-content: center;
-}
-
 .login-form button:hover {
   background-color: var(--eggshell);
 }
@@ -77,7 +67,7 @@
 #senha{
   color: var(--orange);
   align-self: center;
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 #senha:hover{
@@ -85,8 +75,9 @@
   text-decoration:underline;
 }
 
+
 #check{
-   color: var(--orange);
+  color: var(--orange);
   align-self: center;
   font-size: 1rem;
   text-align: center;
@@ -106,4 +97,10 @@
 .mensagem-confirmacao.visivel {
   opacity: 1;
   visibility: visible;
+}
+
+#bar{
+  margin-bottom: 15px;
+  border-bottom: 1px solid var(--orange);
+     
 }
