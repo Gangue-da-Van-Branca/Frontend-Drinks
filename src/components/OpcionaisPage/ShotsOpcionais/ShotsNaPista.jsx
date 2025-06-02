@@ -1,52 +1,39 @@
 import React from "react";
 import "./ShotsOpcionais.css";
 
-const shotsData = [
-  { titulo: "Mini Beer (Licor 43) com espuma", precoPor50: 600 },
-  { titulo: "Tequila de café em copinhos de chocolate", precoPor50: 800 },
-  { titulo: "Busca Vida artesanal em mini garrafas", precoPor50: 500 },
-  { titulo: "Jagermeister em tubos de ensaio", precoPor50: 500 },
-  { titulo: "Mini milk-shakes de Oreo", precoPor50: 750 },
-];
-
-
-export default function ShotsNaPista({ shots, setShots }) {
-
-  const handleChange = (titulo, valor) => {
+export default function ShotsNaPista({ shotsData, shots, setShots }) {
+  const handleChange = (idItem, valor) => {
     const quantidade = parseInt(valor) || 0;
-    setShots((prev) => ({ ...prev, [titulo]: quantidade }));
+    setShots((prev) => ({ ...prev, [idItem]: quantidade }));
   };
 
   const total = shotsData.reduce((acc, shot) => {
-    const quantidade = shots[shot.titulo] || 0;
-    return acc + (quantidade / 50) * shot.precoPor50;
+    const quantidade = shots[shot.idItem] || 0;
+    return acc + quantidade * shot.preco;
   }, 0);
-
 
   return (
     <div className="shots-wrapper">
-      <h2 className="shots-titulo">SHOTS NA PISTA</h2>
-      <p className="shots-subtitulo">para cada 50 shots</p>
+      <h2 className="shots-titulo">SHOTS</h2>
 
       <div className="shots-container">
-        {shotsData.map((shot, index) => (
-          <div className="shot-card" key={index}>
-            <span className="shot-titulo">{shot.titulo}:</span>
+        {shotsData.map((shot) => (
+          <div className="shot-card" key={shot.idItem}>
+            <span className="shot-titulo">{shot.nome}:</span>
             <span className="shot-preco">
-              + R$ {shot.precoPor50.toFixed(2)}
+              + R$ {shot.preco.toFixed(2)}/unidade
             </span>
             <input
               type="number"
               min="0"
-              step="50"
-              value={shots[shot.titulo] || 0}
-              onChange={(e) => handleChange(shot.titulo, e.target.value)}
+              step="1"
+              value={shots[shot.idItem] || 0}
+              onChange={(e) => handleChange(shot.idItem, e.target.value)}
               className="shot-input"
             />
           </div>
         ))}
       </div>
-
       <div className="total-shot">
         Total: <span className="total-valor">R$ {total.toFixed(2)}</span>
       </div>

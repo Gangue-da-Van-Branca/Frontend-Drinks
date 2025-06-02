@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./InfosContratante.css";
 import { useNavigate } from "react-router-dom";
 import { useOrcamento } from "../../context/OrcamentoContext";
@@ -6,8 +6,41 @@ import { useOrcamento } from "../../context/OrcamentoContext";
 export default function InfosForm() {
   const navigate = useNavigate();
   const { orcamento, atualizarContratante } = useOrcamento();
-
   const formData = orcamento.infosContratante;
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const token = localStorage.getItem("token");
+      const idUsuario = localStorage.getItem("idUsuario");
+
+      if (token && idUsuario) {
+        try {
+          const response = await fetch(`http://localhost:8080/Usuario/${idUsuario}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          if (response.ok) {
+            const userData = await response.json();
+            atualizarContratante({
+              ...formData,
+              nome: userData.nome,
+              sobrenome: userData.sobrenome,
+              telefone: userData.telefone,
+              email: userData.email,
+            });
+          } else {
+            console.warn("Não foi possível carregar os dados do usuário.");
+          }
+        } catch (error) {
+          console.error("Erro ao buscar dados do usuário:", error);
+        }
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -68,6 +101,7 @@ export default function InfosForm() {
         <div id="linha-horizontal-infos" />
         <div className="form-grid">
           <input
+            type="date"
             name="data"
             placeholder="DATA"
             onChange={handleChange}
@@ -80,6 +114,7 @@ export default function InfosForm() {
             value={formData.endereco}
           />
           <input
+            type="time"
             name="horarioInicio"
             placeholder="HORÁRIO DE INICIO"
             onChange={handleChange}
@@ -92,6 +127,7 @@ export default function InfosForm() {
             value={formData.cep}
           />
           <input
+            type="time"
             name="horarioFinal"
             placeholder="HORÁRIO FINAL"
             onChange={handleChange}
@@ -100,6 +136,8 @@ export default function InfosForm() {
           <input
             name="convidados"
             placeholder="NÚMERO DE CONVIDADOS"
+            type="number"
+            min="1"
             onChange={handleChange}
             value={formData.convidados}
           />
