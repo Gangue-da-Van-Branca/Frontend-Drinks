@@ -10,7 +10,7 @@ export default function OrcamentoResumo() {
   const { baseFesta, opcionais, infosContratante, dadosOpcionais } = orcamento;
 
   const calcularPreco = () => {
-    let precoBase = 500;
+    let precoBase = 8000;
 
     const totalBares = (opcionais.baresAdicionais || []).reduce(
       (acc, idItem) => {
@@ -38,7 +38,10 @@ export default function OrcamentoResumo() {
       0
     );
 
-    return precoBase + totalBares + totalShots + totalExtras;
+    const numeroConvidados = Number(infosContratante.convidados) || 0;
+    const custoPorPessoa = numeroConvidados * 85;
+
+    return precoBase + totalBares + totalShots + totalExtras + custoPorPessoa;
   };
 
   const handleConfirmar = () => {
@@ -49,12 +52,30 @@ export default function OrcamentoResumo() {
       preco: precoFinal,
     };
 
-    console.log("Enviando orçamento:", orcamentoFinal);
+    const payload = {
+    baseFesta: {
+      tipoFesta: baseFesta.tipoFesta,
+      drinksSelecionados: baseFesta.drinksSelecionados.map((drink) => ({
+        id: drink.idItem,
+        nome: drink.nome,
+        descricao: drink.descricao
+      }))
+    },
+    infosContratante: infosContratante,
+    opcionais: {
+      shots: opcionais.shots,
+      extras: opcionais.extras,
+      baresAdicionais: opcionais.baresAdicionais
+    },
+    preco: precoFinal
+  };
+
+    console.log("Enviando orçamento:", payload);
 
     fetch("http://localhost:8080/Orcamento/front-create", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(orcamentoFinal),
+      body: JSON.stringify(payload),
     })
       .then(async (res) => {
         const data = await res.json();
