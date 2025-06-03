@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "../pages/Cliente/Home/Home";
 import Cadastro from "../pages/Cadastro/Cadastro";
-import Dashboard from "../pages/Cliente/Dashboard";
 import Pacotes from "../pages/Cliente/PacotesPage/Pacotes";
 import BaseDrinks from "../pages/Cliente/BaseDrinks/BaseDrinks";
 import Opcionais from "../pages/Cliente/Opcionais/Opcionais";
@@ -20,7 +19,6 @@ export default function AppRoutes() {
         <Route path="/basedrinks" element={<BaseDrinks />} />
         <Route path="/opcionais" element={<Opcionais />} />
         <Route path="/infosContratante" element={<InfosCompra />} />
-        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/orcamento-resumo" element={<OrcamentoResumo />} />
         <Route path="/cadastro" element={<Cadastro />} />
 

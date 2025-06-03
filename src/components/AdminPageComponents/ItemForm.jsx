@@ -6,7 +6,7 @@ export default function ItemForm({ itemEditado, onItemSalvo }) {
     nome: "",
     descricao: "",
     preco: "",
-    tipo: ""
+    tipo: "",
   });
 
   useEffect(() => {
@@ -15,16 +15,16 @@ export default function ItemForm({ itemEditado, onItemSalvo }) {
         nome: itemEditado.nome,
         descricao: itemEditado.descricao,
         preco: itemEditado.preco,
-        tipo: itemEditado.tipo
+        tipo: itemEditado.tipo,
       });
     }
   }, [itemEditado]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -33,14 +33,21 @@ export default function ItemForm({ itemEditado, onItemSalvo }) {
 
     const item = {
       ...formData,
-      preco: parseFloat(formData.preco)
+      preco: parseFloat(formData.preco),
     };
 
-    const url = itemEditado 
+    const url = itemEditado
       ? `http://localhost:8080/Item/${itemEditado.idItem}`
       : "http://localhost:8080/Item";
-      
+
     const method = itemEditado ? "PUT" : "POST";
+
+    const body = itemEditado ? JSON.stringify(item) : JSON.stringify([item]);
+
+    console.log(
+      "JSON do Item a ser enviado:",
+      JSON.stringify(itemEditado ? item : [item], null, 2)
+    );
 
     fetch(url, {
       method,
@@ -48,7 +55,7 @@ export default function ItemForm({ itemEditado, onItemSalvo }) {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-      body: JSON.stringify([item]),
+      body,
     })
       .then(handleResponse)
       .then(() => {
@@ -58,7 +65,7 @@ export default function ItemForm({ itemEditado, onItemSalvo }) {
             nome: "",
             descricao: "",
             preco: "",
-            tipo: ""
+            tipo: "",
           });
         }
       })
@@ -67,7 +74,9 @@ export default function ItemForm({ itemEditado, onItemSalvo }) {
 
   const handleResponse = (res) => {
     if (!res.ok) {
-      return res.json().then(err => { throw new Error(JSON.stringify(err)) });
+      return res.json().then((err) => {
+        throw new Error(JSON.stringify(err));
+      });
     }
     return res.json();
   };
@@ -75,7 +84,7 @@ export default function ItemForm({ itemEditado, onItemSalvo }) {
   return (
     <div className="form-container">
       <h3>{itemEditado ? "Editar Item" : "Cadastrar Novo Item"}</h3>
-      
+
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="nome">Nome do Item</label>
@@ -130,7 +139,9 @@ export default function ItemForm({ itemEditado, onItemSalvo }) {
             onChange={handleChange}
             required
           >
-            <option value="" disabled>Selecione um tipo</option>
+            <option value="" disabled>
+              Selecione um tipo
+            </option>
             <option value="Drink Alcólico">Drink Alcólico</option>
             <option value="Soft Drink">Soft Drink</option>
             <option value="Bar">Bar</option>
