@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import "./OrcamentoResumo.css";
 import { useOrcamento } from "../../context/OrcamentoContext";
@@ -47,28 +48,39 @@ export default function OrcamentoResumo() {
   const handleConfirmar = () => {
     const precoFinal = calcularPreco();
 
-    const orcamentoFinal = {
-      ...orcamento,
-      preco: precoFinal,
+    const mapIdsToNames = (itens, dataSet) => {
+      const result = {};
+      for (const [id, qtd] of Object.entries(itens)) {
+        const itemData = dataSet.find((d) => d.idItem === id);
+        const nome = itemData ? itemData.nome : id;
+        result[nome] = qtd;
+      }
+      return result;
     };
 
     const payload = {
-    baseFesta: {
-      tipoFesta: baseFesta.tipoFesta,
-      drinksSelecionados: baseFesta.drinksSelecionados.map((drink) => ({
-        id: drink.idItem,
-        nome: drink.nome,
-        descricao: drink.descricao
-      }))
-    },
-    infosContratante: infosContratante,
-    opcionais: {
-      shots: opcionais.shots,
-      extras: opcionais.extras,
-      baresAdicionais: opcionais.baresAdicionais
-    },
-    preco: precoFinal
-  };
+      baseFesta: {
+        tipoFesta: baseFesta.tipoFesta,
+        drinksSelecionados: baseFesta.drinksSelecionados.map((drink) => ({
+          id: drink.idItem,
+          nome: drink.nome,
+          descricao: drink.descricao,
+        })),
+      },
+      infosContratante: infosContratante,
+      opcionais: {
+        shots: mapIdsToNames(opcionais.shots || {}, dadosOpcionais.shotsData),
+        extras: mapIdsToNames(
+          opcionais.extras || {},
+          dadosOpcionais.extrasData
+        ),
+        baresAdicionais: (opcionais.baresAdicionais || []).map((id) => {
+          const bar = dadosOpcionais.baresData.find((b) => b.idItem === id);
+          return bar ? bar.nome : id;
+        }),
+      },
+      preco: precoFinal,
+    };
 
     console.log("Enviando orçamento:", payload);
 
