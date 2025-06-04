@@ -44,12 +44,54 @@ export default function DashboardOrcamentos() {
     fetchData();
   }, []);
 
+  async function atualizarStatusPedido(orcamento, novoStatus) {
+    const pedido = orcamento.pedido;
+
+    try {
+      const response = await fetch(
+        `http://localhost:8080/Pedido/${pedido.idPedido}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            total: pedido.total,
+            status: novoStatus,
+            orcamentoIdOrcamento: pedido.orcamentoIdOrcamento,
+            orcamentoUsuarioIdUsuario: pedido.orcamentoUsuarioIdUsuario,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Erro ao atualizar status do pedido");
+      }
+
+      const pedidoAtualizado = await response.json();
+
+      // Atualiza o estado local
+      setOrcamentosComPedido((prev) =>
+        prev.map((orc) =>
+          orc.pedido?.idPedido === pedido.idPedido
+            ? { ...orc, pedido: pedidoAtualizado }
+            : orc
+        )
+      );
+    } catch (error) {
+      console.error("Erro:", error);
+      alert("Erro ao atualizar status do pedido.");
+    }
+  }
+
   function aprovarOrcamento(orcamento) {
-    console.log("Aprovar orçamento:", orcamento.idOrcamento);
+    if (orcamento.pedido) {
+      atualizarStatusPedido(orcamento, "Aprovado");
+    }
   }
 
   function rejeitarOrcamento(orcamento) {
-    console.log("Rejeitar orçamento:", orcamento.idOrcamento);
+    if (orcamento.pedido) {
+      atualizarStatusPedido(orcamento, "Cancelado");
+    }
   }
 
   if (carregando) {
@@ -66,7 +108,10 @@ export default function DashboardOrcamentos() {
 
   const indiceUltimoItem = paginaAtual * itensPorPagina;
   const indicePrimeiroItem = indiceUltimoItem - itensPorPagina;
-  const itensAtuais = orcamentosComPedido.slice(indicePrimeiroItem, indiceUltimoItem);
+  const itensAtuais = orcamentosComPedido.slice(
+    indicePrimeiroItem,
+    indiceUltimoItem
+  );
 
   const totalPaginas = Math.ceil(orcamentosComPedido.length / itensPorPagina);
 
