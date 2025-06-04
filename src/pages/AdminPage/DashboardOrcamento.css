@@ -1,44 +1,103 @@
-.dashboard-orcamentos {
+#dashboard-orcamentos {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  background-color: #f8f9fa;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.orcamento-card {
-  padding: 15px;
-  background-color: white;
-  border: 1px solid #dee2e6;
-  border-radius: 10px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+#dashboard-orcamentos h2 {
+  font-size: 1.8rem;
+  color: #343a40;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-.orcamento-card h3 {
+#orcamento-card {
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#orcamento-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+#orcamento-card h3 {
   margin-top: 0;
+  font-size: 1.4rem;
+  color: #495057;
 }
 
-.botoes-acoes {
-  margin-top: 10px;
+#botoes-acoes {
+  margin-top: 15px;
   display: flex;
-  gap: 10px;
+  gap: 12px;
 }
 
-.botoes-acoes button {
-  padding: 8px 12px;
+#botoes-acoes button {
+  padding: 10px 16px;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.botoes-acoes button:first-child {
-  background-color: #28a745;
+#botoes-acoes button:first-child {
+  background-color: #011806;
   color: white;
 }
 
-.botoes-acoes button:last-child {
+#botoes-acoes button:last-child {
   background-color: #dc3545;
   color: white;
 }
 
-.botoes-acoes button:hover {
-  opacity: 0.8;
+#botoes-acoes button:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+#paginacao {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+#parapf {
+  padding: 1rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#parapf:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+#pparapf:hover:not(:disabled) {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+#paginacao span {
+  font-size: 1rem;
+  color: #495057;
 }

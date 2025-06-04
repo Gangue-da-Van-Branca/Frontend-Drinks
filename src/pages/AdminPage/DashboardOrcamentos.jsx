@@ -1,77 +1,167 @@
-import React, { useState } from "react";
-import OrcamentoCard from "./OrcamentoCard.jsx";
+import React, { useEffect, useState } from "react";
+import OrcamentoCard from "./OrcamentoCard";
+import Swal from "sweetalert2";
 import "./DashboardOrcamento.css";
 
 export default function DashboardOrcamentos() {
-  // eslint-disable-next-line no-unused-vars
-  const [orcamentos, setOrcamentos] = useState(mockOrcamentos);
+  const [orcamentosComPedido, setOrcamentosComPedido] = useState([]);
+  const [carregando, setCarregando] = useState(true);
+  const [erro, setErro] = useState(null);
 
-  const handleAprovar = (orcamento) => {
-    alert(`Orçamento para o dia ${orcamento.infosContratante.data} aprovado!`);
-  };
+  const [paginaAtual, setPaginaAtual] = useState(1);
+  const itensPorPagina = 5;
 
-  const handleRejeitar = (orcamento) => {
-    alert(`Orçamento para o dia ${orcamento.infosContratante.data} rejeitado!`);
-  };
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const [resOrc, resPed] = await Promise.all([
+          fetch("http://localhost:8080/Orcamento"),
+          fetch("http://localhost:8080/Pedido"),
+        ]);
+
+        if (!resOrc.ok || !resPed.ok) {
+          throw new Error("Erro ao buscar dados do servidor");
+        }
+
+        const orcamentosData = await resOrc.json();
+        const pedidosData = await resPed.json();
+
+        const combinados = orcamentosData.map((orc) => {
+          const pedidoRelacionado = pedidosData.find(
+            (ped) => ped.orcamentoIdOrcamento === orc.idOrcamento
+          );
+          return { ...orc, pedido: pedidoRelacionado };
+        });
+
+        combinados.sort((b, a) => b.idOrcamento - a.idOrcamento);
+
+        setOrcamentosComPedido(combinados);
+      } catch (err) {
+        console.error("Erro ao carregar dados:", err);
+        setErro(err.message);
+      } finally {
+        setCarregando(false);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  async function atualizarStatusPedido(orcamento, novoStatus) {
+    const pedido = orcamento.pedido;
+
+    try {
+      const response = await fetch(
+        `http://localhost:8080/Pedido/${pedido.idPedido}/${pedido.orcamentoIdOrcamento}/${pedido.orcamentoUsuarioIdUsuario}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            total: pedido.total,
+            status: novoStatus,
+            orcamentoIdOrcamento: pedido.orcamentoIdOrcamento,
+            orcamentoUsuarioIdUsuario: pedido.orcamentoUsuarioIdUsuario,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Erro ao atualizar status do pedido");
+      }
+
+      setOrcamentosComPedido((prev) =>
+        prev.map((orc) =>
+          orc.pedido?.idPedido === pedido.idPedido
+            ? { ...orc, pedido: { ...pedido, status: novoStatus } }
+            : orc
+        )
+      );
+    } catch (error) {
+      console.error("Erro:", error);
+      alert("Erro ao atualizar status do pedido.");
+    }
+  }
+
+  function aprovarOrcamento(orcamento) {
+    if (orcamento.pedido) {
+      const confirmacao = window.confirm(
+        `Deseja mesmo aprovar o pedido ${orcamento.pedido.idPedido}?`
+      );
+      if (confirmacao) {
+        atualizarStatusPedido(orcamento, "Aprovado");
+      }
+    }
+  }
+
+  function rejeitarOrcamento(orcamento) {
+    if (orcamento.pedido) {
+      const confirmacao = window.confirm(
+        `Deseja mesmo cancelar o pedido ${orcamento.pedido.idPedido}?`
+      );
+      if (confirmacao) {
+        atualizarStatusPedido(orcamento, "Cancelado");
+      }
+    }
+  }
+
+  if (carregando) {
+    return <p>Carregando orçamentos...</p>;
+  }
+
+  if (erro) {
+    return <p>Erro: {erro}</p>;
+  }
+
+  if (orcamentosComPedido.length === 0) {
+    return <p>Não há orçamentos disponíveis.</p>;
+  }
+
+  const indiceUltimoItem = paginaAtual * itensPorPagina;
+  const indicePrimeiroItem = indiceUltimoItem - itensPorPagina;
+  const itensAtuais = orcamentosComPedido.slice(
+    indicePrimeiroItem,
+    indiceUltimoItem
+  );
+
+  const totalPaginas = Math.ceil(orcamentosComPedido.length / itensPorPagina);
+
+  function proximaPagina() {
+    if (paginaAtual < totalPaginas) {
+      setPaginaAtual(paginaAtual + 1);
+    }
+  }
+
+  function paginaAnterior() {
+    if (paginaAtual > 1) {
+      setPaginaAtual(paginaAtual - 1);
+    }
+  }
 
   return (
-    <div className="dashboard-orcamentos">
-      <h2>Orçamentos Recebidos</h2>
-      {orcamentos.map((orcamento, index) => (
-        <OrcamentoCard 
-          key={index}
+    <div id="dashboard-orcamentos">
+      <h2>Dashboard de Orçamentos</h2>
+
+      {itensAtuais.map((orcamento, index) => (
+        <OrcamentoCard
+          key={orcamento.idOrcamento}
           orcamento={orcamento}
-          index={index}
-          onAprovar={handleAprovar}
-          onRejeitar={handleRejeitar}
+          index={indicePrimeiroItem + index}
+          onAprovar={aprovarOrcamento}
+          onRejeitar={rejeitarOrcamento}
         />
       ))}
+
+      <div id="paginacao">
+        <button onClick={paginaAnterior} disabled={paginaAtual === 1}>
+          Anterior
+        </button>
+        <span>
+          Página {paginaAtual} de {totalPaginas}
+        </span>
+        <button onClick={proximaPagina} disabled={paginaAtual === totalPaginas}>
+          Próxima
+        </button>
+      </div>
     </div>
   );
 }
-
-const mockOrcamentos = [
-  {
-    infosContratante: {
-      data: "2025-06-15",
-      horarioInicio: "18:00",
-      horarioFinal: "23:00",
-      convidados: 120
-    },
-    baseFesta: {
-      drinks: {
-        "Caipirinha": true,
-        "Gin Tônica": true
-      }
-    },
-    opcionais: {
-      baresAdicionais: ["Bar de Caipirinhas"],
-      extras: {
-        "Decoração Premium": true,
-        "DJ": true
-      }
-    },
-    valorFinal: "4500,00"
-  },
-  {
-    infosContratante: {
-      data: "2025-07-10",
-      horarioInicio: "20:00",
-      horarioFinal: "02:00",
-      convidados: 80
-    },
-    baseFesta: {
-      drinks: {
-        "Mojito": true,
-        "Margarita": true
-      }
-    },
-    opcionais: {
-      baresAdicionais: [],
-      extras: {
-        "Iluminação Especial": true
-      }
-    },
-    valorFinal: "3200,00"
-  }
-];
