@@ -3,7 +3,6 @@ import "./DashboardOrcamento.css";
 
 export default function OrcamentoCard({
   orcamento,
-  index,
   onAprovar,
   onRejeitar,
 }) {
@@ -11,7 +10,10 @@ export default function OrcamentoCard({
 
   return (
     <div id="orcamento-card">
-      <h3>Orçamento #{index + 1}</h3>
+      <h3>
+        Orçamento {baseFesta.tipoFesta} - {infosContratante.nome}{" "}
+        {infosContratante.sobrenome}
+      </h3>
       <p>
         <strong>Nome:</strong> {infosContratante.nome}{" "}
         {infosContratante.sobrenome}

@@ -6,7 +6,7 @@ export default function MeusPedidos() {
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState(null);
   const [pedidoAtivo, setPedidoAtivo] = useState(null);
-  const [orcamentos, setOrcamentos] = useState({}); 
+  const [orcamentos, setOrcamentos] = useState({});
 
   useEffect(() => {
     const fetchPedidos = async () => {
@@ -20,9 +20,12 @@ export default function MeusPedidos() {
       }
 
       try {
-        const response = await fetch(`http://localhost:8080/Pedido/usuario/${idUsuario}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const response = await fetch(
+          `http://localhost:8080/Pedido/usuario/${idUsuario}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
 
         if (!response.ok) {
           throw new Error("Erro ao buscar pedidos.");
@@ -46,9 +49,12 @@ export default function MeusPedidos() {
 
     if (!orcamentos[orcamentoId]) {
       try {
-        const response = await fetch(`http://localhost:8080/Orcamento/${orcamentoId}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const response = await fetch(
+          `http://localhost:8080/Orcamento/${orcamentoId}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
 
         if (!response.ok) {
           throw new Error("Erro ao buscar orçamento.");
@@ -83,40 +89,81 @@ export default function MeusPedidos() {
         {pedidos.map((pedido, index) => {
           const orcamento = orcamentos[pedido.orcamentoIdOrcamento];
           return (
-            <li key={index} id="meus-pedidos-item" onClick={() => toggleDetalhes(index, pedido.orcamentoIdOrcamento)}>
+            <li
+              key={index}
+              id="meus-pedidos-item"
+              onClick={() => toggleDetalhes(index, pedido.orcamentoIdOrcamento)}
+            >
               <div id="meus-pedidos-resumo">
-                <p id="meus-pedidos-status"><strong>Status:</strong> {pedido.status}</p>
-                <p id="meus-pedidos-total"><strong>Total:</strong> R$ {pedido.total?.toFixed(2)}</p>
+                <p id="meus-pedidos-status">
+                  <strong>Status:</strong> {pedido.status}
+                </p>
+                <p id="meus-pedidos-total">
+                  <strong>Total:</strong> R$ {pedido.total?.toFixed(2)}
+                </p>
               </div>
 
               {pedidoAtivo === index && orcamento && (
                 <div id="meus-pedidos-detalhes">
                   <h4>Drinks</h4>
-                  {orcamento.drinks?.length ? (
+                  {orcamento.baseFesta?.drinksSelecionados?.length ? (
                     <ul>
-                      {orcamento.drinks.map((drink, idx) => (
-                        <li key={idx}>{drink.nome}</li>
-                      ))}
+                      {orcamento.baseFesta.drinksSelecionados.map(
+                        (drink, idx) => (
+                          <li key={idx}>{drink.nome}</li>
+                        )
+                      )}
                     </ul>
-                  ) : <p>Sem drinks.</p>}
+                  ) : (
+                    <p>Sem drinks.</p>
+                  )}
 
-                  <h4>Opcionais</h4>
-                  {orcamento.opcionais?.length ? (
+                  <h4>Opcionais - Shots</h4>
+                  {orcamento.opcionais?.shots ? (
                     <ul>
-                      {orcamento.opcionais.map((opcional, idx) => (
-                        <li key={idx}>{opcional.nome}</li>
+                      {Object.entries(orcamento.opcionais.shots).map(
+                        ([nome, qtd], idx) => (
+                          <li key={idx}>
+                            {nome}: {qtd}
+                          </li>
+                        )
+                      )}
+                    </ul>
+                  ) : (
+                    <p>Sem shots.</p>
+                  )}
+
+                  <h4>Opcionais - Extras</h4>
+                  {orcamento.opcionais?.extras ? (
+                    <ul>
+                      {Object.entries(orcamento.opcionais.extras).map(
+                        ([nome, qtd], idx) => (
+                          <li key={idx}>
+                            {nome}: {qtd}
+                          </li>
+                        )
+                      )}
+                    </ul>
+                  ) : (
+                    <p>Sem extras.</p>
+                  )}
+
+                  <h4>Opcionais - Bares Adicionais</h4>
+                  {orcamento.opcionais?.baresAdicionais?.length ? (
+                    <ul>
+                      {orcamento.opcionais.baresAdicionais.map((bar, idx) => (
+                        <li key={idx}>{bar}</li>
                       ))}
                     </ul>
-                  ) : <p>Sem opcionais.</p>}
+                  ) : (
+                    <p>Sem bares adicionais.</p>
+                  )}
 
                   <h4>Convidados</h4>
-                  {orcamento.convidados?.length ? (
-                    <ul>
-                      {orcamento.convidados.map((convidado, idx) => (
-                        <li key={idx}>{convidado.nome}</li>
-                      ))}
-                    </ul>
-                  ) : <p>Sem convidados.</p>}
+                  <p>
+                    {orcamento.infosContratante?.convidados ||
+                      "Sem convidados informados"}
+                  </p>
                 </div>
               )}
 

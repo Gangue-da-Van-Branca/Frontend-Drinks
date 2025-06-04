@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import OrcamentoCard from "./OrcamentoCard";
+import Swal from "sweetalert2";
 import "./DashboardOrcamento.css";
 
 export default function DashboardOrcamentos() {
@@ -32,6 +33,8 @@ export default function DashboardOrcamentos() {
           return { ...orc, pedido: pedidoRelacionado };
         });
 
+        combinados.sort((b, a) => b.idOrcamento - a.idOrcamento);
+
         setOrcamentosComPedido(combinados);
       } catch (err) {
         console.error("Erro ao carregar dados:", err);
@@ -49,7 +52,7 @@ export default function DashboardOrcamentos() {
 
     try {
       const response = await fetch(
-        `http://localhost:8080/Pedido/${pedido.idPedido}`,
+        `http://localhost:8080/Pedido/${pedido.idPedido}/${pedido.orcamentoIdOrcamento}/${pedido.orcamentoUsuarioIdUsuario}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -66,13 +69,10 @@ export default function DashboardOrcamentos() {
         throw new Error("Erro ao atualizar status do pedido");
       }
 
-      const pedidoAtualizado = await response.json();
-
-      // Atualiza o estado local
       setOrcamentosComPedido((prev) =>
         prev.map((orc) =>
           orc.pedido?.idPedido === pedido.idPedido
-            ? { ...orc, pedido: pedidoAtualizado }
+            ? { ...orc, pedido: { ...pedido, status: novoStatus } }
             : orc
         )
       );
@@ -84,13 +84,23 @@ export default function DashboardOrcamentos() {
 
   function aprovarOrcamento(orcamento) {
     if (orcamento.pedido) {
-      atualizarStatusPedido(orcamento, "Aprovado");
+      const confirmacao = window.confirm(
+        `Deseja mesmo aprovar o pedido ${orcamento.pedido.idPedido}?`
+      );
+      if (confirmacao) {
+        atualizarStatusPedido(orcamento, "Aprovado");
+      }
     }
   }
 
   function rejeitarOrcamento(orcamento) {
     if (orcamento.pedido) {
-      atualizarStatusPedido(orcamento, "Cancelado");
+      const confirmacao = window.confirm(
+        `Deseja mesmo cancelar o pedido ${orcamento.pedido.idPedido}?`
+      );
+      if (confirmacao) {
+        atualizarStatusPedido(orcamento, "Cancelado");
+      }
     }
   }
 
