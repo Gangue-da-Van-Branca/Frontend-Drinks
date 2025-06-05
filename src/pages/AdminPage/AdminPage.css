@@ -2,7 +2,13 @@
   max-width: 900px;
   margin: 0 auto;
   padding: 20px;
-  font-family: Arial, sans-serif;
+}
+
+.admin-container h1 {
+  color: #0a1d30;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  font-family: "SedraRegular-Bold";
 }
 
 .admin-nav {
@@ -13,7 +19,7 @@
 
 .admin-nav button {
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: var(--orange);
   border: none;
   color: white;
   cursor: pointer;
@@ -22,11 +28,11 @@
 }
 
 .admin-nav button:hover {
-  background-color: #0056b3;
+  background-color: #602d0c;
 }
 
 .admin-nav button.ativo {
-  background-color: #0056b3;
+  background-color: #793f18;
   font-weight: bold;
 }
 

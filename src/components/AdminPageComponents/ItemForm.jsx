@@ -142,7 +142,7 @@ export default function ItemForm({ itemEditado, onItemSalvo }) {
             <option value="" disabled>
               Selecione um tipo
             </option>
-            <option value="Drink Alcólico">Drink Alcólico</option>
+            <option value="Drink Alcoólico">Drink Alcoólico</option>
             <option value="Soft Drink">Soft Drink</option>
             <option value="Bar">Bar</option>
             <option value="Opcional">Opcional</option>

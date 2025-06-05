@@ -38,7 +38,7 @@ function BaseDrinks() {
     fetchDrinks();
   }, []);
 
-  const categoriasPermitidas = ["Drink Alcólico", "Soft Drink"];
+  const categoriasPermitidas = ["Drink Alcoólico", "Soft Drink"];
   const drinksFiltrados = drinksAPI.filter((drink) =>
     categoriasPermitidas.includes(drink.tipo)
   );
