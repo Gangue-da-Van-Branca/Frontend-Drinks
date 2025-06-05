@@ -27,7 +27,7 @@ const Header = ({ nome, setNome }) => {
       if (token && idUsuario && !nome) {
         try {
           const response = await fetch(
-            `http://localhost:8080/Usuario/${idUsuario}`,
+            `${import.meta.env.VITE_API_URL}/Usuario/${idUsuario}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,

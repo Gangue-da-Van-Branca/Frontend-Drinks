@@ -25,7 +25,7 @@ function BaseDrinks() {
   useEffect(() => {
     const fetchDrinks = async () => {
       try {
-        const response = await fetch("http://localhost:8080/Item");
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/Item`);
         const data = await response.json();
         setDrinksAPI(data);
       } catch (error) {

@@ -37,8 +37,8 @@ export default function ItemForm({ itemEditado, onItemSalvo }) {
     };
 
     const url = itemEditado
-      ? `http://localhost:8080/Item/${itemEditado.idItem}`
-      : "http://localhost:8080/Item";
+      ? `${import.meta.env.VITE_API_URL}/Item/${itemEditado.idItem}`
+      : `${import.meta.env.VITE_API_URL}/Item`;
 
     const method = itemEditado ? "PUT" : "POST";
 

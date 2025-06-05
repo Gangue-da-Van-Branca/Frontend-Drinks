@@ -21,7 +21,7 @@ function Opcionais() {
   const [extras, setExtras] = useState({});
 
   useEffect(() => {
-    fetch("http://localhost:8080/Item")
+    fetch(`${import.meta.env.VITE_API_URL}Item`)
       .then((res) => res.json())
       .then((data) => {
         // Separar por tipo

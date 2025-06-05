@@ -15,7 +15,7 @@ export default function InfosForm() {
 
       if (token && idUsuario) {
         try {
-          const response = await fetch(`http://localhost:8080/Usuario/${idUsuario}`, {
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/Usuario/${idUsuario}`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
