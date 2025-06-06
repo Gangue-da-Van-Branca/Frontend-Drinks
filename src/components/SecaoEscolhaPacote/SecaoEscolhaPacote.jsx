@@ -3,11 +3,19 @@ import Elodrinks from "../Elodrinks";
 import casamentoIcon from "../../assets/icons/weddingIcon280.svg";
 import maletaIcon from "../../assets/icons/maletaIcon280.svg";
 import niverIcon from "../../assets/icons/giftIcon280.svg";
-
-
 import seta from '../../assets/icons/arrow-up-right.svg'
+import { useNavigate } from "react-router-dom";
+
+
 
 const SecaoEscolhaPacote = () => {
+  
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/pacotes");
+  };
+  
   return (
     <section className="escolha-pacote">
     <div className="escolha-pacote-overlay">
@@ -48,7 +56,7 @@ const SecaoEscolhaPacote = () => {
       </div>
 
       <button id="pacote-botao">
-        <a href="/pacotes" className="nunito">
+        <a  onClick={handleClick} className="nunito">
           Ver todos os pacotes
         </a>
         <img src={seta} alt="seta" />

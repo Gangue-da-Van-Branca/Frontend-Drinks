@@ -9,7 +9,7 @@ export default function GerenciarItens() {
   const [itemEditado, setItemEditado] = useState(null);
 
   const carregarItens = () => {
-    fetch('http://localhost:8080/Item', {
+    fetch(`${import.meta.env.VITE_API_URL}Item`, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem("token")}`
       }
@@ -24,7 +24,7 @@ export default function GerenciarItens() {
   }, []);
 
   const handleExcluir = (id) => {
-    fetch(`http://localhost:8080/Item/${id}`, {
+    fetch(`${import.meta.env.VITE_API_URL}Item/${id}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem("token")}`

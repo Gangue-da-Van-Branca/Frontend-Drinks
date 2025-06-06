@@ -4,29 +4,18 @@ import "./OrcamentoResumo.css";
 import { useOrcamento } from "../../context/OrcamentoContext";
 import { useNavigate } from "react-router-dom";
 
-// --- ATENÇÃO: VERIFIQUE E AJUSTE A URL DA SUA API ABAIXO ---
-// Certifique-se de que esta é a porta onde sua API .NET está realmente rodando e acessível.
-// No seu último log de erro bem-sucedido (404 Not Found), a porta era 5252.
-// No código do frontend que você colou, está 8080. Verifique qual é a correta.
-const API_BASE_URL = "http://localhost:8080"; // Verifique esta porta!
 
 export default function OrcamentoResumo() {
   const { orcamento, resetarOrcamento } = useOrcamento();
   const navigate = useNavigate();
 
-  // Adicionando o estado para loading e erro, caso não esteja no seu código original.
   const [status, setStatus] = useState({ loading: false, error: null });
 
-  // Esses são os dados que vêm do seu contexto
-  // É crucial que 'dadosOpcionais' esteja corretamente populado no seu OrcamentoContext
-  // com 'shotsData', 'extrasData', e 'baresData' como arrays de objetos
-  // e cada objeto contendo pelo menos 'idItem' e 'nome'.
   const { baseFesta, opcionais, infosContratante, dadosOpcionais } = orcamento;
 
   const calcularPreco = () => {
     let precoBase = 8000;
 
-    // Garante que dadosOpcionais e suas propriedades existam antes de tentar usá-los
     const safeDadosOpcionais = dadosOpcionais || { baresData: [], shotsData: [], extrasData: []};
     const safeOpcionais = opcionais || { baresAdicionais: [], shots: {}, extras: {} };
 
@@ -67,12 +56,6 @@ export default function OrcamentoResumo() {
 
     const precoFinal = calcularPreco();
 
-    // --- LOGS PARA DEPURAÇÃO ---
-    console.log("ESTADO INICIAL DO ORCAMENTO (do contexto):", JSON.stringify(orcamento, null, 2));
-    console.log("Conteúdo de orcamento.dadosOpcionais:", JSON.stringify(orcamento.dadosOpcionais, null, 2));
-    console.log("Conteúdo de orcamento.opcionais (ANTES do mapeamento):", JSON.stringify(orcamento.opcionais, null, 2));
-    // --- FIM DOS LOGS PARA DEPURAÇÃO ---
-
     const mapIdsToNames = (itens, dataSet, dataSetNameForLog) => {
       const result = {};
       if (!dataSet || !Array.isArray(dataSet) || dataSet.length === 0) {
@@ -111,8 +94,6 @@ export default function OrcamentoResumo() {
       baseFesta: {
         tipoFesta: orcamento.baseFesta?.tipoFesta || "N/A",
         drinksSelecionados: (orcamento.baseFesta?.drinksSelecionados || []).map((drink) => ({
-          // Backend espera 'id' como string, 'nome' e 'descricao'.
-          // O backend foi ajustado para buscar por 'drink.Nome'.
           id: String(drink.idItem || drink.id || ""), // Garante que 'id' seja string e tenta pegar de idItem ou id
           nome: drink.nome || "Nome não encontrado",
           descricao: drink.descricao || "Descrição não disponível",
@@ -127,20 +108,17 @@ export default function OrcamentoResumo() {
       preco: precoFinal,
     };
 
-    console.log("Enviando PAYLOAD FINAL para API:", JSON.stringify(payload, null, 2));
-
-    try { // Adicionado try/catch para o fetch
-      const response = await fetch("http://localhost:8080/Orcamento/front-create", { // Adicionado API_BASE_URL
+    try { 
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/Orcamento/front-create`, { 
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
 
-      const responseData = await response.json(); // Tenta ler como JSON mesmo se !res.ok para pegar erros do backend
+      const responseData = await response.json();
       console.log("Resposta da API:", response.status, responseData);
 
       if (!response.ok) {
-        // Tenta extrair uma mensagem de erro mais útil do corpo da resposta
         const errorText = responseData.message || responseData.title || (typeof responseData === 'string' ? responseData : JSON.stringify(responseData.errors || responseData));
         throw new Error(errorText || "Erro ao enviar orçamento: ${response.status}");
       }
@@ -151,8 +129,7 @@ export default function OrcamentoResumo() {
 
     } catch (err) {
       console.error("Erro ao enviar orçamento para API:", err);
-      setStatus({ loading: false, error: err.message || "Falha ao enviar orçamento. Verifique o console."}); // Atualiza o estado de erro
-      // Removido o alert daqui para mostrar o erro no componente
+      setStatus({ loading: false, error: err.message || "Falha ao enviar orçamento. Verifique o console."}); 
     }
   };
 
@@ -176,9 +153,6 @@ export default function OrcamentoResumo() {
   }
 
   return (
-    // Seu JSX para renderizar o resumo permanece o mesmo
-    // Apenas certifique-se de que está acessando as propriedades de forma segura (ex: opcionais.shots && ...)
-    // E que a URL no fetch é a correta (provavelmente http://localhost:5252, verifique seu backend)
     <div id="orcamento-container">
       <h1 id="orcamento-logo">
         ELO <span>DRINKS</span>

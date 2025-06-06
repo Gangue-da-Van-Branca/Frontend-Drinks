@@ -15,8 +15,8 @@ export default function DashboardOrcamentos() {
     async function fetchData() {
       try {
         const [resOrc, resPed] = await Promise.all([
-          fetch("http://localhost:8080/Orcamento"),
-          fetch("http://localhost:8080/Pedido"),
+          fetch(`${import.meta.env.VITE_API_URL}/Orcamento`),
+          fetch(`${import.meta.env.VITE_API_URL}/Pedido`),
         ]);
 
         if (!resOrc.ok || !resPed.ok) {
@@ -52,7 +52,7 @@ export default function DashboardOrcamentos() {
 
     try {
       const response = await fetch(
-        `http://localhost:8080/Pedido/${pedido.idPedido}/${pedido.orcamentoIdOrcamento}/${pedido.orcamentoUsuarioIdUsuario}`,
+        `${import.meta.env.VITE_API_URL}/Pedido/${pedido.idPedido}/${pedido.orcamentoIdOrcamento}/${pedido.orcamentoUsuarioIdUsuario}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },

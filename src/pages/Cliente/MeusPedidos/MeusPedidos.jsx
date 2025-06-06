@@ -21,7 +21,7 @@ export default function MeusPedidos() {
 
       try {
         const response = await fetch(
-          `http://localhost:8080/Pedido/usuario/${idUsuario}`,
+          `${import.meta.env.VITE_API_URL}/Pedido/usuario/${idUsuario}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -50,7 +50,7 @@ export default function MeusPedidos() {
     if (!orcamentos[orcamentoId]) {
       try {
         const response = await fetch(
-          `http://localhost:8080/Orcamento/${orcamentoId}`,
+          `${import.meta.env.VITE_API_URL}/Orcamento/${orcamentoId}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
