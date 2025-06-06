@@ -1,3 +1,29 @@
 #resumo-form-grid{
-        display: block;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        font-family: "NunitoSans", sans-serif;
+}
+
+#orc-sec{
+    width: 85%;
+    border-bottom: 2px solid var(--orange);
+}
+
+#enquadramento{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    justify-content:flex-start;
+}
+
+#colunas{
+    display: flex;
+    justify-content: space-between;
+}
+
+ul{
+    font-family: "NunitoSans", sans-serif;
+    list-style: none;
+    width: 100%;
 }
