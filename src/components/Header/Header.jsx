@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect,useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Login from "../Login/Login";
 import logo from "../../assets/images/logo2.png";
@@ -8,8 +8,9 @@ const Header = ({ nome, setNome }) => {
   const [buttonPopup, setButtonPopUp] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [tipoUsuario, setTipoUsuario] = useState(null);
+  const userMenuRef = useRef(null);
   const navigate = useNavigate();
-
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,6 +39,7 @@ const Header = ({ nome, setNome }) => {
           if (response.ok) {
             const userData = await response.json();
             setNome(userData.nome);
+            setTipoUsuario(userData.tipo);
           }
         } catch (error) {
           console.error("Erro:", error);
@@ -62,6 +64,28 @@ const Header = ({ nome, setNome }) => {
     navigate("/meus-pedidos");
     setUserMenuOpen(false);
   };
+
+  useEffect(() => {
+  const handleClickOutside = (event) => {
+    if (
+      userMenuRef.current &&
+      !userMenuRef.current.contains(event.target)
+    ) {
+      setUserMenuOpen(false);
+    }
+  };
+
+  if (userMenuOpen) {
+    document.addEventListener("mousedown", handleClickOutside);
+  } else {
+    document.removeEventListener("mousedown", handleClickOutside);
+  }
+
+  return () => {
+    document.removeEventListener("mousedown", handleClickOutside);
+  };
+}, [userMenuOpen]);
+
 
   return (
     <header className={`header ${isScrolled ? "scrolled" : ""}`}>
@@ -92,8 +116,18 @@ const Header = ({ nome, setNome }) => {
                 Olá, {nome}!
               </a>
               {userMenuOpen && (
-                <div className="user-menu">
+                <div className="user-menu" ref={userMenuRef}>
                   <a onClick={handleMyOrders}>Ver meus pedidos</a>
+                  {tipoUsuario === "1" && (
+                    <a
+                      onClick={() => {
+                        navigate("/administrador");
+                        setUserMenuOpen(false);
+                      }}
+                    >
+                      Admin board
+                    </a>
+                  )}
                   <a onClick={handleLogout}>Logout</a>
                 </div>
               )}
