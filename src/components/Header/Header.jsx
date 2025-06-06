@@ -1,4 +1,4 @@
-import React, { useEffect,useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Login from "../Login/Login";
 import logo from "../../assets/images/logo2.png";
@@ -10,6 +10,7 @@ const Header = ({ nome, setNome }) => {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [tipoUsuario, setTipoUsuario] = useState(null);
   const userMenuRef = useRef(null);
+  const loginPopupRef = useRef(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -66,26 +67,42 @@ const Header = ({ nome, setNome }) => {
   };
 
   useEffect(() => {
-  const handleClickOutside = (event) => {
-    if (
-      userMenuRef.current &&
-      !userMenuRef.current.contains(event.target)
-    ) {
-      setUserMenuOpen(false);
+    const handleClickOutside = (event) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
+        setUserMenuOpen(false);
+      }
+    };
+
+    if (userMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
     }
-  };
 
-  if (userMenuOpen) {
-    document.addEventListener("mousedown", handleClickOutside);
-  } else {
-    document.removeEventListener("mousedown", handleClickOutside);
-  }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [userMenuOpen]);
 
-  return () => {
-    document.removeEventListener("mousedown", handleClickOutside);
-  };
-}, [userMenuOpen]);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        buttonPopup &&
+        loginPopupRef.current &&
+        !loginPopupRef.current.contains(event.target)
+      ) {
+        setButtonPopUp(false);
+      }
+    };
 
+    if (buttonPopup) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [buttonPopup]);
 
   return (
     <header className={`header ${isScrolled ? "scrolled" : ""}`}>
@@ -141,6 +158,7 @@ const Header = ({ nome, setNome }) => {
                 trigger={buttonPopup}
                 setTrigger={setButtonPopUp}
                 setNome={setNome}
+                ref={loginPopupRef}
               />
             </>
           )}
