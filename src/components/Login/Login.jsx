@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import EsqueceuSenha from "./EsqueceuSenha";
 
-const Login = forwardRef(({ trigger, setTrigger, setNome }, ref) => {
+const Login = forwardRef(({ trigger, setTrigger, setNome, onLoginSuccess }, ref) => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [erro, setErro] = useState("");
@@ -26,11 +26,10 @@ const Login = forwardRef(({ trigger, setTrigger, setNome }, ref) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, senha }),
-      });
+      }); 
 
       if (response.ok) {
         const data = await response.json();
-        console.log("Login bem-sucedido:", data);
 
         localStorage.setItem("token", data.token);
         localStorage.setItem("role", data.role);
@@ -50,6 +49,7 @@ const Login = forwardRef(({ trigger, setTrigger, setNome }, ref) => {
         }
 
         setTrigger(false);
+        if (onLoginSuccess) onLoginSuccess();
       } else {
         const errorData = await response.json();
         setErro(errorData.erro || "Erro ao fazer login");

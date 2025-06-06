@@ -1,3 +1,4 @@
+// Header.jsx
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Login from "../Login/Login";
@@ -13,6 +14,36 @@ const Header = ({ nome, setNome }) => {
   const loginPopupRef = useRef(null);
   const navigate = useNavigate();
 
+  const fetchUserData = async () => {
+    const token = localStorage.getItem("token");
+    const idUsuario = localStorage.getItem("idUsuario");
+
+    if (token && idUsuario) {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/Usuario/${idUsuario}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (response.ok) {
+          const userData = await response.json();
+          setNome(userData.nome);
+          setTipoUsuario(userData.tipo);
+        }
+      } catch (error) {
+        console.error("Erro ao buscar dados do usuário:", error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -21,39 +52,10 @@ const Header = ({ nome, setNome }) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    const fetchUserName = async () => {
-      const token = localStorage.getItem("token");
-      const idUsuario = localStorage.getItem("idUsuario");
-
-      if (token && idUsuario && !nome) {
-        try {
-          const response = await fetch(
-            `${import.meta.env.VITE_API_URL}/Usuario/${idUsuario}`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
-
-          if (response.ok) {
-            const userData = await response.json();
-            setNome(userData.nome);
-            setTipoUsuario(userData.tipo);
-          }
-        } catch (error) {
-          console.error("Erro:", error);
-        }
-      }
-    };
-
-    fetchUserName();
-  }, [nome, setNome]);
-
   const handleLogout = () => {
     localStorage.clear();
     setNome(null);
+    setTipoUsuario(null);
     setUserMenuOpen(false);
   };
 
@@ -159,6 +161,7 @@ const Header = ({ nome, setNome }) => {
                 setTrigger={setButtonPopUp}
                 setNome={setNome}
                 ref={loginPopupRef}
+                onLoginSuccess={fetchUserData} // <- importante!
               />
             </>
           )}
