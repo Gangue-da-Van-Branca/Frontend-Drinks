@@ -1,0 +1,55 @@
+#resumo-form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-family: "NunitoSans", sans-serif;
+}
+
+#orc-sec {
+  width: 85%;
+  border-bottom: 2px solid var(--orange);
+}
+
+#enquadramento {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  width: 100%;
+  justify-content: flex-start;
+  font-size: 1.25rem;
+}
+
+#colunas {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+ul {
+  font-family: "NunitoSans", sans-serif;
+  list-style: none;
+  width: 100%;
+}
+
+#orcamento-footer{
+    font-size: 1.5rem;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    position: absolute;
+    padding: 0 2rem 2rem 0;
+}
+
+#confirm{
+    background-color:var(--orange);
+    color: var(--white);
+}
+
+#confirm:hover{
+  background-color: chocolate;
+  padding: 1.5rem 2.25rem;
+  border: none;
+}

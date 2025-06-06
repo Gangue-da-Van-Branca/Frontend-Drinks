@@ -1,3 +1,9 @@
+#pagina-base-festa{
+  background-color: var(--white);
+  position: relative;
+}
+
+
 #titulo {
   font-size: 28px;
   font-family: 'SedraBold';
@@ -35,7 +41,7 @@
 }
 
 #botao-avancar:hover {
-  background-color: #743610;
+  background-color: chocolate;
 }
 
 .footer-basedrinks {

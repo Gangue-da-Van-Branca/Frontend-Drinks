@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import TipoFesta from "../../../components/BaseDrinksPage/TipoFesta/TipoFesta";
 import SelecioneDrinks from "../../../components/BaseDrinksPage/SelecioneDrinks/SelecioneDrinks";
 import TopoDrinks from "../../../components/BaseDrinksPage/TopoDrinks/TopoDrinks";
 import Footer from "../../../components/Footer/Footer";
 import "./BaseDrinks.css";
+
 import { useOrcamento } from "../../../context/OrcamentoContext";
 
 function BaseDrinks() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const navigate = useNavigate();
   const location = useLocation();
   const [tipoSelecionado, setTipoSelecionado] = useState(
