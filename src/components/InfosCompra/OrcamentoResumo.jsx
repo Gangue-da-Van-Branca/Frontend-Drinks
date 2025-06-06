@@ -1,4 +1,5 @@
 import "../../components/InfosCompra/InfosContratante.css";
+import "./OrcamentoResumo.css";
 import { useNavigate } from "react-router-dom";
 import { useOrcamento } from "../../context/OrcamentoContext";
 import logo from "../../assets/images/logo2.png";
@@ -41,7 +42,7 @@ export default function OrcamentoResumo() {
         <div className="infos-form">
           <div className="section-title">DADOS DO CONTRATANTE</div>
           <div id="linha-horizontal-infos" />
-          <div className="form-grid">
+          <div id="resumo-form-grid">
             {renderCampo("Nome", infosContratante.nome)}
             {renderCampo("Sobrenome", infosContratante.sobrenome)}
             {renderCampo("Telefone", infosContratante.telefone)}
@@ -108,12 +109,11 @@ export default function OrcamentoResumo() {
                 )}
               </ul>
             </div>
-          </div>
-
-          <div className="form-footer" style={{ marginTop: "40px" }}>
+             <div className="form-footer" style={{ marginTop: "40px" }}>
             <button type="button" onClick={handleConfirmar}>
               CONFIRMAR ENVIO
             </button>
+          </div>
           </div>
         </div>
       </div>
