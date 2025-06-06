@@ -1,7 +1,11 @@
-import React from "react";
+import { useEffect } from 'react';
 import "./TopoOpcionais.css";
 
 const TopoOpcionais = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <header id="topo-opcionais">
       <div id="logo-container-opcionais">

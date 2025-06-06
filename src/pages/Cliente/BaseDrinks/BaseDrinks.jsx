@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useEffect , useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import TipoFesta from "../../../components/BaseDrinksPage/TipoFesta/TipoFesta";
 import SelecioneDrinks from "../../../components/BaseDrinksPage/SelecioneDrinks/SelecioneDrinks";
@@ -117,6 +117,10 @@ const drinksDisponiveis = [
 ];
 
 function BaseDrinks() {
+
+  useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
 
   
   const navigate = useNavigate();
