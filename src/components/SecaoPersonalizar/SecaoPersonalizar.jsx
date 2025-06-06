@@ -4,8 +4,16 @@ import seta from '../../assets/icons/arrow-white.svg';
 import img1 from "../../assets/images/ex_bar.jpg";
 import img2 from "../../assets/images/casamento.jpg";
 import img3 from "../../assets/images/bartender3.jpg";
+import { useNavigate } from "react-router-dom";
 
 const SecaoPersonalizar = () => {
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/basedrinks");
+  };
+  
   return (
     <section className="personalizacao" id="personalizacao">
       <div className="title">
@@ -53,8 +61,8 @@ const SecaoPersonalizar = () => {
         </div>
       </div>
 
-      <button id="personalizar-botao">
-        <a href="/basedrinks" className="nunito">
+      <button onClick={handleClick} id="personalizar-botao">
+        <a className="nunito">
           PERSONALIZAR
         </a>
         <img src={seta} alt="seta" />

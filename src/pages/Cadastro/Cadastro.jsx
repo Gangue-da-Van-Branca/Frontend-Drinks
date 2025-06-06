@@ -30,7 +30,7 @@ const Cadastro = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:8080/Auth/register`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/Auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

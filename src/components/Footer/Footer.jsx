@@ -37,7 +37,7 @@ const Footer = () => {
 
         <div className="footer-col address">
           <p>SÃO PAULO</p>
-          <p><FaMapMarkerAlt />Rua Cenerino Branco de Araújo, 684</p>
+          <p><FaMapMarkerAlt /> Rua Cenerino Branco de Araújo, 684</p>
           <p>+55 (11) 99486-3100</p>
           <p className="dev-credit">
             DEVELOPED BY THE TEAM OF <br />

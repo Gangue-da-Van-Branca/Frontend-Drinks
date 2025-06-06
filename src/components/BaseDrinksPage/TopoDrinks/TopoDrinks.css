@@ -1,5 +1,5 @@
 #topo-basedrinks {
-  padding-top: 2rem;
+  padding: 2rem 2rem 0;
 }
 
 #logo-container-basedrinks {
@@ -11,7 +11,7 @@
 #barra-lateral-basedrinks {
   width: 5rem;
   height: 3rem;
-  background-color: #9d4915;
+  background-color: var(--orange);
   margin-right: 0.5rem;
 }
 
@@ -29,7 +29,7 @@
 #linha-horizontal-basedrinks {
   width: 100%;
   height: 1px;
-  background-color: #9d4915;
+  background-color: var(--orange);
   margin-top: -15px;
   margin-bottom: 30px;
 }

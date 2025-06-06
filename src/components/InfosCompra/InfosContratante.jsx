@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import "./InfosContratante.css";
 import { useNavigate } from "react-router-dom";
 import { useOrcamento } from "../../context/OrcamentoContext";
@@ -8,8 +9,41 @@ import voltar from "../../assets/icons/arrow-white.svg";
 export default function InfosForm() {
   const navigate = useNavigate();
   const { orcamento, atualizarContratante } = useOrcamento();
-
   const formData = orcamento.infosContratante;
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const token = localStorage.getItem("token");
+      const idUsuario = localStorage.getItem("idUsuario");
+
+      if (token && idUsuario) {
+        try {
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/Usuario/${idUsuario}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          if (response.ok) {
+            const userData = await response.json();
+            atualizarContratante({
+              ...formData,
+              nome: userData.nome,
+              sobrenome: userData.sobrenome,
+              telefone: userData.telefone,
+              email: userData.email,
+            });
+          } else {
+            console.warn("Não foi possível carregar os dados do usuário.");
+          }
+        } catch (error) {
+          console.error("Erro ao buscar dados do usuário:", error);
+        }
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -79,46 +113,51 @@ export default function InfosForm() {
             />
           </div>
 
-          <div className="section-title">INFORMAÇÕES DO EVENTO</div>
-          <div id="linha-horizontal-infos" />
-          <div className="form-grid">
-            <input
-              name="data"
-              placeholder="DATA"
-              onChange={handleChange}
-              value={formData.data}
-            />
-            <input
-              name="endereco"
-              placeholder="ENDEREÇO DO EVENTO"
-              onChange={handleChange}
-              value={formData.endereco}
-            />
-            <input
-              name="horarioInicio"
-              placeholder="HORÁRIO DE INICIO"
-              onChange={handleChange}
-              value={formData.horarioInicio}
-            />
-            <input
-              name="cep"
-              placeholder="CEP"
-              onChange={handleChange}
-              value={formData.cep}
-            />
-            <input
-              name="horarioFinal"
-              placeholder="HORÁRIO FINAL"
-              onChange={handleChange}
-              value={formData.horarioFinal}
-            />
-            <input
-              name="convidados"
-              placeholder="NÚMERO DE CONVIDADOS"
-              onChange={handleChange}
-              value={formData.convidados}
-            />
-          </div>
+        <div className="section-title">INFORMAÇÕES DO EVENTO</div>
+        <div id="linha-horizontal-infos" />
+        <div className="form-grid">
+          <input
+            type="date"
+            name="data"
+            placeholder="DATA"
+            onChange={handleChange}
+            value={formData.data}
+          />
+          <input
+            name="endereco"
+            placeholder="ENDEREÇO DO EVENTO"
+            onChange={handleChange}
+            value={formData.endereco}
+          />
+          <input
+            type="time"
+            name="horarioInicio"
+            placeholder="HORÁRIO DE INICIO"
+            onChange={handleChange}
+            value={formData.horarioInicio}
+          />
+          <input
+            name="cep"
+            placeholder="CEP"
+            onChange={handleChange}
+            value={formData.cep}
+          />
+          <input
+            type="time"
+            name="horarioFinal"
+            placeholder="HORÁRIO FINAL"
+            onChange={handleChange}
+            value={formData.horarioFinal}
+          />
+          <input
+            name="convidados"
+            placeholder="NÚMERO DE CONVIDADOS"
+            type="number"
+            min="1"
+            onChange={handleChange}
+            value={formData.convidados}
+          />
+        </div>
 
           <div className="form-footer">
             <button type="submit">AVANÇAR</button>

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState} from "react";
+import { useNavigate } from "react-router-dom";
 import Login from "../Login/Login";
 import logo from "../../assets/images/logo2.png";
 import "./Header.css";
@@ -7,6 +8,8 @@ const Header = ({ nome, setNome }) => {
   const [buttonPopup, setButtonPopUp] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,13 +24,16 @@ const Header = ({ nome, setNome }) => {
       const token = localStorage.getItem("token");
       const idUsuario = localStorage.getItem("idUsuario");
 
-      if (token && idUsuario && !nome) { 
+      if (token && idUsuario && !nome) {
         try {
-          const response = await fetch(`http://localhost:8080/Usuario/${idUsuario}`, {
-            headers: {
-              Authorization: `Bearer ${token}`
+          const response = await fetch(
+            `${import.meta.env.VITE_API_URL}/Usuario/${idUsuario}`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
             }
-          });
+          );
 
           if (response.ok) {
             const userData = await response.json();
@@ -53,8 +59,7 @@ const Header = ({ nome, setNome }) => {
   };
 
   const handleMyOrders = () => {
-    // Navegar para a página de pedidos
-    console.log("Ver meus pedidos");
+    navigate("/meus-pedidos");
     setUserMenuOpen(false);
   };
 
@@ -66,10 +71,18 @@ const Header = ({ nome, setNome }) => {
         </div>
         <nav className="nav">
           <ul>
-            <li><a href="#quem-somos">Quem Somos</a></li>
-            <li><a href="#como-funciona">Como Funciona</a></li>
-            <li><a href="#escolha-pacote">Pacotes</a></li>
-            <li><a href="#personalizacao">Personalizar</a></li>
+            <li>
+              <a href="#quem-somos">Quem Somos</a>
+            </li>
+            <li>
+              <a href="#como-funciona">Como Funciona</a>
+            </li>
+            <li>
+              <a href="#escolha-pacote">Pacotes</a>
+            </li>
+            <li>
+              <a href="#personalizacao">Personalizar</a>
+            </li>
           </ul>
         </nav>
         <div className="login-icon">
@@ -87,8 +100,14 @@ const Header = ({ nome, setNome }) => {
             </div>
           ) : (
             <>
-              <a onClick={() => setButtonPopUp(true)} className="Login">Login</a>
-              <Login trigger={buttonPopup} setTrigger={setButtonPopUp} setNome={setNome} />
+              <a onClick={() => setButtonPopUp(true)} className="Login">
+                Login
+              </a>
+              <Login
+                trigger={buttonPopup}
+                setTrigger={setButtonPopUp}
+                setNome={setNome}
+              />
             </>
           )}
         </div>

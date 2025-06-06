@@ -20,7 +20,7 @@ const Login = ({ trigger, setTrigger, setNome }) => {
     setLoading(true);
 
     try {
-      const response = await fetch(`http://localhost:8080/Auth/login`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/Auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -36,7 +36,7 @@ const Login = ({ trigger, setTrigger, setNome }) => {
         localStorage.setItem("role", data.role);
         localStorage.setItem("idUsuario", data.idUsuario);
 
-        const userResponse = await fetch(`http://localhost:8080/Usuario/${data.idUsuario}`, {
+        const userResponse = await fetch(`${import.meta.env.VITE_API_URL}/Usuario/${data.idUsuario}`, {
           headers: {
             Authorization: `Bearer ${data.token}`,
           },
@@ -104,9 +104,6 @@ const Login = ({ trigger, setTrigger, setNome }) => {
               {loading ? "Entrando..." : "Entrar"}
             </button>
              <a id="senha" href="#" onClick={handleEsqueceuSenhaClick}>
-            <button type="button" onClick={handleCadastro}>
-              Cadastrar
-            </button>
               Esqueceu sua senha?
             </a>
             <p id="bar"></p>
