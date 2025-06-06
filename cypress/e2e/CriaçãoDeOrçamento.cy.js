@@ -17,10 +17,10 @@ describe('Fluxo de Criação de Orçamento', () => {
         cy.get(':nth-child(3) > input').click();
         cy.get(':nth-child(1) > .lista-drinks > :nth-child(1) > label > input').click();
         cy.get(':nth-child(1) > .lista-drinks > :nth-child(2) > label > input').click();
-        cy.get(':nth-child(1) > .lista-drinks > :nth-child(3) > label > input').click();
-        cy.get(':nth-child(1) > .lista-drinks > :nth-child(4) > label > input').click();
-        cy.get(':nth-child(1) > .lista-drinks > :nth-child(5) > label > input').click();
-        cy.get(':nth-child(1) > .lista-drinks > :nth-child(6) > label > input').click();
+        cy.get(':nth-child(2) > .lista-drinks > :nth-child(3) > label > input').click();
+        cy.get(':nth-child(2) > .lista-drinks > :nth-child(4) > label > input').click();
+        cy.get(':nth-child(2) > .lista-drinks > :nth-child(5) > label > input').click();
+        cy.get(':nth-child(2) > .lista-drinks > :nth-child(6) > label > input').click();
         cy.get(':nth-child(2) > .lista-drinks > :nth-child(1) > label > input').click();
         cy.get(':nth-child(2) > .lista-drinks > :nth-child(2) > label > input').click();
         cy.get('#botao-avancar').click();
@@ -51,7 +51,7 @@ describe('Fluxo de Criação de Orçamento', () => {
         cy.get('button').click();
 
         cy.on('window:alert', (str) => {
-            expect(str).to.equal('Orçamento criado com sucesso!');
+            expect(str).to.equal('Orçamento enviado com sucesso! ID Orçamento: ${responseData.idOrcamento}, ID Pedido: ${responseData.idPedido}');
         });
 
         cy.url().should('match', /^http:\/\/localhost:5173\/?$/);
