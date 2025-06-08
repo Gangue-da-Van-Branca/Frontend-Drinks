@@ -1,4 +1,5 @@
-import React, { useEffect, useState} from "react";
+// Header.jsx
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Login from "../Login/Login";
 import logo from "../../assets/images/logo2.png";
@@ -8,8 +9,40 @@ const Header = ({ nome, setNome }) => {
   const [buttonPopup, setButtonPopUp] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [tipoUsuario, setTipoUsuario] = useState(null);
+  const userMenuRef = useRef(null);
+  const loginPopupRef = useRef(null);
   const navigate = useNavigate();
 
+  const fetchUserData = async () => {
+    const token = localStorage.getItem("token");
+    const idUsuario = localStorage.getItem("idUsuario");
+
+    if (token && idUsuario) {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/Usuario/${idUsuario}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (response.ok) {
+          const userData = await response.json();
+          setNome(userData.nome);
+          setTipoUsuario(userData.tipo);
+        }
+      } catch (error) {
+        console.error("Erro ao buscar dados do usuário:", error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,38 +52,10 @@ const Header = ({ nome, setNome }) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    const fetchUserName = async () => {
-      const token = localStorage.getItem("token");
-      const idUsuario = localStorage.getItem("idUsuario");
-
-      if (token && idUsuario && !nome) {
-        try {
-          const response = await fetch(
-            `${import.meta.env.VITE_API_URL}/Usuario/${idUsuario}`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
-
-          if (response.ok) {
-            const userData = await response.json();
-            setNome(userData.nome);
-          }
-        } catch (error) {
-          console.error("Erro:", error);
-        }
-      }
-    };
-
-    fetchUserName();
-  }, [nome, setNome]);
-
   const handleLogout = () => {
     localStorage.clear();
     setNome(null);
+    setTipoUsuario(null);
     setUserMenuOpen(false);
   };
 
@@ -62,6 +67,44 @@ const Header = ({ nome, setNome }) => {
     navigate("/meus-pedidos");
     setUserMenuOpen(false);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
+        setUserMenuOpen(false);
+      }
+    };
+
+    if (userMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [userMenuOpen]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        buttonPopup &&
+        loginPopupRef.current &&
+        !loginPopupRef.current.contains(event.target)
+      ) {
+        setButtonPopUp(false);
+      }
+    };
+
+    if (buttonPopup) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [buttonPopup]);
 
   return (
     <header className={`header ${isScrolled ? "scrolled" : ""}`}>
@@ -92,8 +135,18 @@ const Header = ({ nome, setNome }) => {
                 Olá, {nome}!
               </a>
               {userMenuOpen && (
-                <div className="user-menu">
+                <div className="user-menu" ref={userMenuRef}>
                   <a onClick={handleMyOrders}>Ver meus pedidos</a>
+                  {tipoUsuario === "1" && (
+                    <a
+                      onClick={() => {
+                        navigate("/administrador");
+                        setUserMenuOpen(false);
+                      }}
+                    >
+                      Admin board
+                    </a>
+                  )}
                   <a onClick={handleLogout}>Logout</a>
                 </div>
               )}
@@ -107,6 +160,8 @@ const Header = ({ nome, setNome }) => {
                 trigger={buttonPopup}
                 setTrigger={setButtonPopUp}
                 setNome={setNome}
+                ref={loginPopupRef}
+                onLoginSuccess={fetchUserData} // <- importante!
               />
             </>
           )}

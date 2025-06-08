@@ -5,7 +5,7 @@ import Pacotes from "../pages/Cliente/PacotesPage/Pacotes";
 import BaseDrinks from "../pages/Cliente/BaseDrinks/BaseDrinks";
 import Opcionais from "../pages/Cliente/Opcionais/Opcionais";
 import InfosCompra from "../pages/Cliente/InfosCompra/InfosCompra";
-import OrcamentoResumo from "../pages/Cliente/OrcamentoResumo";
+import OrcamentoResumo from "../pages/Cliente/InfosCompra/OrcamentoResumo";
 import AdminPage from "../pages/AdminPage/AdminPage";
 import MeusPedidos from "../pages/Cliente/MeusPedidos/MeusPedidos";
 import PrivateRoute from "./PrivateRoute";

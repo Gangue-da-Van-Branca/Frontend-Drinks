@@ -1,14 +1,22 @@
-import React from "react";
 import "./TopoDrinks.css";
+import { useLocation, useNavigate } from "react-router-dom";
+import voltar from "../../../assets/icons/arrow-white.svg";
 
 const TopoDrinks = () => {
+   const navigate = useNavigate();
   return (
     <header id="topo-basedrinks">
+       <div id="botoes">
+        <button type="submit" onClick={() => navigate("/")}>
+          <img src={voltar} alt="" />
+        </button>
+      </div>
       <div id="logo-container-basedrinks">
-        <div id="barra-lateral-basedrinks" />
+        <div/>
       </div>
       <div id="linha-titulo-basedrinks">
         BASE DA FESTA
+       
         <div id="linha-horizontal-basedrinks" />
         <div id="texto-basedrinks">
           <p>
