@@ -220,7 +220,7 @@ describe('Cadastro em Lote de Itens no Painel de Administrador', () => {
 
     let itemIndex = 0;
   
-    before(() => {
+    beforeEach(() => {
       // Login
       cy.visit('http://localhost:5173/');
       cy.get('.Login').click();
@@ -248,4 +248,17 @@ describe('Cadastro em Lote de Itens no Painel de Administrador', () => {
           cy.contains('.item-info', item.nome).should('be.visible');
         });
       });
+
+      it('Deve alterar o primeiro item cadastrado na lista', () => {
+        const novoNome = 'Alterado ';
+        cy.log(`Alterando o último item cadastrado`);
+        cy.visit('http://localhost:5173/administrador');
+        cy.wait(1000);
+        cy.get('.item-list').find('.item-actions > .icon-btn-edit-btn').first().click();
+        cy.get('#nome').type(' Alterado');
+        cy.get('.btn-submit').click();
+        cy.reload();
+        cy.contains('.item-info', novoNome).should('be.visible');
+      });
+
   });
