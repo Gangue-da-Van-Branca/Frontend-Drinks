@@ -118,13 +118,11 @@ function Pacotes() {
     const agora = new Date().getTime();
     const tresDiasEmMs = 3 * 24 * 60 * 60 * 1000;
 
-    // Verifica se o cache ainda é válido
     if (cache && timestamp && agora - parseInt(timestamp, 10) < tresDiasEmMs) {
       setPacotesComDrinks(JSON.parse(cache));
       return;
     }
 
-    // Caso não exista cache válido, busca os dados novamente
     const pacotesComDados = await Promise.all(
       pacotes.map(async (pacote) => {
         const drinksDetalhados = await Promise.all(
@@ -145,7 +143,6 @@ function Pacotes() {
       })
     );
 
-    // Armazena no cache e registra o timestamp
     localStorage.setItem(cacheKey, JSON.stringify(pacotesComDados));
     localStorage.setItem(timestampKey, agora.toString());
     setPacotesComDrinks(pacotesComDados);

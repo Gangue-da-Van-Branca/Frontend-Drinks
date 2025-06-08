@@ -1,19 +1,34 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useEffect, useRef } from "react";
 
 export default function PrivateRoute({ children, requiredRole }) {
+  const location = useLocation();
+  const toastShownRef = useRef(false);
+
+  useEffect(() => {
+    // Resetar o toast quando a URL muda
+    toastShownRef.current = false;
+  }, [location.pathname]);
+
   const token = localStorage.getItem("token");
   const role = localStorage.getItem("role");
 
   if (!token) {
-    // Não está logado
-    return <Navigate to="/" />;
+    if (!toastShownRef.current) {
+      toast.error("É necessário fazer login para acessar esta página.");
+      toastShownRef.current = true;
+    }
+    return <Navigate to="/" replace />;
   }
 
   if (requiredRole && role !== requiredRole) {
-    // Não tem a role necessária
-    return <Navigate to="/" />;
+    if (!toastShownRef.current) {
+      toast.error("Você não tem permissão para acessar esta página.");
+      toastShownRef.current = true;
+    }
+    return <Navigate to="/" replace />;
   }
 
-  // Autorizado
   return children;
 }

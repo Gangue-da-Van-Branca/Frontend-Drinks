@@ -17,12 +17,47 @@ export default function AppRoutes() {
         <Route path="/" element={<Home />} />
         <Route path="/pacotes" element={<Pacotes />} />
         <Route path="/cadastro" element={<Cadastro />} />
-        <Route path="/basedrinks" element={<BaseDrinks />} />
-        <Route path="/opcionais" element={<Opcionais />} />
-        <Route path="/infosContratante" element={<InfosCompra />} />
-        <Route path="/orcamento-resumo" element={<OrcamentoResumo />} />
-        <Route path="/meus-pedidos" element={<MeusPedidos />} />
-        <Route path="/cadastro" element={<Cadastro />} />
+
+        <Route
+          path="/basedrinks"
+          element={
+            <PrivateRoute>
+              <BaseDrinks />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/opcionais"
+          element={
+            <PrivateRoute>
+              <Opcionais />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/infosContratante"
+          element={
+            <PrivateRoute>
+              <InfosCompra />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/orcamento-resumo"
+          element={
+            <PrivateRoute>
+              <OrcamentoResumo />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/meus-pedidos"
+          element={
+            <PrivateRoute>
+              <MeusPedidos />
+            </PrivateRoute>
+          }
+        />
 
         {/* Rota protegida */}
         <Route

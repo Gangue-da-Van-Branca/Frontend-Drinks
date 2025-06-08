@@ -10,7 +10,7 @@ import SecaoPersonalizar from "../../../components/SecaoPersonalizar/SecaoPerson
 import "../../../style/global.css";
 
 function Home() {
-  const [nome, setNome] = useState("");
+  const [nome, setNome] = useState(localStorage.getItem("nome") || null);
 
   return (
     <div>
