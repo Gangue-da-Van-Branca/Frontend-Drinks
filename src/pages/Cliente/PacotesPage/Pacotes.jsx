@@ -109,31 +109,51 @@ function Pacotes() {
   ];
 
   useEffect(() => {
-    async function buscarDrinks() {
-      const pacotesComDados = await Promise.all(
-        pacotes.map(async (pacote) => {
-          const drinksDetalhados = await Promise.all(
-            pacote.drinks.map(async (id) => {
-              try {
-                const response = await fetch(
-                  `${import.meta.env.VITE_API_URL}/item/${id}`
-                );
-                if (!response.ok) throw new Error("Erro ao buscar drink");
-                return await response.json();
-              } catch (error) {
-                console.error(`Erro com o drink ${id}:`, error);
-                return { id, nome: "Drink não encontrado", descricao: "" };
-              }
-            })
-          );
-          return { ...pacote, drinks: drinksDetalhados };
-        })
-      );
-      setPacotesComDrinks(pacotesComDados);
+  async function buscarDrinks() {
+    const cacheKey = "pacotesComDrinksCache";
+    const timestampKey = "pacotesComDrinksTimestamp";
+    const cache = localStorage.getItem(cacheKey);
+    const timestamp = localStorage.getItem(timestampKey);
+
+    const agora = new Date().getTime();
+    const tresDiasEmMs = 3 * 24 * 60 * 60 * 1000;
+
+    // Verifica se o cache ainda é válido
+    if (cache && timestamp && agora - parseInt(timestamp, 10) < tresDiasEmMs) {
+      setPacotesComDrinks(JSON.parse(cache));
+      return;
     }
 
-    buscarDrinks();
-  }, []);
+    // Caso não exista cache válido, busca os dados novamente
+    const pacotesComDados = await Promise.all(
+      pacotes.map(async (pacote) => {
+        const drinksDetalhados = await Promise.all(
+          pacote.drinks.map(async (id) => {
+            try {
+              const response = await fetch(
+                `${import.meta.env.VITE_API_URL}/item/${id}`
+              );
+              if (!response.ok) throw new Error("Erro ao buscar drink");
+              return await response.json();
+            } catch (error) {
+              console.error(`Erro com o drink ${id}:`, error);
+              return { id, nome: "Drink não encontrado", descricao: "" };
+            }
+          })
+        );
+        return { ...pacote, drinks: drinksDetalhados };
+      })
+    );
+
+    // Armazena no cache e registra o timestamp
+    localStorage.setItem(cacheKey, JSON.stringify(pacotesComDados));
+    localStorage.setItem(timestampKey, agora.toString());
+    setPacotesComDrinks(pacotesComDados);
+  }
+
+  buscarDrinks();
+}, []);
+
 
   return (
     <div>
