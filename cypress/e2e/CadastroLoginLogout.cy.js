@@ -18,7 +18,7 @@ describe('Cadastro, Login e Logout de Usuário', () => {
   });
 
   it('deve cadastrar um novo usuário com dados aleatórios e exibir alerta de sucesso', () => {
-    cy.visit('http://localhost:5173/');
+    cy.visit('https://elo-drinks.netlify.app/');
     cy.get('.Login').click();
     cy.get('#cadastro').click();
     cy.url().should('include', '/cadastro');
@@ -36,14 +36,14 @@ describe('Cadastro, Login e Logout de Usuário', () => {
       expect(str).to.equal('Usuário cadastrado com sucesso!');
     });
 
-    cy.url().should('match', /^http:\/\/localhost:5173\/?$/);
+    cy.url().should('match', /^https:\/\/elo-drinks\.netlify\.app\/?$/);
     cy.contains('h1', 'O SEU DRINK').should('be.visible');
   });
 
   it('Deve realizar login e depois logout do usuário', () => {
 
     cy.session([emailAleatorio, senhaAleatoria], () => {
-      cy.visit('http://localhost:5173/');
+      cy.visit('https://elo-drinks.netlify.app/');
       cy.get('.Login').click();
 
       cy.get('input[type="email"]').first().type(emailAleatorio);
@@ -54,7 +54,7 @@ describe('Cadastro, Login e Logout de Usuário', () => {
       cy.get('.user-greeting').should('be.visible');
     }),
 
-    cy.visit('http://localhost:5173/');
+    cy.visit('https://elo-drinks.netlify.app/');
 
     cy.get('.user-greeting').should('be.visible').click();
     cy.get('.user-menu > :nth-child(2)').contains('Logout').click();
@@ -65,7 +65,7 @@ describe('Cadastro, Login e Logout de Usuário', () => {
   });
 
   it('Deve tentar realizar o login com dados inválidos e exibir alerta de erro', () => {
-    cy.visit('http://localhost:5173/');
+    cy.visit('https://elo-drinks.netlify.app/');
     cy.get('.Login').click();
     cy.get('input[type="email"]').first().type(emailAleatorio);
     cy.get('input[type="password"]').first().type(senhaAleatoria + 'invalida');
@@ -76,7 +76,7 @@ describe('Cadastro, Login e Logout de Usuário', () => {
   });
 
   it('Deve tentar cadastrar um usuário com email já existente e exibir alerta de erro', () => {
-    cy.visit('http://localhost:5173/');
+    cy.visit('https://elo-drinks.netlify.app/');
     cy.get('.Login').click();
     cy.get('#cadastro').click();
     cy.url().should('include', '/cadastro');
