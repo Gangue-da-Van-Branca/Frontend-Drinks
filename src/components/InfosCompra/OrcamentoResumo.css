@@ -43,6 +43,11 @@ ul {
     padding: 0 2rem 2rem 0;
 }
 
+#orcamento-infosall{
+  font-size: 1rem;
+  
+}
+
 #confirm{
     background-color:var(--orange);
     color: var(--white);

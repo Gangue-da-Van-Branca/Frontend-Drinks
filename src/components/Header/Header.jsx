@@ -17,6 +17,7 @@ const Header = ({ nome, setNome }) => {
   const fetchUserData = async () => {
     const token = localStorage.getItem("token");
     const idUsuario = localStorage.getItem("idUsuario");
+    
 
     if (token && idUsuario) {
       try {
@@ -33,6 +34,7 @@ const Header = ({ nome, setNome }) => {
           const userData = await response.json();
           setNome(userData.nome);
           setTipoUsuario(userData.tipo);
+          localStorage.setItem("nome", userData.nome);
         }
       } catch (error) {
         console.error("Erro ao buscar dados do usuário:", error);
@@ -153,7 +155,7 @@ const Header = ({ nome, setNome }) => {
             </div>
           ) : (
             <>
-              <a onClick={() => setButtonPopUp(true)} className="Login">
+              <a onClick={() => setButtonPopUp((prev) => !prev)} className="Login">
                 Login
               </a>
               <Login
@@ -161,7 +163,7 @@ const Header = ({ nome, setNome }) => {
                 setTrigger={setButtonPopUp}
                 setNome={setNome}
                 ref={loginPopupRef}
-                onLoginSuccess={fetchUserData} // <- importante!
+                onLoginSuccess={fetchUserData}
               />
             </>
           )}

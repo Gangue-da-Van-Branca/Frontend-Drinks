@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TopoPacotes from "../../../components/PacotesPage/TopoPacotes/TopoPacotes";
 import Card from "../../../components/PacotesPage/CardPacotes/CardPacotes";
 import BotaoPersonalizar from "../../../components/PacotesPage/BotaoPacotesPersonalizar/BotaoPacotesPersonalizar";
@@ -13,130 +13,150 @@ import "./Pacotes.css";
 
 function Pacotes() {
   const [modalAbertoIndex, setModalAbertoIndex] = useState(null);
+  const [pacotesComDrinks, setPacotesComDrinks] = useState([]);
 
   const pacotes = [
-    { evento: "Casamento", preco: "1234,00", drinks: ["adbjsdba", "adbjsdbaa", "adbjsdbappp", "adbjsdbavvvv", "adbjsdballl"],foto: casamentoTime },
-    { evento: "Lançamento", preco: "1000,00", drinks: ["adbjsdba", "adbjsdbaa", "adbjsdbappp", "adbjsdbavvvv", "adbjsdballl"], foto: festa1  },
-    { evento: "Evento Corporativo", preco: "1234,00", drinks: ["adbjsdba", "adbjsdbaa", "adbjsdbappp", "adbjsdbavvvv", "adbjsdballl"], foto: festa2},
-    { evento: "Debutante", preco: "1000,00", drinks: ["adbjsdba", "adbjsdbaa", "adbjsdbappp", "adbjsdbavvvv", "adbjsdballl"], foto: festa3 },
-    { evento: "Festa Teen", preco: "1234,00", drinks: ["adbjsdba", "adbjsdbaa", "adbjsdbappp", "adbjsdbavvvv", "adbjsdballl"], foto: festa4 },
-    { evento: "Aniversário", preco: "1000,00", drinks: ["adbjsdba", "adbjsdbaa", "adbjsdbappp", "adbjsdbavvvv", "adbjsdballl"], foto: festa5 },
+    {
+      evento: "Casamento",
+      preco: "10000,00",
+      drinks: [
+        "i1yAp0eCcDLNPgEv2t",
+        "i1OMQI4VbYTzKhgk72",
+        "i1oqVEF45n5GtvNi7H",
+        "i1cXa725zAv9IHx78s",
+        "i1g6y8eLob9QGZJjE1",
+        "i1H6dhQYql8jcb6nNf",
+        "i17R3SuHESlsNccJ97",
+        "i1vCWQEQXxersroTVf",
+      ],
+      foto: casamentoTime,
+    },
+    {
+      evento: "Evento de Lançamento",
+      preco: "5000,00",
+      drinks: [
+        "i1OMQI4VbYTzKhgk72",
+        "i1uZepl4zoJIV2zcne",
+        "i1oqVEF45n5GtvNi7H",
+        "i1H6dhQYql8jcb6nNf",
+        "i17R3SuHESlsNccJ97",
+        "i1r2FZ2OSkPaOptUU3",
+        "i1Xy5Nn2uuMouEJXqh",
+        "i1m0xFyJn4dQs9MQI6",
+      ],
+      foto: festa1,
+    },
+    {
+      evento: "Evento Corporativo",
+      preco: "7000,00",
+      drinks: [
+        "i1yAp0eCcDLNPgEv2t",
+        "i160VCLtD6W5bszrgu",
+        "i1OMQI4VbYTzKhgk72",
+        "i1oqVEF45n5GtvNi7H",
+        "i1m0xFyJn4dQs9MQI6",
+        "i1TE7rXG2YUqWMfkhY",
+        "i1vCWQEQXxersroTVf",
+        "i1rz62dHMqSDa020XU",
+      ],
+      foto: festa2,
+    },
+    {
+      evento: "Debutante",
+      preco: "8000,00",
+      drinks: [
+        "i12PlUD9t9CLhfIiAO",
+        "i179fSVduKdLX4LscD",
+        "i1PTAuIHUo438hUHvc",
+        "i1OMQI4VbYTzKhgk72",
+        "i11LKQJlmumPn9lWih",
+        "i1r2FZ2OSkPaOptUU3",
+        "i1Xy5Nn2uuMouEJXqh",
+        "i17R3SuHESlsNccJ97",
+      ],
+      foto: festa3,
+    },
+    {
+      evento: "Festa Teen",
+      preco: "3000,00",
+      drinks: [
+        "i11LKQJlmumPn9lWih",
+        "i1Xy5Nn2uuMouEJXqh",
+        "i1vCWQEQXxersroTVf",
+        "i1TE7rXG2YUqWMfkhY",
+        "i1rz62dHMqSDa020XU",
+        "i1r2FZ2OSkPaOptUU3",
+        "i1GsP4QdH4eysBOQmJ",
+        "i1FGlcg0VClkJIzj9B",
+      ],
+      foto: festa4,
+    },
+    {
+      evento: "Aniversário",
+      preco: "5000,00",
+      drinks: [
+        "i179fSVduKdLX4LscD",
+        "i1oqVEF45n5GtvNi7H",
+        "i1OMQI4VbYTzKhgk72",
+        "i1uZepl4zoJIV2zcne",
+        "i12PlUD9t9CLhfIiAO",
+        "i1cXa725zAv9IHx78s",
+        "i1r2FZ2OSkPaOptUU3",
+        "i1Xy5Nn2uuMouEJXqh",
+      ],
+      foto: festa5,
+    },
   ];
 
-const drinksDisponiveis = [
-  {
-    categoria: "Drinks Alcoólicos",
-    drinks: [
-      {
-        id: "adbjsdba",
-        nome: "MOSCOW MULE",
-        descricao:
-          "Vodka, xarope de gengibre, limão taiti e espuma de gengibre",
-      },
-      {
-        id: "adbjsdbaa",
-        nome: "FITZGERALD",
-        descricao:
-          "Gin, syrup de açúcar, suco de limão siciliano, angostura bitters e zest",
-      },
-      {
-        id: "adbjsdbappp",
-        nome: "PENICILIN",
-        descricao:
-          "Whisky, suco de limão siciliano, xarope de gengibre e scotch defumado",
-      },
-      {
-        id: "adbjsdbavvvv",
-        nome: "BASIL SMASH",
-        descricao:
-          "Gin, suco de limão siciliano, syrup de manjericão e folhas de manjericão",
-      },
-      {
-        id: "adbjsdbaddd",
-        nome: "CLASSIC TONIC",
-        descricao: "Gin, limão siciliano e tônica",
-      },
-      {
-        id: "adbjsdballl",
-        nome: "PARADISE",
-        descricao:
-          "Vodka, água de coco, syrup de baunilha e raspas de coco desidratado",
-      },
-      {
-        id: "adbjsdbaqweer",
-        nome: "APEROL SPRITZ",
-        descricao: "Aperol, espumante, água com gás e laranja",
-      },
-      {
-        id: "adbjsdbasss",
-        nome: "NEGRONI TWIST",
-        descricao: "Gin, vermute rosso, Campari e zest de laranja bahia",
-      },
-      {
-        id: "adbjsdbaplanbd",
-        nome: "SPICY PASSION",
-        descricao:
-          "Vodka, maracujá, syrup de pimenta dedo-de-moça e limão taiti",
-      },
-      {
-        id: "adbjsdbadadbab",
-        nome: "CUCUMBER FIZZ",
-        descricao:
-          "Gin, pepino, suco de limão siciliano, syrup de hortelã e água tônica",
-      },
-      {
-        id: "adbjsdbadakjbdaqw",
-        nome: "MARGARITA",
-        descricao: "Tequila, Cointreau, suco de limão taiti e borda de sal",
-      },
-      {
-        id: "adbjsdbaakjjdns",
-        nome: "DAIQUIRI CLÁSSICO",
-        descricao: "Rum branco, suco de limão taiti e xarope de açúcar",
-      },
-    ],
-  },
-  {
-    categoria: "Soft Drinks (não alcoólicos) - Incluso guloseimas",
-    drinks: [
-      {
-        id: "adbjsdbaaaaayyttree",
-        nome: "CIRQUE BLUE",
-        descricao:
-          "Curacao blue, suco de blueberry, amora, mix de limão, água com gás e algodão doce ou bala de fruta",
-      },
-      {
-        id: "adbjsdbaqpiqwwb",
-        nome: "PINK LEMONADE",
-        descricao:
-          "Mix de limão, limão siciliano, goma ou gás e syrup de morango servido em tacinhas ou limonadas brilhantes",
-      },
-      {
-        id: "adbjsdbaqseqewe",
-        nome: "PIÑA DESCALADA",
-        descricao:
-          "Suco de abacaxi, leite de coco, leite condensado e granulados coloridos",
-      },
-      {
-        id: "adbjsdbaçlasbbbbx",
-        nome: "LICHAI PARADISSE",
-        descricao:
-          "Água com gás, morangos simples, lichia, suco de limão e hortelã",
-      },
-      {
-        id: "adbjsdbaq5tqtw",
-        nome: "CLASSIC TONIC",
-        descricao: "Limão siciliano, xarope e tônica",
-      },
-    ],
-  },
-];
+  useEffect(() => {
+  async function buscarDrinks() {
+    const cacheKey = "pacotesComDrinksCache";
+    const timestampKey = "pacotesComDrinksTimestamp";
+    const cache = localStorage.getItem(cacheKey);
+    const timestamp = localStorage.getItem(timestampKey);
+
+    const agora = new Date().getTime();
+    const tresDiasEmMs = 3 * 24 * 60 * 60 * 1000;
+
+    if (cache && timestamp && agora - parseInt(timestamp, 10) < tresDiasEmMs) {
+      setPacotesComDrinks(JSON.parse(cache));
+      return;
+    }
+
+    const pacotesComDados = await Promise.all(
+      pacotes.map(async (pacote) => {
+        const drinksDetalhados = await Promise.all(
+          pacote.drinks.map(async (id) => {
+            try {
+              const response = await fetch(
+                `${import.meta.env.VITE_API_URL}/item/${id}`
+              );
+              if (!response.ok) throw new Error("Erro ao buscar drink");
+              return await response.json();
+            } catch (error) {
+              console.error(`Erro com o drink ${id}:`, error);
+              return { id, nome: "Drink não encontrado", descricao: "" };
+            }
+          })
+        );
+        return { ...pacote, drinks: drinksDetalhados };
+      })
+    );
+
+    localStorage.setItem(cacheKey, JSON.stringify(pacotesComDados));
+    localStorage.setItem(timestampKey, agora.toString());
+    setPacotesComDrinks(pacotesComDados);
+  }
+
+  buscarDrinks();
+}, []);
+
 
   return (
     <div>
       <TopoPacotes />
       <div className="container-cards">
-        {pacotes.map((pacote, index) => (
+        {pacotesComDrinks.map((pacote, index) => (
           <Card
             key={index}
             index={index}
@@ -145,11 +165,7 @@ const drinksDisponiveis = [
             foto={pacote.foto}
             modalAbertoIndex={modalAbertoIndex}
             setModalAbertoIndex={setModalAbertoIndex}
-            drinks={pacote.drinks.map((drinkId) => {
-              return drinksDisponiveis
-                .flatMap((cat) => cat.drinks)
-                .find((drink) => drink.id === drinkId);
-            })}
+            drinks={pacote.drinks}
           />
         ))}
       </div>

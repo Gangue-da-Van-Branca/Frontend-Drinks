@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import "./OrcamentoResumo.css";
 import { useOrcamento } from "../../context/OrcamentoContext";
@@ -5,17 +6,28 @@ import { useNavigate } from "react-router-dom";
 import logo from "../../assets/images/logo2.png";
 import sair from "../../assets/icons/Botão X.svg";
 import voltar from "../../assets/icons/arrow-white.svg";
+import { toast } from "react-toastify";
+import "./OrcamentoResumo.css";
 
 export default function OrcamentoResumo() {
   const { orcamento, resetarOrcamento } = useOrcamento();
   const navigate = useNavigate();
-
   const [status, setStatus] = useState({ loading: false, error: null });
-
   const { baseFesta, opcionais, infosContratante, dadosOpcionais } = orcamento;
 
   const calcularPreco = () => {
-    let precoBase = 8000;
+    const tiposDeFesta = {
+      "Casamento": 10000,
+      "Evento Corporativo": 7000,
+      "Evento de Lançamento": 5000,
+      "Coquetel": 4000,
+      "Aniversário": 5000,
+      "Debutante": 8000,
+      "Festa Teen": 3000,
+    };
+
+    const tipoFestaSelecionado = baseFesta?.tipoFesta;
+    const precoBase = tiposDeFesta[tipoFestaSelecionado] || 8000;
 
     const safeDadosOpcionais = dadosOpcionais || {
       baresData: [],
@@ -61,14 +73,27 @@ export default function OrcamentoResumo() {
     const numeroConvidados = Number(infosContratante?.convidados) || 0;
     const custoPorPessoa = numeroConvidados * 85;
 
-    return precoBase + totalBares + totalShots + totalExtras + custoPorPessoa;
+    return {
+      precoBase,
+      totalBares,
+      totalShots,
+      totalExtras,
+      custoPorPessoa,
+      precoTotal:
+        precoBase + totalBares + totalShots + totalExtras + custoPorPessoa,
+    };
   };
 
   const handleConfirmar = async () => {
-    // Adicionado async aqui
-    setStatus({ loading: true, error: null }); // Adicionado para feedback de UI
-
-    const precoFinal = calcularPreco();
+    setStatus({ loading: true, error: null });
+    const {
+      precoTotal: precoFinal,
+      precoBase,
+      totalBares,
+      totalShots,
+      totalExtras,
+      custoPorPessoa,
+    } = calcularPreco();
 
     const mapIdsToNames = (itens, dataSet, dataSetNameForLog) => {
       const result = {};
@@ -78,20 +103,19 @@ export default function OrcamentoResumo() {
         );
       }
       for (const [id, qtd] of Object.entries(itens)) {
-        const itemData = (dataSet || []).find((d) => d.idItem === id); // Adicionado (dataSet || []) para segurança
+        const itemData = (dataSet || []).find((d) => d.idItem === id);
         if (!itemData) {
           console.warn(
             ["${dataSetNameForLog}"],
             "Item com ID '${id}' não encontrado no dataSet. Usando ID como nome para o payload."
           );
         }
-        const nome = itemData ? itemData.nome : id; // Se não encontrar, usa o ID como nome
+        const nome = itemData ? itemData.nome : id;
         result[nome] = qtd;
       }
       return result;
     };
 
-    // Garante que 'opcionais' e 'dadosOpcionais' e suas sub-propriedades existam e sejam arrays/objetos antes de usá-los
     const safeOpcionais = orcamento.opcionais || {
       shots: {},
       extras: {},
@@ -126,12 +150,6 @@ export default function OrcamentoResumo() {
           return id;
         }
         const bar = safeDadosOpcionais.baresData.find((b) => b.idItem === id);
-        if (!bar) {
-          console.warn(
-            [safeDadosOpcionais.baresData],
-            "Bar com ID '${id}' não encontrado em dadosOpcionais.baresData. Usando ID como nome para o payload."
-          );
-        }
         return bar ? bar.nome : id;
       }
     );
@@ -141,7 +159,7 @@ export default function OrcamentoResumo() {
         tipoFesta: orcamento.baseFesta?.tipoFesta || "N/A",
         drinksSelecionados: (orcamento.baseFesta?.drinksSelecionados || []).map(
           (drink) => ({
-            id: String(drink.idItem || drink.id || ""), // Garante que 'id' seja string e tenta pegar de idItem ou id
+            id: String(drink.idItem || drink.id || ""),
             nome: drink.nome || "Nome não encontrado",
             descricao: drink.descricao || "Descrição não disponível",
           })
@@ -167,7 +185,6 @@ export default function OrcamentoResumo() {
       );
 
       const responseData = await response.json();
-      console.log("Resposta da API:", response.status, responseData);
 
       if (!response.ok) {
         const errorText =
@@ -176,18 +193,16 @@ export default function OrcamentoResumo() {
           (typeof responseData === "string"
             ? responseData
             : JSON.stringify(responseData.errors || responseData));
-        throw new Error(
-          errorText || "Erro ao enviar orçamento: ${response.status}"
-        );
+        throw new Error(errorText || "Erro ao enviar orçamento");
       }
 
-      alert(
-        "Orçamento enviado com sucesso! ID Orçamento: ${responseData.idOrcamento}, ID Pedido: ${responseData.idPedido}"
+      toast.success(
+        'Orçamento enviado com sucesso! Veja o andamento na aba "Meus pedidos"'
       );
       resetarOrcamento();
       navigate("/");
     } catch (err) {
-      console.error("Erro ao enviar orçamento para API:", err);
+      toast.error("Erro ao enviar orçamento para API.");
       setStatus({
         loading: false,
         error: err.message || "Falha ao enviar orçamento. Verifique o console.",
@@ -210,12 +225,22 @@ export default function OrcamentoResumo() {
   ) {
     return (
       <div id="orcamento-container">
-        <img src={logo} alt="logo" id="logo" />
+        <h1 id="orcamento-logo">
+          ELO <span>DRINKS</span>
+        </h1>
         <p>Carregando dados do orçamento ou orçamento inicializando...</p>
-        {/* Botão para debug ou voltar pode ser útil aqui */}
       </div>
     );
   }
+
+  const {
+    precoBase,
+    totalBares,
+    totalShots,
+    totalExtras,
+    custoPorPessoa,
+    precoTotal,
+  } = calcularPreco();
 
   return (
     <div id="info-border">
@@ -261,69 +286,73 @@ export default function OrcamentoResumo() {
             </div>
 
             <div id="enquadramento">
-             
-                <div className="section-title" id="orc-sec">
-                  BARES ADICIONAIS
-                </div>
-                <ul>
-                  {opcionais.baresAdicionais &&
-                  dadosOpcionais.baresData &&
-                  opcionais.baresAdicionais.length > 0 ? (
-                    opcionais.baresAdicionais.map((barId) => {
-                      // Renomeado para barId
-                      const barData = dadosOpcionais.baresData.find(
-                        (b) => b.idItem === barId
-                      );
-                      return (
-                        <li key={barId}>{barData ? barData.nome : barId}</li>
-                      );
-                    })
-                  ) : (
-                    <li>Nenhum</li>
-                  )}
-                </ul>
-             
+              <div className="section-title" id="orc-sec">
+                BARES ADICIONAIS
+              </div>
+              <ul>
+                {opcionais.baresAdicionais &&
+                dadosOpcionais.baresData &&
+                opcionais.baresAdicionais.length > 0 ? (
+                  opcionais.baresAdicionais.map((barId) => {
+                    const barData = dadosOpcionais.baresData.find(
+                      (b) => b.idItem === barId
+                    );
+                    return (
+                      <li key={barId}>
+                        {barData ? barData.nome : barId} - {"R$ "}
+                        {barData ? barData.preco : barId}
+                      </li>
+                    );
+                  })
+                ) : (
+                  <li>Nenhum</li>
+                )}
+              </ul>
             </div>
           </div>
-          <div id="enquadramento"> 
-          <div className="infos-form">
-            <div className="section-title" id="orc-sec">
-              BASE DA FESTA
-            </div>
+          <div id="enquadramento">
+            <div className="infos-form">
+              <div className="section-title" id="orc-sec">
+                BASE DA FESTA
+              </div>
 
-            <div className="form-grid">
-              {baseFesta &&
-                Object.entries(baseFesta)
-                  .slice(1)
-                  .map(([key, value]) => {
-                    // Adicionado check para baseFesta
-                    if (key === "drinksSelecionados" && Array.isArray(value)) {
-                      return (
-                        <div key={key} className="campo">
-                          <strong>Drinks Selecionados:</strong>
-                          <ul>
-                            {value.map((drink, index) => (
-                              <li key={index}>{drink.nome || String(drink)}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      );
-                    } else {
-                      return (
-                        <div key={key} className="campo">
-                          <strong>
-                            {key === "tipoFesta" ? "Tipo da Festa" : key}:
-                          </strong>{" "}
-                          {typeof value === "object" && value !== null
-                            ? value.nome || JSON.stringify(value)
-                            : String(value)}
-                        </div>
-                      );
-                    }
-                  })}
+              <div className="form-grid">
+                {baseFesta &&
+                  Object.entries(baseFesta)
+                    .slice(1)
+                    .map(([key, value]) => {
+                      if (
+                        key === "drinksSelecionados" &&
+                        Array.isArray(value)
+                      ) {
+                        return (
+                          <div key={key} className="campo">
+                            <strong>Drinks Selecionados:</strong>
+                            <ul>
+                              {value.map((drink, index) => (
+                                <li key={index}>
+                                  {drink.nome || String(drink)}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        );
+                      } else {
+                        return (
+                          <div key={key} className="campo">
+                            <strong>
+                              {key === "tipoFesta" ? "Tipo da Festa" : key}:
+                            </strong>{" "}
+                            {typeof value === "object" && value !== null
+                              ? value.nome || JSON.stringify(value)
+                              : String(value)}
+                          </div>
+                        );
+                      }
+                    })}
+              </div>
             </div>
           </div>
-          </div> 
           <div id="enquadramento">
             <div className="section-title" id="orc-sec">
               OPCIONAIS
@@ -341,7 +370,7 @@ export default function OrcamentoResumo() {
                       );
                       return (
                         <li key={key}>
-                          {shot ? shot.nome : key}: {val}
+                          {val}{" "}{shot ? shot.nome : key}
                         </li>
                       );
                     })}
@@ -361,7 +390,7 @@ export default function OrcamentoResumo() {
                       );
                       return (
                         <li key={key}>
-                          {extra ? extra.nome : key}: {val}
+                          {val}{" "}{extra ? extra.nome : key}
                         </li>
                       );
                     })}
@@ -370,11 +399,16 @@ export default function OrcamentoResumo() {
           </div>
         </div>
         <div id="orcamento-footer">
+          <div id = "orcamento-infosall">
+            Custo base = R$ {precoBase.toFixed(2)} <br />
+            Convidados = R$ {custoPorPessoa.toFixed(2)} <br />
+            Opcionais = R$ {(totalBares + totalShots + totalExtras).toFixed(2)} <br />
+            </div>
           <div id="preco-final">
-            <strong>Preço final:</strong> R$ {calcularPreco().toFixed(2)}
+            <strong>Preço final:</strong> R$ {precoTotal.toFixed(2)}
           </div>
 
-          <button 
+          <button
             type="button"
             onClick={handleConfirmar}
             disabled={status.loading}
