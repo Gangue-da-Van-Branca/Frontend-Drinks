@@ -1,17 +1,20 @@
+#cont {
+  margin-top: 150px;
+}
 #meus-pedidos-container {
   padding: 30px;
   max-width: 800px;
   margin: 0 auto;
-  background-color: #fafafa;
+  background-color: #f0f0f0;
   border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 #meus-pedidos-titulo {
   font-size: 28px;
   margin-bottom: 25px;
   text-align: center;
-  color: #333;
+  color: var(--darkblue);
 }
 
 #meus-pedidos-lista {
@@ -24,14 +27,14 @@
   margin-bottom: 15px;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 #meus-pedidos-item:hover {
   transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 #meus-pedidos-resumo {
@@ -40,7 +43,8 @@
   align-items: center;
 }
 
-#meus-pedidos-status, #meus-pedidos-total {
+#meus-pedidos-status,
+#meus-pedidos-total {
   font-size: 16px;
   color: #555;
 }
@@ -77,6 +81,12 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
