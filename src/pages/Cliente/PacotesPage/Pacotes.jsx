@@ -129,7 +129,7 @@ function Pacotes() {
           pacote.drinks.map(async (id) => {
             try {
               const response = await fetch(
-                `${import.meta.env.VITE_API_URL}/item/${id}`
+                `${import.meta.env.VITE_API_URL}/Item/${id}`
               );
               if (!response.ok) throw new Error("Erro ao buscar drink");
               return await response.json();
