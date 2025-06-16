@@ -84,13 +84,7 @@ export default function MeusPedidos() {
     return <p id="meus-pedidos-loading">Carregando pedidos...</p>;
   }
 
-  if (erro) {
-    return <p id="meus-pedidos-erro">Erro: {erro}</p>;
-  }
-
-  if (pedidos.length === 0) {
-    return <p id="meus-pedidos-vazio">Você não requisitou nenhum orçamento até agora</p>;
-  }
+  
 
   return (
     <div id="cont">
