@@ -11,40 +11,48 @@ export default function MeusPedidos() {
   const [nome, setNome] = useState(localStorage.getItem("nome") || null);
 
   useEffect(() => {
-    const fetchPedidos = async () => {
-      const idUsuario = localStorage.getItem("idUsuario");
-      const token = localStorage.getItem("token");
+  const fetchPedidos = async () => {
+    const idUsuario = localStorage.getItem("idUsuario");
+    const token = localStorage.getItem("token");
 
-      if (!idUsuario || !token) {
-        setErro("Usuário não autenticado.");
+    if (!idUsuario || !token) {
+      setErro("Usuário não autenticado.");
+      setCarregando(false);
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/Pedido/usuario/${idUsuario}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      if (response.status === 404) {
+        // Se a API retornar 404, interpretamos como "nenhum pedido"
+        setPedidos([]);
         setCarregando(false);
         return;
       }
 
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/Pedido/usuario/${idUsuario}`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error("Erro ao buscar pedidos.");
-        }
-
-        const data = await response.json();
-        setPedidos(data);
-      } catch (err) {
-        console.error("Erro:", err);
-        setErro(err.message);
-      } finally {
-        setCarregando(false);
+      if (!response.ok) {
+        throw new Error("Erro ao buscar pedidos.");
       }
-    };
 
-    fetchPedidos();
-  }, []);
+      const data = await response.json();
+      setPedidos(data);
+    } catch (err) {
+      console.error("Erro:", err);
+      setErro(err.message);
+    } finally {
+      setCarregando(false);
+    }
+  };
+
+  fetchPedidos();
+}, []);
+
 
   const toggleDetalhes = async (index, orcamentoId) => {
     const token = localStorage.getItem("token");
@@ -81,7 +89,7 @@ export default function MeusPedidos() {
   }
 
   if (pedidos.length === 0) {
-    return <p id="meus-pedidos-vazio">Você não possui pedidos.</p>;
+    return <p id="meus-pedidos-vazio">Você não requisitou nenhum orçamento até agora</p>;
   }
 
   return (
