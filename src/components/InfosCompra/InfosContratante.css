@@ -1,10 +1,10 @@
 #info-border{
-  background-image: url('/assets/images/ex_festa5.jpg');
   background-size: cover;
+  background-color: #fafafa;
   background-position: center;
   height: 100vh;
   display: flex;
-  padding: 5rem;
+  padding: 5rem 15rem;
   justify-content: center;
   font-family: 'SedraRegular', sans-serif;
 }
@@ -14,9 +14,8 @@
   justify-self: center;
   width: 100%;
   height: 100%;
-  background-color: var(--eggshell);
+  background-color: #fafafa;
   padding: 2rem;
-  border: 1px solid var(--orange);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
