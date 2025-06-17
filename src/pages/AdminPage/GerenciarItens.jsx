@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ItemForm from "../../components/AdminPageComponents/ItemForm";
 import { FaPen, FaTrash } from "react-icons/fa"; 
-
+import { toast } from "react-toastify";
 import "./AdminPage.css";
 
 export default function GerenciarItens() {
@@ -20,29 +20,37 @@ export default function GerenciarItens() {
     })
     .then(res => res.json())
     .then(data => setItens(data))
-    .catch(err => console.error("Erro ao carregar itens:", err));
+    .catch(err => toast.error("Erro ao carregar itens:", err));
   };
 
   useEffect(() => {
     carregarItens();
   }, []);
 
-  const handleExcluir = (id) => {
-    fetch(`${import.meta.env.VITE_API_URL}/Item/${id}`, {
+  const handleExcluir = async (id) => {
+  try {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/Item/${id}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem("token")}`
       }
-    })
-    .then(() => {
-      console.log("Item excluído com sucesso!");
-      carregarItens();
-    })
-    .catch(err => console.error("Erro ao excluir item:", err));
-  };
+    });
 
-  const handleEditar = (item) => {
+    if (!response.ok) {
+      throw new Error("Erro ao excluir item");
+    }
+
+    toast.success("Item excluído com sucesso!");
+    await carregarItens();
+  } catch (err) {
+    toast.error("Erro ao excluir item:", err);
+  }
+};
+
+
+  const handleEditar =async (item) => {
     setItemEditado(item);
+    await carregarItens();
   };
 
   const tipos = ["Todos", "Drink Alcoólico", "Soft Drink", "Bar", "Opcional", "Shot"];
