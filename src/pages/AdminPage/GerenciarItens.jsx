@@ -67,7 +67,7 @@ export default function GerenciarItens() {
 
   return (
     <div className="gerenciar-container">
-      <ItemForm itemEditado={itemEditado} onItemSalvo={carregarItens} />
+      <ItemForm itemEditado={itemEditado} onItemSalvo={carregarItens}   setItemEditado={setItemEditado} />
 
       <h3>Itens Cadastrados</h3>
 

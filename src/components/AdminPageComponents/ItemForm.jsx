@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./ItemForm.css";
 import { toast } from "react-toastify";
 
-export default function ItemForm({ itemEditado, onItemSalvo }) {
+export default function ItemForm({ itemEditado, onItemSalvo, setItemEditado }) {
   const [formData, setFormData] = useState({
     nome: "",
     descricao: "",
@@ -11,15 +11,22 @@ export default function ItemForm({ itemEditado, onItemSalvo }) {
   });
 
   useEffect(() => {
-    if (itemEditado) {
-      setFormData({
-        nome: itemEditado.nome,
-        descricao: itemEditado.descricao,
-        preco: itemEditado.preco,
-        tipo: itemEditado.tipo,
-      });
-    }
-  }, [itemEditado]);
+  if (itemEditado) {
+    setFormData({
+      nome: itemEditado.nome,
+      descricao: itemEditado.descricao,
+      preco: itemEditado.preco,
+      tipo: itemEditado.tipo,
+    });
+  } else {
+    setFormData({
+      nome: "",
+      descricao: "",
+      preco: "",
+      tipo: "",
+    });
+  }
+}, [itemEditado]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -60,6 +67,7 @@ export default function ItemForm({ itemEditado, onItemSalvo }) {
       }
 
       await onItemSalvo(); 
+      setItemEditado(null);
       toast.success(itemEditado ? "Item atualizado com sucesso!" : "Item cadastrado com sucesso!");
 
       if (!itemEditado) {
