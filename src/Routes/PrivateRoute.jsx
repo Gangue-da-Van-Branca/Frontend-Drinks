@@ -7,7 +7,6 @@ export default function PrivateRoute({ children, requiredRole }) {
   const toastShownRef = useRef(false);
 
   useEffect(() => {
-    // Resetar o toast quando a URL muda
     toastShownRef.current = false;
   }, [location.pathname]);
 

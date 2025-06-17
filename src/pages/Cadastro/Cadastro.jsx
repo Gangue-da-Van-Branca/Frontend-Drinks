@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import "./Cadastro.css";
 
 const Cadastro = () => {
@@ -25,7 +26,7 @@ const Cadastro = () => {
     e.preventDefault();
 
     if (formData.senha !== formData.confirmacaoSenha) {
-      alert("As senhas não conferem!");
+      toast.alert("As senhas não conferem!");
       return;
     }
 
@@ -46,15 +47,15 @@ const Cadastro = () => {
       });
 
       if (response.ok) {
-        alert("Usuário cadastrado com sucesso!");
+        toast.alert("Usuário cadastrado com sucesso!");
         navigate("/");
       } else {
         const errorData = await response.json();
-        alert("Erro ao cadastrar usuário: " + (errorData.message || "Erro desconhecido"));
+        toast.alert("Erro ao cadastrar usuário: " + (errorData.message || "Erro desconhecido"));
       }
     } catch (error) {
       console.error("Erro:", error);
-      alert("Erro ao conectar com o servidor.");
+      toast.alert("Erro ao conectar com o servidor.");
     }
   };
 

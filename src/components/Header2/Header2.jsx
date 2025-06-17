@@ -58,6 +58,7 @@ const Header = ({ nome, setNome }) => {
     setNome(null);
     setTipoUsuario(null);
     setUserMenuOpen(false);
+    navigate("/")
   };
 
   const handleUserMenuToggle = () => {

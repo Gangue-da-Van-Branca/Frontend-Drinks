@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Header2 from "../../../components/Header2/Header2";
+import { toast } from "react-toastify";
 import "./MeusPedidos.css";
 
 export default function MeusPedidos() {
@@ -43,7 +44,6 @@ export default function MeusPedidos() {
       const data = await response.json();
       setPedidos(data);
     } catch (err) {
-      console.error("Erro:", err);
       setErro(err.message);
     } finally {
       setCarregando(false);
@@ -73,7 +73,7 @@ export default function MeusPedidos() {
         const data = await response.json();
         setOrcamentos((prev) => ({ ...prev, [orcamentoId]: data }));
       } catch (err) {
-        console.error("Erro ao carregar orçamento:", err);
+        toast.error("Erro ao carregar orçamento:", err);
       }
     }
 
