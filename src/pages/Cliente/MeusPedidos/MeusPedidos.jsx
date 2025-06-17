@@ -12,47 +12,46 @@ export default function MeusPedidos() {
   const [nome, setNome] = useState(localStorage.getItem("nome") || null);
 
   useEffect(() => {
-  const fetchPedidos = async () => {
-    const idUsuario = localStorage.getItem("idUsuario");
-    const token = localStorage.getItem("token");
+    const fetchPedidos = async () => {
+      const idUsuario = localStorage.getItem("idUsuario");
+      const token = localStorage.getItem("token");
 
-    if (!idUsuario || !token) {
-      setErro("Usuário não autenticado.");
-      setCarregando(false);
-      return;
-    }
-
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/Pedido/usuario/${idUsuario}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-
-      if (response.status === 404) {
-        // Se a API retornar 404, interpretamos como "nenhum pedido"
-        setPedidos([]);
+      if (!idUsuario || !token) {
+        setErro("Usuário não autenticado.");
         setCarregando(false);
         return;
       }
 
-      if (!response.ok) {
-        throw new Error("Erro ao buscar pedidos.");
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/Pedido/usuario/${idUsuario}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+
+        if (response.status === 404) {
+          // Se a API retornar 404, interpretamos como "nenhum pedido"
+          setPedidos([]);
+          setCarregando(false);
+          return;
+        }
+
+        if (!response.ok) {
+          throw new Error("Erro ao buscar pedidos.");
+        }
+
+        const data = await response.json();
+        setPedidos(data);
+      } catch (err) {
+        setErro(err.message);
+      } finally {
+        setCarregando(false);
       }
+    };
 
-      const data = await response.json();
-      setPedidos(data);
-    } catch (err) {
-      setErro(err.message);
-    } finally {
-      setCarregando(false);
-    }
-  };
-
-  fetchPedidos();
-}, []);
-
+    fetchPedidos();
+  }, []);
 
   const toggleDetalhes = async (index, orcamentoId) => {
     const token = localStorage.getItem("token");
@@ -83,8 +82,6 @@ export default function MeusPedidos() {
   if (carregando) {
     return <p id="meus-pedidos-loading">Carregando pedidos...</p>;
   }
-
-  
 
   return (
     <div id="cont">
@@ -132,7 +129,8 @@ export default function MeusPedidos() {
                     )}
 
                     <h4>Opcionais - Shots</h4>
-                    {orcamento.opcionais?.shots.length > 0 ? (
+                    {orcamento.opcionais?.shots &&
+                    Object.keys(orcamento.opcionais.shots).length > 0 ? (
                       <ul>
                         {Object.entries(orcamento.opcionais.shots).map(
                           ([nome, qtd], idx) => (
@@ -147,7 +145,8 @@ export default function MeusPedidos() {
                     )}
 
                     <h4>Opcionais - Extras</h4>
-                    {orcamento.opcionais?.extras.length > 0 ? (
+                    {orcamento.opcionais?.extras &&
+                     Object.keys(orcamento.opcionais.extras).length > 0 ? (
                       <ul>
                         {Object.entries(orcamento.opcionais.extras).map(
                           ([nome, qtd], idx) => (
