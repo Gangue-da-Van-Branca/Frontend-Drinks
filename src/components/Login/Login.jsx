@@ -51,8 +51,13 @@ const Login = forwardRef(({ trigger, setTrigger, setNome, onLoginSuccess }, ref)
         setTrigger(false);
         if (onLoginSuccess) onLoginSuccess();
       } else {
-        const errorData = await response.json();
-        setErro(errorData.erro || "Erro ao fazer login");
+        try {
+          const errorData = await response.json();
+          setErro(errorData.erro || "Erro ao fazer login");
+        } catch (parseError) {
+          console.error("Erro ao fazer parse da resposta:", parseError);
+          setErro("Erro ao fazer login");
+        }
       }
     } catch (error) {
       console.error("Erro na requisição:", error);
@@ -72,50 +77,64 @@ const Login = forwardRef(({ trigger, setTrigger, setNome, onLoginSuccess }, ref)
     setShowEsqueceuSenha(true);
   };
 
+  const handleEsqueceuSenhaClose = () => {
+    setShowEsqueceuSenha(false);
+  };
+
   return (
     <>
-      <div className="popUp" ref={ref}>
-        <div className="popUp-inner">
-          <a className="close-button" onClick={() => setTrigger(false)}>
-            X
-          </a>
-          <h2>Login</h2>
-          {erro && <p className="erro">{erro}</p>}
-          <form onSubmit={handleSubmit} className="login-form">
-            <label>
-              Email:
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </label>
-            <label>
-              Senha:
-              <input
-                type="password"
-                value={senha}
-                onChange={(e) => setSenha(e.target.value)}
-                required
-              />
-            </label>
-            <button type="submit" disabled={loading}>
-              {loading ? "Entrando..." : "Entrar"}
-            </button>
-             <a id="senha" href="#" onClick={handleEsqueceuSenhaClick}>
-              Esqueceu sua senha?
+      {/* Popup de Login - só mostra se EsqueceuSenha não estiver ativo */}
+      {!showEsqueceuSenha && (
+        <div className="popUp" ref={ref}>
+          <div className="popUp-inner">
+            <a className="close-button" onClick={() => setTrigger(false)}>
+              X
             </a>
-            <p id="bar"></p>
-            <button type="submit" onClick={handleCadastro} id="cadastro">
-              Cadastrar
-            </button>
-           
-          </form>
+            <h2>Login</h2>
+            {erro && <p className="erro">{erro}</p>}
+            <form onSubmit={handleSubmit} className="login-form">
+              <label>
+                Email:
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </label>
+              <label>
+                Senha:
+                <input
+                  type="password"
+                  value={senha}
+                  onChange={(e) => setSenha(e.target.value)}
+                  required
+                />
+              </label>
+              <button type="submit" disabled={loading}>
+                {loading ? "Entrando..." : "Entrar"}
+              </button>
+               <a id="senha" href="#" onClick={handleEsqueceuSenhaClick}>
+                Esqueceu sua senha?
+              </a>
+              <p id="bar"></p>
+              <button type="submit" onClick={handleCadastro} id="cadastro">
+                Cadastrar
+              </button>
+             
+            </form>
+          </div>
         </div>
-      </div>
+      )}
 
-      <EsqueceuSenha trigger={showEsqueceuSenha} setTrigger={setShowEsqueceuSenha} />
+      {/* Popup de Esqueceu Senha */}
+      <EsqueceuSenha 
+        trigger={showEsqueceuSenha} 
+        setTrigger={handleEsqueceuSenhaClose}
+        onClose={() => {
+          setShowEsqueceuSenha(false);
+        }}
+      />
     </>
   );
 });

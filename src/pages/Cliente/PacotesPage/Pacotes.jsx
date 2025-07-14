@@ -12,151 +12,105 @@ import festa5 from "../../../assets/images/ex_festa4.jpg";
 import "./Pacotes.css";
 
 function Pacotes() {
-  const [modalAbertoIndex, setModalAbertoIndex] = useState(null);
   const [pacotesComDrinks, setPacotesComDrinks] = useState([]);
 
-  const pacotes = [
-    {
-      evento: "Casamento",
-      preco: "10000,00",
-      drinks: [
-        "i1yAp0eCcDLNPgEv2t",
-        "i1OMQI4VbYTzKhgk72",
-        "i1oqVEF45n5GtvNi7H",
-        "i1cXa725zAv9IHx78s",
-        "i1g6y8eLob9QGZJjE1",
-        "i1H6dhQYql8jcb6nNf",
-        "i17R3SuHESlsNccJ97",
-        "i1vCWQEQXxersroTVf",
-      ],
-      foto: casamentoTime,
-    },
-    {
-      evento: "Evento de Lançamento",
-      preco: "5000,00",
-      drinks: [
-        "i1OMQI4VbYTzKhgk72",
-        "i1uZepl4zoJIV2zcne",
-        "i1oqVEF45n5GtvNi7H",
-        "i1H6dhQYql8jcb6nNf",
-        "i17R3SuHESlsNccJ97",
-        "i1r2FZ2OSkPaOptUU3",
-        "i1Xy5Nn2uuMouEJXqh",
-        "i1m0xFyJn4dQs9MQI6",
-      ],
-      foto: festa1,
-    },
-    {
-      evento: "Evento Corporativo",
-      preco: "7000,00",
-      drinks: [
-        "i1yAp0eCcDLNPgEv2t",
-        "i160VCLtD6W5bszrgu",
-        "i1OMQI4VbYTzKhgk72",
-        "i1oqVEF45n5GtvNi7H",
-        "i1m0xFyJn4dQs9MQI6",
-        "i1TE7rXG2YUqWMfkhY",
-        "i1vCWQEQXxersroTVf",
-        "i1rz62dHMqSDa020XU",
-      ],
-      foto: festa2,
-    },
-    {
-      evento: "Debutante",
-      preco: "8000,00",
-      drinks: [
-        "i12PlUD9t9CLhfIiAO",
-        "i179fSVduKdLX4LscD",
-        "i1PTAuIHUo438hUHvc",
-        "i1OMQI4VbYTzKhgk72",
-        "i11LKQJlmumPn9lWih",
-        "i1r2FZ2OSkPaOptUU3",
-        "i1Xy5Nn2uuMouEJXqh",
-        "i17R3SuHESlsNccJ97",
-      ],
-      foto: festa3,
-    },
-    {
-      evento: "Festa Teen",
-      preco: "3000,00",
-      drinks: [
-        "i11LKQJlmumPn9lWih",
-        "i1Xy5Nn2uuMouEJXqh",
-        "i1vCWQEQXxersroTVf",
-        "i1TE7rXG2YUqWMfkhY",
-        "i1rz62dHMqSDa020XU",
-        "i1r2FZ2OSkPaOptUU3",
-        "i1GsP4QdH4eysBOQmJ",
-        "i1FGlcg0VClkJIzj9B",
-      ],
-      foto: festa4,
-    },
-    {
-      evento: "Aniversário",
-      preco: "5000,00",
-      drinks: [
-        "i179fSVduKdLX4LscD",
-        "i1oqVEF45n5GtvNi7H",
-        "i1OMQI4VbYTzKhgk72",
-        "i1uZepl4zoJIV2zcne",
-        "i12PlUD9t9CLhfIiAO",
-        "i1cXa725zAv9IHx78s",
-        "i1r2FZ2OSkPaOptUU3",
-        "i1Xy5Nn2uuMouEJXqh",
-      ],
-      foto: festa5,
-    },
-  ];
-
   useEffect(() => {
-    async function buscarDrinks() {
-      const cacheKey = "pacotesComDrinksCache";
-      const timestampKey = "pacotesComDrinksTimestamp";
-      const cache = localStorage.getItem(cacheKey);
-      const timestamp = localStorage.getItem(timestampKey);
-      const token = localStorage.getItem("token");
-
-      const agora = new Date().getTime();
-      const tresDiasEmMs = 3 * 24 * 60 * 60 * 1000;
-
-      if (
-        cache &&
-        timestamp &&
-        agora - parseInt(timestamp, 10) < tresDiasEmMs
-      ) {
-        setPacotesComDrinks(JSON.parse(cache));
-        return;
+    // Pacotes com drinks predefinidos (sem necessidade de buscar na API)
+    const pacotesComDrinks = [
+      {
+        evento: "Casamento",
+        preco: "10000,00",
+        drinks: [
+          { idItem: "i1wuArJ8Ve2GHqEHDs", nome: "Fitzgerald", descricao: "Gin, syrup de açúcar, suco de limão siciliano, angostura bitters e zest", preco: 15, tipo: "Drink Alcoólico" },
+          { idItem: "i1EHXIP80bb2sAOIzY", nome: "Negroni Twist", descricao: "Gin, vermute rosso, Campari e zest de laranja bahia", preco: 15, tipo: "Drink Alcoólico" },
+          { idItem: "i1q8fkqRkLTLpOVStO", nome: "Margarita", descricao: "Tequila, Cointreau, suco de limão taiti e borda de sal", preco: 15, tipo: "Drink Alcoólico" },
+          { idItem: "i1hQHuQ90azZRThJfi", nome: "Aperol Spritz", descricao: "Aperol, espumante, água com gás e laranja", preco: 15, tipo: "Drink Alcoólico" },
+          { idItem: "i1jJV8vQcqNsdfzwLJ", nome: "Moscow Mule", descricao: "Vodka, xarope de gengibre, limão taiti e espuma de gengibre", preco: 15, tipo: "Drink Alcoólico" },
+          { idItem: "i1AqgU7J5JBMkDoWEe", nome: "Daiquiri Clássico", descricao: "Rum branco, suco de limão taiti e xarope de açúcar", preco: 15, tipo: "Drink Alcoólico" },
+          { idItem: "i1BVn36SzYrjWwKifA", nome: "Classic Tonic", descricao: "Limão siciliano, xarope e tônica", preco: 15, tipo: "Soft Drink" },
+          { idItem: "i1RwmVnU2cUmGUNtiM", nome: "Pink Lemonade", descricao: "Mix de limão, limão siciliano, goma ou gás e syrup de morango servido em tacinhas ou limonadas brilhantes", preco: 15, tipo: "Soft Drink" }
+        ],
+        foto: casamentoTime,
+      },
+      {
+        evento: "Evento de Lançamento",
+        preco: "5000,00",
+        drinks: [
+          { idItem: "i1hQHuQ90azZRThJfi", nome: "Aperol Spritz", descricao: "Aperol, espumante, água com gás e laranja", preco: 15, tipo: "Drink Alcoólico" },
+          { idItem: "i1jJV8vQcqNsdfzwLJ", nome: "Moscow Mule", descricao: "Vodka, xarope de gengibre, limão taiti e espuma de gengibre", preco: 15, tipo: "Drink Alcoólico" },
+          { idItem: "i1C6Z0ffU730PDXoJU", nome: "Cucumber Fizz", descricao: "Gin, pepino, suco de limão siciliano, syrup de hortelã e água tônica", preco: 15, tipo: "Drink Alcoólico" },
+          { idItem: "i121gnJwkv4nSneNYs", nome: "Spicy Passion", descricao: "Vodka, maracujá, syrup de pimenta dedo-de-moça e limão taiti", preco: 15, tipo: "Drink Alcoólico" },
+          { idItem: "i1RXM5gc3t8I10Kxfx", nome: "Classic Tonic", descricao: "Gin, limão siciliano e tônica", preco: 15, tipo: "Drink Alcoólico" },
+          { idItem: "i1ZTpsx0Uwt6ZEOwYb", nome: "Basil Smash", descricao: "Gin, suco de limão siciliano, syrup de manjericão e folhas de manjericão", preco: 15, tipo: "Drink Alcoólico" },
+          { idItem: "i1mrskmGI0LDgQ15nE", nome: "Cirque Blue", descricao: "Curacao blue, suco de blueberry, amora, mix de limão, água com gás e algodão doce ou bala de fruta", preco: 15, tipo: "Soft Drink" },
+          { idItem: "i1PW8ZhenB5LoA8kiP", nome: "Piña Descalada", descricao: "Suco de abacaxi, leite de coco, leite condensado e granulados coloridos", preco: 15, tipo: "Soft Drink" }
+        ],
+        foto: festa1,
+      },
+      {
+        evento: "Evento Corporativo",
+        preco: "7000,00",
+        drinks: [
+          { idItem: "i1wuArJ8Ve2GHqEHDs", nome: "Fitzgerald", descricao: "Gin, syrup de açúcar, suco de limão siciliano, angostura bitters e zest", preco: 15, tipo: "Drink Alcoólico" },
+          { idItem: "i1EHXIP80bb2sAOIzY", nome: "Negroni Twist", descricao: "Gin, vermute rosso, Campari e zest de laranja bahia", preco: 15, tipo: "Drink Alcoólico" },
+          { idItem: "i19t58SKPdejhO9qiZ", nome: "Penicilin", descricao: "Whisky, suco de limão siciliano, xarope de gengibre e scotch defumado", preco: 15, tipo: "Drink Alcoólico" },
+          { idItem: "i1RXM5gc3t8I10Kxfx", nome: "Classic Tonic", descricao: "Gin, limão siciliano e tônica", preco: 15, tipo: "Drink Alcoólico" },
+          { idItem: "i1hQHuQ90azZRThJfi", nome: "Aperol Spritz", descricao: "Aperol, espumante, água com gás e laranja", preco: 15, tipo: "Drink Alcoólico" },
+          { idItem: "i1jJV8vQcqNsdfzwLJ", nome: "Moscow Mule", descricao: "Vodka, xarope de gengibre, limão taiti e espuma de gengibre", preco: 15, tipo: "Drink Alcoólico" },
+          { idItem: "i1BVn36SzYrjWwKifA", nome: "Classic Tonic", descricao: "Limão siciliano, xarope e tônica", preco: 15, tipo: "Soft Drink" },
+          { idItem: "i1Eo7iCg7yk3vpTHkT", nome: "Lichai Paradise", descricao: "Água com gás, morangos simples, lichia, suco de limão e hortelã", preco: 15, tipo: "Soft Drink" }
+        ],
+        foto: festa2,
+      },
+      {
+        evento: "Debutante",
+        preco: "8000,00",
+        drinks: [
+          { idItem: "i1EkKzMxJk04KOnUHs", nome: "Paradise", descricao: "Vodka, água de coco, syrup de baunilha e raspas de coco desidratado", preco: 15, tipo: "Drink Alcoólico" },
+          { idItem: "i1AqgU7J5JBMkDoWEe", nome: "Daiquiri Clássico", descricao: "Rum branco, suco de limão taiti e xarope de açúcar", preco: 15, tipo: "Drink Alcoólico" },
+          { idItem: "i1q8fkqRkLTLpOVStO", nome: "Margarita", descricao: "Tequila, Cointreau, suco de limão taiti e borda de sal", preco: 15, tipo: "Drink Alcoólico" },
+          { idItem: "i1hQHuQ90azZRThJfi", nome: "Aperol Spritz", descricao: "Aperol, espumante, água com gás e laranja", preco: 15, tipo: "Drink Alcoólico" },
+          { idItem: "i121gnJwkv4nSneNYs", nome: "Spicy Passion", descricao: "Vodka, maracujá, syrup de pimenta dedo-de-moça e limão taiti", preco: 15, tipo: "Drink Alcoólico" },
+          { idItem: "i1RwmVnU2cUmGUNtiM", nome: "Pink Lemonade", descricao: "Mix de limão, limão siciliano, goma ou gás e syrup de morango servido em tacinhas ou limonadas brilhantes", preco: 15, tipo: "Soft Drink" },
+          { idItem: "i1mrskmGI0LDgQ15nE", nome: "Cirque Blue", descricao: "Curacao blue, suco de blueberry, amora, mix de limão, água com gás e algodão doce ou bala de fruta", preco: 15, tipo: "Soft Drink" },
+          { idItem: "i1PW8ZhenB5LoA8kiP", nome: "Piña Descalada", descricao: "Suco de abacaxi, leite de coco, leite condensado e granulados coloridos", preco: 15, tipo: "Soft Drink" }
+        ],
+        foto: festa3,
+      },
+      {
+        evento: "Festa Teen",
+        preco: "3000,00",
+        drinks: [
+          { idItem: "i1BVn36SzYrjWwKifA", nome: "Classic Tonic", descricao: "Limão siciliano, xarope e tônica", preco: 15, tipo: "Soft Drink" },
+          { idItem: "i1Eo7iCg7yk3vpTHkT", nome: "Lichai Paradise", descricao: "Água com gás, morangos simples, lichia, suco de limão e hortelã", preco: 15, tipo: "Soft Drink" },
+          { idItem: "i1mrskmGI0LDgQ15nE", nome: "Cirque Blue", descricao: "Curacao blue, suco de blueberry, amora, mix de limão, água com gás e algodão doce ou bala de fruta", preco: 15, tipo: "Soft Drink" },
+          { idItem: "i1PW8ZhenB5LoA8kiP", nome: "Piña Descalada", descricao: "Suco de abacaxi, leite de coco, leite condensado e granulados coloridos", preco: 15, tipo: "Soft Drink" },
+          { idItem: "i1RwmVnU2cUmGUNtiM", nome: "Pink Lemonade", descricao: "Mix de limão, limão siciliano, goma ou gás e syrup de morango servido em tacinhas ou limonadas brilhantes", preco: 15, tipo: "Soft Drink" },
+          { idItem: "i1hQHuQ90azZRThJfi", nome: "Aperol Spritz", descricao: "Aperol, espumante, água com gás e laranja", preco: 15, tipo: "Drink Alcoólico" },
+          { idItem: "i1AqgU7J5JBMkDoWEe", nome: "Daiquiri Clássico", descricao: "Rum branco, suco de limão taiti e xarope de açúcar", preco: 15, tipo: "Drink Alcoólico" },
+          { idItem: "i1C6Z0ffU730PDXoJU", nome: "Cucumber Fizz", descricao: "Gin, pepino, suco de limão siciliano, syrup de hortelã e água tônica", preco: 15, tipo: "Drink Alcoólico" }
+        ],
+        foto: festa4,
+      },
+      {
+        evento: "Aniversário",
+        preco: "5000,00",
+        drinks: [
+          { idItem: "i1AqgU7J5JBMkDoWEe", nome: "Daiquiri Clássico", descricao: "Rum branco, suco de limão taiti e xarope de açúcar", preco: 15, tipo: "Drink Alcoólico" },
+          { idItem: "i1q8fkqRkLTLpOVStO", nome: "Margarita", descricao: "Tequila, Cointreau, suco de limão taiti e borda de sal", preco: 15, tipo: "Drink Alcoólico" },
+          { idItem: "i1hQHuQ90azZRThJfi", nome: "Aperol Spritz", descricao: "Aperol, espumante, água com gás e laranja", preco: 15, tipo: "Drink Alcoólico" },
+          { idItem: "i1jJV8vQcqNsdfzwLJ", nome: "Moscow Mule", descricao: "Vodka, xarope de gengibre, limão taiti e espuma de gengibre", preco: 15, tipo: "Drink Alcoólico" },
+          { idItem: "i1C6Z0ffU730PDXoJU", nome: "Cucumber Fizz", descricao: "Gin, pepino, suco de limão siciliano, syrup de hortelã e água tônica", preco: 15, tipo: "Drink Alcoólico" },
+          { idItem: "i1ZTpsx0Uwt6ZEOwYb", nome: "Basil Smash", descricao: "Gin, suco de limão siciliano, syrup de manjericão e folhas de manjericão", preco: 15, tipo: "Drink Alcoólico" },
+          { idItem: "i1RwmVnU2cUmGUNtiM", nome: "Pink Lemonade", descricao: "Mix de limão, limão siciliano, goma ou gás e syrup de morango servido em tacinhas ou limonadas brilhantes", preco: 15, tipo: "Soft Drink" },
+          { idItem: "i1PW8ZhenB5LoA8kiP", nome: "Piña Descalada", descricao: "Suco de abacaxi, leite de coco, leite condensado e granulados coloridos", preco: 15, tipo: "Soft Drink" }
+        ],
+        foto: festa5,
       }
+    ];
 
-      const pacotesComDados = await Promise.all(
-        pacotes.map(async (pacote) => {
-          const drinksDetalhados = await Promise.all(
-            pacote.drinks.map(async (id) => {
-              try {
-                const response = await fetch(
-                  `${import.meta.env.VITE_API_URL}/Item/${id}`,
-                  {
-                    headers: { Authorization: `Bearer ${token}` },
-                  }
-                );
-                if (!response.ok) throw new Error("Erro ao buscar drink");
-                return await response.json();
-              } catch (error) {
-                console.error(`Erro com o drink ${id}:`, error);
-                return { id, nome: "Drink não encontrado", descricao: "" };
-              }
-            })
-          );
-          return { ...pacote, drinks: drinksDetalhados };
-        })
-      );
-
-      localStorage.setItem(cacheKey, JSON.stringify(pacotesComDados));
-      localStorage.setItem(timestampKey, agora.toString());
-      setPacotesComDrinks(pacotesComDados);
-    }
-
-    buscarDrinks();
+    // Define os pacotes diretamente sem buscar na API
+    setPacotesComDrinks(pacotesComDrinks);
   }, []);
 
   return (
@@ -166,12 +120,9 @@ function Pacotes() {
         {pacotesComDrinks.map((pacote, index) => (
           <Card
             key={index}
-            index={index}
             evento={pacote.evento}
             preco={pacote.preco}
             foto={pacote.foto}
-            modalAbertoIndex={modalAbertoIndex}
-            setModalAbertoIndex={setModalAbertoIndex}
             drinks={pacote.drinks}
           />
         ))}

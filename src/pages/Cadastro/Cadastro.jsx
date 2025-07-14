@@ -13,6 +13,7 @@ const Cadastro = () => {
     confirmacaoSenha: ""
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -25,10 +26,14 @@ const Cadastro = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (isSubmitting) return; // Evita múltiplos envios
+
     if (formData.senha !== formData.confirmacaoSenha) {
-      toast.alert("As senhas não conferem!");
+      toast.error("As senhas não conferem!");
       return;
     }
+
+    setIsSubmitting(true);
 
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/Auth/register`, {
@@ -47,15 +52,20 @@ const Cadastro = () => {
       });
 
       if (response.ok) {
-        toast.alert("Usuário cadastrado com sucesso!");
-        navigate("/");
+        toast.success("Usuário cadastrado com sucesso!");
+        // Aguarda um pouco para mostrar o toast antes de navegar
+        setTimeout(() => {
+          navigate("/");
+        }, 1500);
       } else {
         const errorData = await response.json();
-        toast.alert("Erro ao cadastrar usuário: " + (errorData.message || "Erro desconhecido"));
+        toast.error("Erro ao cadastrar usuário: " + (errorData.message || "Erro desconhecido"));
+        setIsSubmitting(false);
       }
     } catch (error) {
       console.error("Erro:", error);
-      toast.alert("Erro ao conectar com o servidor.");
+      toast.error("Erro ao conectar com o servidor.");
+      setIsSubmitting(false);
     }
   };
 
@@ -125,7 +135,9 @@ const Cadastro = () => {
                 required
               />
             </label>
-            <button type="submit">Cadastrar</button>
+            <button type="submit" disabled={isSubmitting}>
+              {isSubmitting ? "Cadastrando..." : "Cadastrar"}
+            </button>
           </form>
         </div>
       </div>
