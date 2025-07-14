@@ -20,7 +20,7 @@ function Carrossel() {
           <img className="crsl-icon" src={casamentoIcon} alt="Casamento" />
           <div className="rodape">
             <h1>CASAMENTOS</h1>
-            <p class="Nunito">DETALHES DO PACOTE <img src={seta} alt="" /></p>
+            <p className="Nunito">DETALHES DO PACOTE <img src={seta} alt="" /></p>
           </div>
         </div>
       </SwiperSlide>
@@ -34,7 +34,7 @@ function Carrossel() {
           <img className="crsl-icon" src={niverIcon} alt="Aniversário" />
           <div className="rodape">
             <h1>ANIVERSÁRIOS</h1>
-            <p class="Nunito">DETALHES DO PACOTE <img src={seta} alt="" /></p>
+            <p className="Nunito">DETALHES DO PACOTE <img src={seta} alt="" /></p>
           </div>
         </div>
       </SwiperSlide>
@@ -48,7 +48,7 @@ function Carrossel() {
           <img className="crsl-icon" src={maletaIcon} alt="Casamento" />
           <div className="rodape">
             <h1>MAIS OPÇÕES</h1>
-            <p class="Nunito">DETALHES DO PACOTE <img src={seta} alt="" /></p>
+            <p className="Nunito">DETALHES DO PACOTE <img src={seta} alt="" /></p>
           </div>
         </div>
       </SwiperSlide>

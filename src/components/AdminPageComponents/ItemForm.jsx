@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./ItemForm.css";
+import { toast } from "react-toastify";
 
-export default function ItemForm({ itemEditado, onItemSalvo }) {
+export default function ItemForm({ itemEditado, onItemSalvo, setItemEditado }) {
   const [formData, setFormData] = useState({
     nome: "",
     descricao: "",
@@ -10,15 +11,22 @@ export default function ItemForm({ itemEditado, onItemSalvo }) {
   });
 
   useEffect(() => {
-    if (itemEditado) {
-      setFormData({
-        nome: itemEditado.nome,
-        descricao: itemEditado.descricao,
-        preco: itemEditado.preco,
-        tipo: itemEditado.tipo,
-      });
-    }
-  }, [itemEditado]);
+  if (itemEditado) {
+    setFormData({
+      nome: itemEditado.nome,
+      descricao: itemEditado.descricao,
+      preco: itemEditado.preco,
+      tipo: itemEditado.tipo,
+    });
+  } else {
+    setFormData({
+      nome: "",
+      descricao: "",
+      preco: "",
+      tipo: "",
+    });
+  }
+}, [itemEditado]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,7 +36,7 @@ export default function ItemForm({ itemEditado, onItemSalvo }) {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const item = {
@@ -41,44 +49,38 @@ export default function ItemForm({ itemEditado, onItemSalvo }) {
       : `${import.meta.env.VITE_API_URL}/Item`;
 
     const method = itemEditado ? "PUT" : "POST";
-
     const body = itemEditado ? JSON.stringify(item) : JSON.stringify([item]);
 
-    console.log(
-      "JSON do Item a ser enviado:",
-      JSON.stringify(itemEditado ? item : [item], null, 2)
-    );
-
-    fetch(url, {
-      method,
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      body,
-    })
-      .then(handleResponse)
-      .then(() => {
-        onItemSalvo();
-        if (!itemEditado) {
-          setFormData({
-            nome: "",
-            descricao: "",
-            preco: "",
-            tipo: "",
-          });
-        }
-      })
-      .catch(console.error);
-  };
-
-  const handleResponse = (res) => {
-    if (!res.ok) {
-      return res.json().then((err) => {
-        throw new Error(JSON.stringify(err));
+    try {
+      const response = await fetch(url, {
+        method,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body,
       });
+
+      if (!response.ok) {
+        const errData = await response.json();
+        throw new Error(JSON.stringify(errData));
+      }
+
+      await onItemSalvo(); 
+      setItemEditado(null);
+      toast.success(itemEditado ? "Item atualizado com sucesso!" : "Item cadastrado com sucesso!");
+
+      if (!itemEditado) {
+        setFormData({
+          nome: "",
+          descricao: "",
+          preco: "",
+          tipo: "",
+        });
+      }
+    } catch (err) {
+      console.error(err);
     }
-    return res.json();
   };
 
   return (

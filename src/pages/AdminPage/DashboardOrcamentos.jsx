@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import OrcamentoCard from "./OrcamentoCard";
+import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import "./DashboardOrcamento.css";
 
@@ -37,7 +38,7 @@ export default function DashboardOrcamentos() {
 
         setOrcamentosComPedido(combinados);
       } catch (err) {
-        console.error("Erro ao carregar dados:", err);
+        toast.error("Erro ao carregar dados:", err);
         setErro(err.message);
       } finally {
         setCarregando(false);
@@ -77,32 +78,44 @@ export default function DashboardOrcamentos() {
         )
       );
     } catch (error) {
-      console.error("Erro:", error);
-      alert("Erro ao atualizar status do pedido.");
+      toast.error("Erro:", error);
+      toast.alert("Erro ao atualizar status do pedido.");
     }
   }
 
-  function aprovarOrcamento(orcamento) {
-    if (orcamento.pedido) {
-      const confirmacao = window.confirm(
-        `Deseja mesmo aprovar o pedido ${orcamento.pedido.idPedido}?`
-      );
-      if (confirmacao) {
-        atualizarStatusPedido(orcamento, "Aprovado");
-      }
-    }
-  }
+  async function aprovarOrcamento(orcamento) {
+  if (orcamento.pedido) {
+    const result = await Swal.fire({
+      title: 'Aprovar pedido?',
+      text: `Deseja mesmo aprovar esse pedido?`,
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Sim, aprovar',
+      cancelButtonText: 'Cancelar'
+    });
 
-  function rejeitarOrcamento(orcamento) {
-    if (orcamento.pedido) {
-      const confirmacao = window.confirm(
-        `Deseja mesmo cancelar o pedido ${orcamento.pedido.idPedido}?`
-      );
-      if (confirmacao) {
-        atualizarStatusPedido(orcamento, "Cancelado");
-      }
+    if (result.isConfirmed) {
+      atualizarStatusPedido(orcamento, "Aprovado");
     }
   }
+}
+
+  async function rejeitarOrcamento(orcamento) {
+  if (orcamento.pedido) {
+    const result = await Swal.fire({
+      title: 'Cancelar pedido?',
+      text: `Deseja mesmo cancelar esse pedido?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sim, cancelar',
+      cancelButtonText: 'Voltar'
+    });
+
+    if (result.isConfirmed) {
+      atualizarStatusPedido(orcamento, "Cancelado");
+    }
+  }
+}
 
   if (carregando) {
     return <p>Carregando orçamentos...</p>;

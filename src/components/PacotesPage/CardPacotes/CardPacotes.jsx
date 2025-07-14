@@ -1,14 +1,27 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useOrcamento } from "../../../context/OrcamentoContext";
 import "./CardPacotes.css";
 
-function Card({ evento, preco, index, drinks, foto }) {
+function Card({ evento, preco, drinks, foto }) {
   const [flipped, setFlipped] = useState(false);
   const navigate = useNavigate();
+  const { atualizarBase } = useOrcamento();
 
   const selecionarPacote = () => {
-    navigate("/basedrinks", {
-      state: { tipoFesta: evento, drinksSelecionados: drinks},
+    // Atualiza o contexto com os dados do pacote
+    atualizarBase({
+      tipoFesta: evento,
+      drinksSelecionados: drinks,
+    });
+
+    // Navega direto para opcionais quando vem de um pacote
+    navigate("/opcionais", {
+      state: { 
+        tipoFesta: evento, 
+        drinksSelecionados: drinks,
+        fromPackage: true // Flag para indicar que veio de um pacote
+      },
     });
   };
 
@@ -53,7 +66,7 @@ function Card({ evento, preco, index, drinks, foto }) {
           <ul>
             {drinks.length > 0 ? (
               drinks.map((drink) => (
-                <li key={drink.id}>
+                <li key={drink.idItem}>
                   <strong>{drink.nome}</strong> — {drink.descricao}
                 </li>
               ))

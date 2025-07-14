@@ -102,5 +102,40 @@
 #bar{
   margin-bottom: 15px;
   border-bottom: 1px solid var(--orange);
-     
+}
+
+/* Estilos para o componente Esqueceu Senha */
+.confirmacao-container {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.mensagem-confirmacao {
+  color: #28a745;
+  font-weight: bold;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  border-radius: 5px;
+  line-height: 1.5;
+}
+
+.mensagem-confirmacao.visivel {
+  display: block;
+}
+
+.botao-fechar {
+  background-color: var(--orange);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.botao-fechar:hover {
+  background-color: #e55a00;
 }

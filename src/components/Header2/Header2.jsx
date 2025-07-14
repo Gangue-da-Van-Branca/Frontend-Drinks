@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Login from "../Login/Login";
 import logo from "../../assets/images/logo2.png";
-import "./Header.css";
+import "./Header2.css";
 
 const Header = ({ nome, setNome }) => {
   const [buttonPopup, setButtonPopUp] = useState(false);
@@ -17,7 +17,6 @@ const Header = ({ nome, setNome }) => {
   const fetchUserData = async () => {
     const token = localStorage.getItem("token");
     const idUsuario = localStorage.getItem("idUsuario");
-    
 
     if (token && idUsuario) {
       try {
@@ -59,7 +58,7 @@ const Header = ({ nome, setNome }) => {
     setNome(null);
     setTipoUsuario(null);
     setUserMenuOpen(false);
-    navigate("/");
+    navigate("/")
   };
 
   const handleUserMenuToggle = () => {
@@ -68,6 +67,11 @@ const Header = ({ nome, setNome }) => {
 
   const handleMyOrders = () => {
     navigate("/meus-pedidos");
+    setUserMenuOpen(false);
+  };
+
+  const handleHome = () => {
+    navigate("/");
     setUserMenuOpen(false);
   };
 
@@ -110,35 +114,19 @@ const Header = ({ nome, setNome }) => {
   }, [buttonPopup]);
 
   return (
-    <header className={`header ${isScrolled ? "scrolled" : ""}`}>
-      <div className="header-container">
-        <div className="logo">
-          <img src={logo} id="logo-img" alt="Logo" />
+    <header id="header" className={isScrolled ? "scrolled" : ""}>
+      <div id="header-container">
+        <div id="logo">
+          <img onClick={handleHome} src={logo} id="logo-img" alt="Logo" />
         </div>
-        <nav className="nav">
-          <ul>
-            <li>
-              <a href="#quem-somos">Quem Somos</a>
-            </li>
-            <li>
-              <a href="#como-funciona">Como Funciona</a>
-            </li>
-            <li>
-              <a href="#escolha-pacote">Pacotes</a>
-            </li>
-            <li>
-              <a href="#personalizacao">Personalizar</a>
-            </li>
-          </ul>
-        </nav>
-        <div className="login-icon">
+        <div id="login-icon">
           {nome ? (
-            <div className="user-menu-container">
-              <a onClick={handleUserMenuToggle} className="user-greeting">
+            <div id="user-menu-container">
+              <a onClick={handleUserMenuToggle} id="user-greeting">
                 Olá, {nome}!
               </a>
               {userMenuOpen && (
-                <div className="user-menu" ref={userMenuRef}>
+                <div id="user-menu" ref={userMenuRef}>
                   <a onClick={handleMyOrders}>Ver meus pedidos</a>
                   {tipoUsuario === "1" && (
                     <a
@@ -156,7 +144,10 @@ const Header = ({ nome, setNome }) => {
             </div>
           ) : (
             <>
-              <a onClick={() => setButtonPopUp((prev) => !prev)} className="Login">
+              <a
+                onClick={() => setButtonPopUp((prev) => !prev)}
+                className="Login"
+              >
                 Login
               </a>
               <Login

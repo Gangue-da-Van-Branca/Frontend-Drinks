@@ -1,0 +1,126 @@
+#header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  color: #fafafa;
+  font-family: 'SedraMedium', sans-serif;
+  padding: 1rem 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  transition: background-color 0.5s ease-in;
+  background-color: var(--orange);
+  font-style: italic;
+  font-size: 1.25rem;
+}
+
+#header.scrolled {
+  background-color: var(--orange);
+}
+
+#header-container {
+  width: 100%;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#logo-img {
+  color: #fafafa;
+  display: flex;
+  align-items: left;
+  width: 12rem;
+  height: auto;
+  cursor: pointer;
+}
+
+#nav ul {
+  display: flex;
+  gap: 4rem;
+  list-style: none;
+}
+
+#nav a {
+  position: relative;
+  text-decoration: none;
+  color: var(--orange);
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+#nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+} 
+
+#nav a:hover::after {
+  width: 100%;
+}
+
+#login-icon {
+  position: relative;
+}
+
+#login-icon a {
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+#user-menu-container {
+  position: relative;
+  display: inline-block;
+}
+
+#user-greeting {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+
+#user-greeting:hover {
+  text-decoration: underline;
+}
+
+#user-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: #fafafa;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(11, 11, 11, 0.232);
+  z-index: 1000;
+  min-width: 200px;
+  color: var(--darkblue);
+}
+
+#user-menu a {
+  font-family: "NunitoSans";
+  font-weight: bold;
+  display: block;
+  width: 100%;
+  padding: 12px 20px;
+  text-align: left;
+  background: none;
+  border: none;
+  color: var(--darkblue);
+  cursor: pointer;
+}
+
+#user-menu a:hover {
+  color: var(--orange);
+  text-decoration: underline;
+  text-decoration-color: var(--orange);
+}

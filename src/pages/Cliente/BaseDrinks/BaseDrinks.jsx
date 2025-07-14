@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import TipoFesta from "../../../components/BaseDrinksPage/TipoFesta/TipoFesta";
 import SelecioneDrinks from "../../../components/BaseDrinksPage/SelecioneDrinks/SelecioneDrinks";
 import TopoDrinks from "../../../components/BaseDrinksPage/TopoDrinks/TopoDrinks";
@@ -59,24 +60,24 @@ function BaseDrinks() {
     } else if (drinksSelecionados.length < 8) {
       setDrinksSelecionados([...drinksSelecionados, drink]);
     } else {
-      alert("Você só pode selecionar até 8 drinks.");
+      toast.info("Você só pode selecionar até 8 drinks.");
     }
   };
 
   const handleAvancar = () => {
     if (drinksSelecionados.length < 8) {
-      alert("Selecione seus 8 drinks.");
+      toast.warn("Selecione seus 8 drinks.");
       return;
     }
     if (!tipoSelecionado || tipoSelecionado.trim() === "") {
-      alert("Selecione o tipo de festa.");
+      toast.warn("Selecione o tipo de festa.");
       return;
     }
     if (
       tipoSelecionado === "Outro" &&
       (!outroTipo || outroTipo.trim() === "")
     ) {
-      alert("Por favor, preencha o campo com o tipo de festa.");
+      toast.warn("Por favor, preencha o campo com o tipo de festa.");
       return;
     }
 

@@ -41,7 +41,8 @@ const Footer = () => {
           <p>+55 (11) 99486-3100</p>
           <p className="dev-credit">
             DEVELOPED BY THE TEAM OF <br />
-            <strong>GANGUE DA VAN BRANCA</strong>
+            <strong>GANGUE DA VAN BRANCA</strong> <br /><br />
+            Aprecie com moderação!
           </p>
         </div>
       </div>
